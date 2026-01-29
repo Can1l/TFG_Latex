@@ -1,0 +1,237 @@
+\chapter{Planteamiento de requisitos y selección tecnológica}
+
+
+\section{Requisitos del sistema}
+Es de vital importancia fijar claramente los requisitos que debe tener el programa antes de abordarlo para poder realizar una planificación adecuada que
+cubra las necesidades de caracterización, permitiendo al usuario tener un total control del movimiento del panel móvil de la ventana. Se diferencia a continuación entre requisitos funcionales, aquellos que describen qué debe hacer el sistema, y no funcionales, que definen cómo debe hacerse.
+
+\subsection{Requisitos funcionales} 
+\begin{itemize}
+	\item El sistema debe disponer de una referencia temporal precisa para seguir el desplazamiento del Sol.
+	\item El sistema debe tener tres modos de funcionamiento, como se mencionó en la Introducción \ref{sec:obj_esp}, que permitan al usuario escoger la manera específica con la que se controla el movimiento de la ventana.
+	\item  Interfaz de usuario que permita establecer la configuración de la ventana, restablecer sus valores predeterminados, cambiar entre los distintos modos y visualizar el estado de la parte móvil, es decir, en qué estado se encuentra, en qué posición está y su configuración, así como la fecha y hora.
+	\begin{enumerate}
+		\item \textbf{Modo automático}: es el responsable de realizar el seguimiento de la radiación directa concentrada por las lentes durante el día solar. Para ello se emplean tres algoritmos distintos que permiten calcular la posición correspondiente a la que debe dirigirse el marco móvil.
+			\begin{enumerate}
+				\item Cálculo de ángulo azimutal y elevación: a partir de los parámetros de configuración, fecha y hora, zona horaria, pan, tilt, longitud y latitud, devuelve la elevación y el ángulo azimutal.
+				\item Cálculo de $AOI_l$ y $AOI_t$: recibe la elevación y el ángulo azimutal calculados en el paso anterior y devuelve los ángulos de incidencia sobre el plano con las lentes de fresnel.
+				\item Interpolación lineal: %Aquí escribir alguna referencia al estado del arte donde se explique el colimador y los ensayos de lab de los que se obtiene la matriz a interpolar. 
+				partiendo de la matriz obtenida mediante \ref{sec:refsec}, donde la precisión es de un grado, se realiza una interpolación bilineal entre dicha matriz y los ángulos de incidencia obtenidos.
+			\end{enumerate} 
+		\item \textbf{Modo efemérides}: permite desplazar el panel a la posición simulando los ángulos de azimut y elevación que tiene el Sol respecto del plano. Solo necesita disponer del cálculo de los ángulos de incidencia y de la interpolación lineal.   
+		\item \textbf{Modo manual}: el usuario decide la posición a la que se desplaza el panel o lo mueve progresivamente.  
+	\end{enumerate}	
+\end{itemize}
+
+
+\subsection{Requisitos no funcionales}
+
+Existen una serie de requisitos no funcionales que condicionan el diseño y la implementación del sistema de control.
+
+
+\begin{itemize}
+	\item \textbf{Restricción de diseño}: el control del panel móvil se realiza en lazo abierto.
+	\item \textbf{Precisión temporal}: el sistema debe disponer de una referencia temporal con una precisión suficiente para garantizar un correcto cálculo de la posición solar, pues desviaciones de decenas de segundos pueden provocar errores significativos en la captación de la radiación directa concentrada.	
+	\item \textbf{Precisión en el posicionamiento}: el sistema de control debe ser capaz de posicionar el panel móvil con una resolución compatible con la precisión de los algoritmos de cálculo y de la matriz de interpolación empleada.	
+	\item \textbf{Fiabilidad del sistema}: el sistema debe operar de forma estable durante periodos prolongados de tiempo sin intervención del usuario, evitando comportamientos erráticos o bloqueos del sistema de control.	
+	\item \textbf{Robustez frente a errores del usuario}: la interfaz debe prevenir configuraciones no válidas y garantizar que el movimiento del panel no exceda los límites físicos establecidos por los finales de carrera.	
+	\item \textbf{Usabilidad}: la interfaz de usuario debe ser intuitiva y permitir un manejo sencillo de los distintos modos de funcionamiento, así como una visualización clara del estado del sistema.	
+	\item \textbf{Mantenibilidad y extensibilidad}: el software debe estructurarse de forma modular, permitiendo futuras modificaciones o ampliaciones del sistema, como la incorporación de nuevos algoritmos de control, sensores adicionales o el manejo de varias ventanas simultáneamente.
+\end{itemize}
+
+
+\section{Criterios de selección tecnológica}
+
+La selección tecnológica se ha confeccionado atendiendo a una serie de pautas derivados de los requisitos funcionales y no funcionales definidos anteriormente. Siguiendo el carácter proyectual de la elaboración de un prototipo orientado a la investigación, se han priorizado los criterios de flexibilidad, pues puede requerirse exportar el proyecto a un entorno distinto, hacer adecuaciones para una nueva maqueta, cambiar funcionalidades o algoritmos de operación; facilidad de integración, pues se requiere de un sistema unificado que aglutine todos las funcionalidades requeridas de una manera coherente; y rapidez de desarrollo frente a la exploración de soluciones altamente optimizadas a nivel industrial.
+
+Los principales criterios considerados son los siguientes:
+
+\begin{itemize}
+	\item \textbf{Compatibilidad con los requisitos}: la plataforma ha de permitir la implementación de los distintos modos de funcionamiento definidos, así como la integración de los algoritmos de cálculo solar y control del movimiento. Para mitigar el error del reloj interno del sistema, se considera la integración de un módulo GPS.
+	\item \textbf{Capacidad de comunicación}: el sistema debe disponer de suficientes interfaces, en particular puertos serie independientes, que permitieran la comunicación simultánea con el módulo GPS y otros posibles dispositivos externos.	
+	\item \textbf{Facilidad de desarrollo y depuración}: se valora especialmente la disponibilidad de entornos de desarrollo accesibles, que faciliten la programación con bibliotecas suficientemente robustas y maduras, así como herramientas de depuración que reducen el tiempo de implementación y validación del sistema.	
+	\item \textbf{Portabilidad}: el código tiene que ser fácilmente adaptable a otros entornos de características similares, permitiendo la reutilización del trabajo realizado en futuros prototipos o líneas de investigación.	
+	\item \textbf{Escalabilidad}: se prioriza una arquitectura software que permita la fácil incorporación de nuevas funcionalidades, algoritmos de control o sensores adicionales, aun cuando el sistema seleccionado opere próximo a los límites de sus recursos.	
+	\item \textbf{Interfaz de usuario desacoplada del hardware}: se valora la posibilidad de implementar una interfaz accesible desde dispositivos externos que facilite la configuración, supervisión y manejo del sistema durante la fase experimental.
+	\item \textbf{Soporte y comunidad}: la existencia de una comunidad activa y repositorios relacionados con la implementación deseada, además de una documentación extensa se considera muy relevante para garantizar la resolución de posibles incidencias y la sostenibilidad del desarrollo.	
+	\item \textbf{Consumo energético}: el consumo del sistema de control es pequeño comparado con el de los actuadores, pero debe minimizarse al tratarse de un sistema generador de electricidad.
+	\item \textbf{Coste y disponibilidad}: se tienen en cuenta el coste de la plataforma y su fácil disponibilidad, aspectos relevantes para el desarrollo de prototipos experimentales. Tanto para la elaboración del software como para la documentación, se trata de escoger alternativas gratuitas o con licencia de estudiante.
+\end{itemize}
+
+Es necesaria en toda buena selección exponer, basándose en los criterios establecidos, si las diversas opciones que se podrían considerar satisfacen, y en qué medida lo hacen, la incorporación de todas aquellas funcionalidades de las que debe estar dotado el sistema. 
+
+
+\section{Alternativas para la plataforma hardware}
+
+\subsection{PLC (Controladores lógicos programables)}
+
+Los PLCs constituyen una plataforma ampliamente empleada en entornos industriales para el control de sistemas electromecánicos, destacando por su elevada fiabilidad y comportamiento temporal determinista. 
+
+En relación con la compatibilidad con los requisitos, los PLCs permiten implementar los distintos modos de funcionamiento definidos, así como integrar la comunicación con un módulo GPS mediante protocolos estándar como RS-485 o interfaces serie. Su arquitectura cíclica de ejecución resulta coherente con el control en lazo abierto del sistema. Pueden trabajar con pantallas HMI altamente dedicadas para la interfaz de usuario y los modelos recientes permiten actuar como punto de acceso Wi-Fi y establecer un servidor HTTP básico, aunque con ciertas limitaciones a la hora de intercambiar mensajes.
+
+Respecto a la capacidad de comunicación, los PLCs suelen disponer de módulos de comunicación industriales bien documentados, lo que facilita la conexión con dispositivos externos. La gestión de eventos en tiempo real puede requerir módulos adicionales según el modelo.
+
+En cuanto a la facilidad de desarrollo y depuración, los entornos de programación de PLC están orientados a aplicaciones industriales y priorizan la estabilidad frente a la flexibilidad. Permiten una depuración eficaz de secuencias de control, pero la implementación de algoritmos matemáticos complejos —como el cálculo de efemérides solares o la interpolación bilineal— resulta menos ágil que en plataformas de programación más básicas.
+
+Desde el punto de vista de la portabilidad, el uso de entornos propietarios y dependientes del fabricante limita la reutilización directa del software desarrollado en otros contextos o plataformas distintas, condicionando la escalabilidad del sistema en líneas de investigación futuras.
+
+El consumo energético de un PLC durante la operación continua se sitúa típicamente en el orden de varios vatios, incluso en ausencia de carga de proceso, lo que supone una penalización relevante.
+
+Finalmente, en términos de coste y disponibilidad, los PLCs y sus entornos de desarrollo suelen implicar un coste elevado, incluso considerando licencias académicas, lo que reduce su idoneidad para el desarrollo de prototipos experimentales.
+
+\subsection{FPGA (Field Programmable Gate Array)}
+
+Las FPGA constituyen una alternativa de alto rendimiento para la implementación de sistemas de control y procesamiento, especialmente en aplicaciones donde se requiere paralelismo, baja latencia y un comportamiento determinista.
+
+En relación con la compatibilidad con los requisitos, una FPGA permite implementar los modos de funcionamiento definidos, así como el control del movimiento del panel móvil. La integración de un receptor GPS es técnicamente viable mediante interfaces serie estándar, procesando las series NMEA. Es posible implementar interfaces avanzadas, pero es necesario un diseño significativamente extendido y no están orientadas a la modificación frecuente de la interfaz de usuario.
+
+Respecto a la capacidad de comunicación, permiten la implementación flexible de múltiples interfaces, incluyendo UART, SPI, I$^2$C o buses industriales. Requiere un mayor esfuerzo de diseño y validación respecto a plataformas más abstractas.
+
+En cuanto a la facilidad de desarrollo y depuración, el uso de FPGAs para satisfacer todas las funcionalidades presenta una curva de aprendizaje significativamente más elevada. Los entornos de desarrollo se basan en lenguajes de descripción hardware como VHDL o Verilog, que no están orientados al desarrollo algorítmico secuencial. Aunque es posible implementar algoritmos matemáticos complejos, como el cálculo de efemérides solares o la interpolación bilineal, estos deben adaptarse a un paradigma de diseño hardware, lo que incrementa en gran medida el tiempo de desarrollo y la complejidad del sistema. La depuración se realiza mediante simulaciones y herramientas específicas, menos inmediatas que en plataformas de programación de alto nivel.
+
+Desde el punto de vista de la portabilidad, el diseño desarrollado en FPGA presenta una fuerte dependencia del dispositivo y del fabricante. Si bien los lenguajes de descripción hardware son estándar, la reutilización del sistema en otros entornos resulta limitada sin un esfuerzo de adaptación significativo.
+
+En términos de escalabilidad, las FPGAs permiten ampliar funcionalidades mediante la incorporación de nuevos bloques lógicos en paralelo. Sin embargo, se encuentra condicionada por los recursos disponibles del dispositivo y por el incremento de la complejidad del diseño, especialmente si se ha de combinar control, comunicaciones e interfaz de usuario.
+
+El consumo energético de una FPGA está fuertemente ligado al dispositivo y diseño implementado, situándose típicamente en el orden de uno a varios vatios, lo que requiere un diseño cuidadoso para no penalizar el balance energético del sistema.
+
+Finalmente, en lo referente al coste y disponibilidad, las plataformas FPGA presentan un coste superior al de microcontroladores de propósito general. Aunque existen versiones académicas de los entornos de diseño, el esfuerzo necesario para implementar un sistema de control completo orientado a prototipado experimental limita su idoneidad frente a soluciones más ágiles.
+
+
+\subsection{STM32}
+La familia de microcontroladores STM32 es altamente empleada en sistemas embebidos de control y automatización debido a su flexibilidad de programación. Son dispositivos basados en la arquitectura ARM Cortex-M, con una gama de modelos que cubren desde las aplicaciones más sencillas hasta sistemas de control complejos.
+
+En relación con la compatibilidad con los requisitos, permiten implementar sin restricciones los distintos modos de funcionamiento definidos. Dispone de un reloj interno cuya desviación varía según el cristal de cuarzo que usa cada modelo. Su capacidad de cálculo es suficiente para ejecutar algoritmos complejos en tareas en tiempo real, cumpliendo con los requisitos de precisión temporal y de posicionamiento establecidos. La integración de un GPS es posible gracias a interfaces serie estándar. Se puede comunicar con un PC o una interfaz local compuesta de una pantalla y botones, pero la integración del punto de acceso Wi-Fi necesita de módulos externos, compitiendo por recursos en el procesador, y en configuraciones orientadas a bajo coste suelen tener memorias muy limitadas.
+
+Respecto a la capacidad de comunicación, la gran cantidad de modelos y compatibilidad con módulos propios de microcontroladores de 32 bits ofrece un amplio abanico de posibilidades a la hora de establecer comunicaciones, soportando conexiones UART, SPI, I$^2$C o buses industriales. 
+
+En cuanto a la facilidad de desarrollo y depuración, las bibliotecas de abstracción de hardware (HAL) facilitan el acceso a los periféricos y aceleran el proceso de desarrollo. Existen herramientas que permiten la generación automática de código embebido a partir de modelos desarrollados en entornos como MATLAB/Simulink, facilitando la validación de algoritmos en fases tempranas del desarrollo. Asimismo, estas herramientas permiten una depuración detallada del sistema, observando variables internas y ejecutando el código progresivamente o con interrupciones en los puntos de interés.
+
+El software para STM32 es portable y escalable dentro de la propia familia de microcontroladores, pudiendo migrar el sistema a modelos con prestaciones más amplias en caso necesario. Sin embargo, la configuración y gestión de relojes están ligadas al fabricante y adaptados a su arquitectura, por lo que solo podrían migrarse fuera de la familia las partes con lógica de alto nivel como los algoritmos matemáticos.
+
+La familia STM32 cuenta con una comunidad amplia y activa, así como con una documentación extensa proporcionada por el fabricante, existiendo numerosos ejemplos de implementación.
+
+Desde el punto de vista económico, los microcontroladores STM32 presentan un coste moderado y una amplia disponibilidad en el mercado. Los entornos de desarrollo y bibliotecas asociadas son gratuitos, haciéndolos adecuados para proyectos académicos y prototipos de investigación.
+
+Los microcontroladores STM32 presentan un consumo energético reducido, típicamente del orden de decenas a centenas de miliwatios durante la operación activa, resultando considerablemente adecuados.
+
+Finalmente, desde el punto de vista del consumo energético, presentan un consumo reducido, con corrientes del orden de decenas de miliamperios en funcionamiento normal, y la disponibilidad de modos de bajo consumo. Esto los hace adecuados para sistemas alimentados a partir de generación propia, 
+\subsection{ESP32}
+
+La familia de microcontroladores ESP32 constituye una plataforma orientada al desarrollo de sistemas embebidos con capacidades avanzadas de comunicación. Esta característica, junto con una capacidad de cálculo elevada para su rango de coste, la convierte en una opción especialmente atractiva para prototipos de investigación que requieren interacción remota y flexibilidad en la interfaz de usuario. 
+
+En relación con la compatibilidad con los requisitos, permite implementar sin restricciones los distintos modos de funcionamiento definidos para el sistema, así como ejecutar los algoritmos de cálculo de efemérides solares, obtención de ángulos de incidencia e interpolación bilineal. La integración de un módulo GPS se realiza de forma directa mediante interfaces UART independientes.
+
+Uno de los aspectos más relevantes del ESP32 es su capacidad para implementar de forma nativa una interfaz de usuario accesible mediante un navegador web. El microcontrolador puede actuar como punto de acceso Wi-Fi propio y alojar un servidor HTTP que permita al usuario visualizar el estado del sistema y controlarlo sin necesidad de hardware adicional ni de software externo. Esta característica resulta especialmente adecuada para el carácter experimental del prototipo.
+
+Respecto a la capacidad de comunicación, el ESP32 dispone de múltiples interfaces serie, incluyendo UART, SPI e I$^2$C, además de conectividad inalámbrica integrada. Esto permite la comunicación simultánea con el módulo GPS y otros dispositivos externos, manteniendo una arquitectura compacta y reduciendo la complejidad del sistema.
+
+En cuanto a la facilidad de desarrollo y depuración, puede programarse utilizando entornos de alto nivel como Arduino IDE o ESP-IDF, que ofrecen una amplia disponibilidad de bibliotecas y ejemplos, facilitando la implementación rápida de funcionalidades complejas, como la interfaz web o la gestión de comunicaciones, reduciendo significativamente el tiempo de desarrollo y validación del sistema. Además, la mayoría de estos dispositivos tienen un procesador dual que rentabiliza el empleo de procesos ligeros, tasks de FreeRTOS, pues permite ligarlos a uno de los dos procesadores sin interrumpir la ejecución de otros procesos recurrentes, como podría ser el acceso Wi-Fi y el movimiento de los motores del sistema.
+
+Desde el punto de vista de la portabilidad, el uso de APIs de alto nivel y bibliotecas ampliamente extendidas permite una adaptación relativamente sencilla del código a otras plataformas compatibles con entornos Arduino o microcontroladores de 32 bits con capacidades similares. Si bien el sistema puede operar próximo a los límites de memoria disponibles, una arquitectura software modular permite su escalabilidad funcional dentro de las restricciones propias del dispositivo.
+
+La plataforma ESP32 cuenta con una comunidad muy activa y una documentación extensa, lo que favorece la resolución de incidencias y la evolución del sistema.
+
+El consumo energético del ESP32 durante la operación se sitúa en el orden de décimas de watio, por lo que no supone un inconveniente en un sistema generador.
+
+Finalmente, en términos de coste y disponibilidad, el ESP32 presenta un coste reducido y una alta disponibilidad en el mercado, con entornos de desarrollo gratuitos, haciéndolo especialmente adecuado para prototipos experimentales y proyectos académicos.
+
+
+\subsection{Otros microcontroladores de 32 bits}
+
+Además de las plataformas analizadas anteriormente, existen numerosos microcontroladores de 32 bits que podrían emplearse para la implementación del sistema de control. Entre ellos se incluyen familias como los microcontroladores de NXP (LPC, i.MX RT), Microchip (SAME, PIC32), Texas Instruments (MSP432) o RP2040, entre otros.
+
+En términos de compatibilidad con los requisitos, estas plataformas ofrecen capacidades de cálculo suficientes para ejecutar los algoritmos de efemérides solares, el cálculo de ángulos de incidencia y la interpolación de matrices, así como temporizadores y periféricos propios de microcontroladores de 32 bits. Asimismo, la integración de un módulo GPS puede realizarse mediante interfaces serie estándar.
+
+Respecto a la capacidad de comunicación, estos dispositivos suelen incorporar múltiples interfaces de propósito general, como UART, SPI e I$^2$C, y en algunos casos buses industriales o conectividad Ethernet. No obstante, la conexión inalámbrica suele requerir módulos externos, lo que incrementa la complejidad del sistema y el esfuerzo de integración.
+
+En cuanto a la facilidad de desarrollo, estas plataformas se apoyan en entornos específicos del fabricante y bibliotecas de abstracción hardware propias. Aunque ofrecen un alto grado de control sobre los periféricos, el proceso de desarrollo es menos inmediato que en entornos de alto nivel para la implementación de interfaces de usuario avanzadas o servicios de red.
+
+Desde el punto de vista de la portabilidad, el software desarrollado para estas plataformas presenta una reutilización elevada, siempre que se mantenga una adecuada separación entre la capa de control y la capa de acceso al hardware. Sin embargo, la migración entre familias de microcontroladores de distintos fabricantes requiere la adaptación de los controladores hardware y de la configuración del sistema, lo que implica un esfuerzo adicional.
+
+Otros microcontroladores de 32 bits presentan consumos energéticos comparables, generalmente en el rango de decenas a centenas de miliwatios, siendo adecuados para aplicaciones de control con restricciones energéticas.
+
+Finalmente, en términos de coste y disponibilidad, estos microcontroladores presentan un coste moderado y una amplia disponibilidad, siendo utilizados habitualmente en entornos académicos y de prototipado. La ausencia de conectividad inalámbrica integrada y la mayor complejidad de desarrollo, en comparación con otras plataformas que estén más orientadas al prototipado rápido, limitan su idoneidad para el enfoque experimental del presente proyecto.
+
+
+\subsection{Descartes hardware}
+Los PLCs son equipos destinados a la automatización industrial, pensados para gestionar múltiples entradas y salidas que lanzan diferentes eventos. Para la automatización de una ventana cuyo control es en lazo abierto, no resulta una solución eficiente utilizar este tipo de equipos sin emplear un microcontrolador que se comunique con él. En caso de que el control fuese en lazo cerrado, con encoders en los husillos de los motores, además de los finales de carrera, que proporcionasen algún tipo de realimentación al sistema por el cual el PLC pudiese gestionar de manera autónoma el movimiento, podría ser una opción a considerarse. Aunque, de todos modos, implementar algoritmos en estos dispositivos resulta bastante laborioso sin hardware adicional.
+
+Las FPGA están orientadas a aplicaciones donde se requiere un alto grado de paralelismo, procesamiento en tiempo real con latencias extremadamente bajas. Si bien permiten implementar cualquier funcionalidad lógica, su uso para el control de una ventana móvil en lazo abierto requiere adaptar los procesos de cálculo a un paradigma de diseño hardware, lo que incrementa significativamente la complejidad del sistema. Para disponer de una arquitectura comparable a la de un microcontrolador sería necesario implementar o integrar un procesador embebido, lo que introduce una capa adicional de diseño y validación que no aporta ventajas claras en el contexto del proyecto, tal y como ocurre en los PLCs.
+
+Asimismo, la implementación de una interfaz de usuario flexible, especialmente basada en tecnologías web o comunicación inalámbrica, resulta poco natural en una FPGA o un PLC sin recurrir a arquitecturas híbridas o hardware adicional. Esto contrasta con el enfoque experimental del proyecto, donde se prioriza la facilidad de configuración, modificación y validación del sistema.
+
+Desde el punto de vista energético, el consumo de PLCs y FPGAs, incluso en diseños moderados, es superior al de microcontroladores de 32 bits que pueden cumplir las mismas funcionalidades, penalizando el balance energético global del sistema.
+
+Por todo ello, aunque las FPGA y PLC constituyen una solución potente en otros ámbitos, su utilización en el presente proyecto supondría un esfuerzo de desarrollo desproporcionado, sin aportar ventajas relevantes frente a plataformas más orientadas al control embebido y al prototipado experimental.
+
+
+\section{Selección de Software}
+
+Es necesario explicar de manera independiente como el software ligado a cada plataforma descrita anteriormente proporciona las herramientas adecuadas para satisfacer las funcionalidades requeridas. De esta forma se tiene una visión global de cada plataforma, facilitando la comparación de viabilidad y la elección final del sistema de implementación.
+
+
+\subsection{Software asociado a ESP32}
+
+En cuanto a los entornos de desarrollo disponibles, el ESP32 puede programarse mediante Arduino-IDE, el framework oficial ESP-IDF y herramientas integradas como PlatformIO. Todos ellos se basan principalmente en el uso del lenguaje C/C++, permitiendo tanto la utilización de bibliotecas de alto nivel como el acceso directo a los periféricos del microcontrolador. El entorno Arduino destaca por su simplicidad y rapidez de desarrollo, facilitando la implementación y validación temprana del sistema, mientras que ESP-IDF proporciona un mayor grado de control sobre el sistema operativo en tiempo real, la gestión de tareas y la configuración de los recursos internos del dispositivo. PlatformIO actúa como un entorno de desarrollo más avanzado que permite emplear indistintamente Arduino o ESP-IDF como framework, mejorando la organización del proyecto y la gestión de dependencias sin modificar sustancialmente la base de código.
+
+Desde el punto de vista de la capacidad del lenguaje y la portabilidad de la arquitectura software, el uso de C/C++ favorece una clara separación entre la lógica de alto nivel del sistema y la capa de acceso al hardware, pero permitiendo que se integren eficazmente. Los algoritmos de cálculo pueden implementarse de forma independiente del microcontrolador, facilitando su reutilización en otras plataformas que puedan compilar C/C++. 
+
+Uno de los aspectos más relevantes del ecosistema software de Arduino es la disponibilidad de bibliotecas para la implementación de conectividad Wi-Fi, servicios web e integración del GPS sin tener que traducir sentencias NMEA. El microcontrolador puede configurarse para operar como punto de acceso inalámbrico independiente, permitiendo la comunicación directa con dispositivos externos sin necesidad de infraestructura de red adicional. Mediante bibliotecas como \textit{AsyncWebServer}, es posible implementar una interfaz web accesible desde un navegador, que permita al usuario configurar los parámetros del sistema, seleccionar los distintos modos de funcionamiento, supervisar el estado del panel móvil y enviar órdenes de control en tiempo real. Esta interfaz desacoplada del hardware resulta especialmente adecuada para la fase experimental del proyecto, al simplificar el acceso y la interacción con el sistema.
+
+En lo relativo al almacenamiento de configuración y parámetros persistentes, el ESP32 dispone de memoria flash interna que puede utilizarse para guardar información de forma no volátil. A través de bibliotecas como \textit{Preferences}, es posible almacenar y recuperar parámetros de configuración, estado, modo de funcionamiento u otros datos relevantes, garantizando su conservación tras reinicios o pérdidas de alimentación. Esta capacidad contribuye a mejorar tanto la usabilidad como la robustez del sistema durante ensayos prolongados y campañas experimentales.
+
+
+\subsection{Software asociado a STM32}
+
+En cuanto a los entornos de desarrollo disponibles, los microcontroladores de la familia STM32 pueden programarse mediante herramientas como STM32CubeIDE, entornos compatibles con el estándar ARM-GCC y plataformas integradas como PlatformIO. El desarrollo se realiza principalmente en lenguaje C/C++, permitiendo tanto el uso de bibliotecas de abstracción de hardware como el acceso directo a los registros del microcontrolador. STM32CubeIDE integra el configurador STM32CubeMX, que facilita la inicialización de periféricos, la configuración de relojes y la generación de código base, agilizando el desarrollo.
+
+Desde el punto de vista de la capacidad del lenguaje y la portabilidad de la arquitectura software, el uso de C/C++ permite una clara separación entre la lógica de control y el acceso a hardware. De este modo, la implementación de los algoritmos es independiente del microcontrolador, facilitando su reutilización en otras plataformas de 32 bits compatibles con ARM Cortex-M o arquitecturas similares, con un esfuerzo de adaptación moderado. La dependencia específica del fabricante se concentra principalmente en la inicialización de periféricos, la gestión de interrupciones y la configuración del sistema de relojes. La plataforma permite la integración de módulos GPS mediante interfaces serie estándar, procesando sentencias NMEA. 
+
+En relación con la conectividad y la implementación de interfaces de usuario, los microcontroladores STM32 no incorporan conectividad inalámbrica de forma nativa en la mayoría de sus modelos, por lo que la implementación de interfaces web o comunicaciones Wi-Fi requiere el uso de módulos externos. Estos módulos pueden comunicarse mediante UART, SPI u otros buses estándar, permitiendo la creación de una interfaz de configuración y supervisión accesible desde dispositivos externos. Esto incrementa la complejidad del sistema y el uso de recursos, al requerirse una gestión adicional de la comunicación y del protocolo de aplicación.
+
+Finalmente, en lo relativo al almacenamiento de parámetros persistentes, los STM32 disponen de memoria flash interna que puede utilizarse para almacenar los diferentes tipos de datos, garantizando su conservación tras reinicios o pérdidas de alimentación. Esta capacidad resulta fundamental para asegurar un funcionamiento coherente del sistema en ensayos prolongados y ciclos repetidos de operación.
+
+\subsection{Software asociado a microcontroladores SAMD/SAME}
+
+Los microcontroladores de 32 bits de Microchip, pertenecientes a las familias SAMD y SAME, están basados en la arquitectura ARM Cortex-M, como las STM32, y se emplean habitualmente en aplicaciones de control embebido y prototipado avanzado. Estos dispositivos pueden programarse mediante entornos compatibles con ARM-GCC, el framework ASF (Atmel Software Framework) y plataformas integradas como PlatformIO, así como a través del ecosistema Arduino en determinadas placas comerciales.
+
+El desarrollo se realiza principalmente en lenguaje C/C++, permitiendo tanto el uso de bibliotecas de abstracción de hardware como el acceso directo a los periféricos del microcontrolador. Esto facilita la separación entre la lógica de control del sistema y la capa de acceso al hardware, permitiendo la reutilización de los algoritmos de cálculo en otras plataformas de microcontroladores de 32 bits.
+
+En relación con la conectividad y la interfaz de usuario, los microcontroladores SAMD/SAME no incorporan conectividad inalámbrica de forma nativa en la mayoría de sus modelos, por lo que la implementación de interfaces web o comunicación Wi-Fi requiere el uso de módulos externos. Estos se integran mediante interfaces UART o SPI, incrementando la complejidad del sistema y el esfuerzo de desarrollo, especialmente en aplicaciones orientadas a la supervisión remota.
+
+En lo relativo al almacenamiento de parámetros persistentes, estas familias disponen de memoria flash interna que puede emplearse para almacenar configuraciones y estados del sistema de forma no volátil. Asimismo, ofrecen modos de bajo consumo que permiten reducir significativamente la potencia disipada durante la operación continua, resultando adecuados para sistemas de control con restricciones energéticas.
+
+
+\section{Discusión de las decisiones adoptadas}
+
+A partir del análisis de los requisitos del sistema y de los criterios de selección tecnológica definidos, se realiza una evaluación comparativa de las distintas plataformas potencialmente aplicables al sistema de control propuesto. Esta evaluación no se basa únicamente en las prestaciones máximas de cada tecnología, sino en su adecuación al carácter experimental del proyecto, a la necesidad de flexibilidad durante la fase de desarrollo y a las restricciones energéticas propias de un sistema generador.
+
+Los microcontroladores de 32 bits permiten abordar el problema desde una perspectiva más flexible, facilitando la implementación de los algoritmos necesarios, la gestión de comunicaciones y la interacción con el usuario dentro de una única plataforma compacta. En este grupo, las familias STM32, ESP32 y otros microcontroladores ARM Cortex-M presentan capacidades suficientes para satisfacer los requisitos establecidos, con consumos energéticos reducidos y costes moderados.
+
+La familia STM32 constituye una solución sólida técnicamente, ampliamente utilizada en sistemas de control embebido, con herramientas maduras y una elevada escalabilidad dentro de su propia gama. Sin embargo, la ausencia de conectividad inalámbrica integrada en la mayoría de sus modelos implica la necesidad de módulos externos para implementar una interfaz de usuario desacoplada del hardware, aumentando la complejidad del sistema y el esfuerzo de integración.
+
+En este contexto, la plataforma ESP32 destaca por integrar de forma nativa capacidades de comunicación inalámbrica, permitiendo implementar una interfaz de usuario basada en tecnologías web sin requerir hardware adicional. Esta característica resulta especialmente relevante para la capacidad de caracterización posterior al proyecto, donde se prioriza la facilidad de configuración, supervisión y modificación del sistema frente a soluciones altamente optimizadas. Además, la disponibilidad de entornos de desarrollo de alto nivel y bibliotecas maduras reduce significativamente el tiempo necesario para la implementación y validación del prototipo.
+
+Desde el punto de vista energético, tanto STM32 como ESP32 presentan consumos compatibles con el sistema generador planteado. No obstante, el ligero incremento de consumo asociado a la conectividad inalámbrica del ESP32 se considera asumible frente a las ventajas funcionales que aporta en términos de interfaz y facilidad de uso.
+
+En consecuencia, la elección de una plataforma basada en ESP32 se justifica como un compromiso equilibrado entre capacidad de cálculo, facilidad de desarrollo, flexibilidad de la interfaz de usuario y consumo energético. Esta decisión no excluye la posibilidad de migrar el sistema a otras plataformas de microcontroladores de 32 bits en fases posteriores del proyecto, ya que la arquitectura software propuesta favorece la reutilización de los algoritmos y la adaptación a otros entornos con un esfuerzo moderado.
+
+\subsection{Justificación de la plataforma ESP32-S3-DevKitC-1}
+
+La placa ESP32-S3-DevKitC-1 se ha seleccionado por ajustarse de forma precisa a los requisitos de comunicación, memoria y consumo energético del sistema de control propuesto. 
+
+El microcontrolador dispone de hasta tres pares de interfaces UART completamente configurables, lo que permite dedicar un canal serie exclusivo al módulo GPS sin comprometer la disponibilidad de puertos para depuración u otros dispositivos externos. Esta característica resulta especialmente relevante para mantener una arquitectura limpia y flexible, evitando multiplexaciones o soluciones software adicionales para la gestión de comunicaciones serie.
+
+La placa integra 16 MB de memoria flash, capacidad suficiente para alojar sin restricciones las bibliotecas empleadas en el sistema, en particular \textit{TinyGPSPlus} y \textit{ESPAsyncWebServer}, que constituyen las dependencias de mayor tamaño del proyecto. Asimismo, esta memoria permite almacenar dos matrices de interpolación de tamaño $86\times 86$, junto con el código del programa y los parámetros de configuración, manteniendo un margen amplio para futuras ampliaciones o modificaciones del software.
+
+Desde el punto de vista del consumo energético, el ESP32-S3 presenta un consumo del orden de décimas de vatio durante el reposo, hasta un rango de $1-2 \, \mathrm{W}$, compatible con su integración en un sistema generador de -electricidad. Además, la posibilidad de gestionar la actividad de las comunicaciones y emplear modos de bajo consumo contribuye a minimizar el impacto energético del sistema de control.
+
+El entorno de desarrollo seleccionado para este microcontrolador es Arduino-IDE. La elección de este entorno se fundamenta en su adecuación al carácter experimental y funcional del proyecto. Este entorno permite un desarrollo rápido e iterativo, facilitando la integración de las bibliotecas que se han reconocido como obligatorias para la implementación de comunicación inalámbrica, servicios web y procesamiento de datos GPS. Todo ello sin necesidad de una configuración compleja en tiempo real ni de una gestión manual de tareas. Dado que el sistema de control no presenta requisitos estrictos de temporización dura ni una elevada concurrencia de procesos, las capacidades adicionales ofrecidas por ESP-IDF no resultan determinantes en este caso.
+
+Asimismo, el uso de Arduino-IDE reduce significativamente la complejidad inicial del desarrollo, permitiendo centrar el esfuerzo en la implementación y validación de los algoritmos de control y de la interfaz de usuario, en lugar de en aspectos de bajo nivel relacionados con la configuración del sistema. Esta decisión resulta coherente con los objetivos del proyecto, donde se prioriza la flexibilidad, la facilidad de depuración y la rapidez de modificación del prototipo frente a una optimización exhaustiva de los recursos.
+
+Por último, el empleo de Arduino-IDE no limita la portabilidad futura del software, ya que el código desarrollado en C/C++ puede migrarse a entornos como ESP-IDF o PlatformIO con un esfuerzo moderado, manteniendo la arquitectura y los algoritmos principales del sistema.
+
+La idoneidad del ESP32-S3 para aplicaciones similares queda respaldada por su uso habitual en proyectos de seguimiento solar, sistemas de monitorización energética y control embebido con interfaz web, ampliamente documentados en repositorios técnicos y plataformas especializadas de desarrollo de sistemas embebidos, lo que refuerza su elección para el presente proyecto.
+

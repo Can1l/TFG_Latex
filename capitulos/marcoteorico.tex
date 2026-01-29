@@ -1,0 +1,820 @@
+\chapter{Marco Teórico}
+\section{Radiación Solar}
+El Sol es una estrella que ilumina y calienta la Tierra comportándose como un reactor nuclear de fusión. En su interior tiene lugar una serie de reacciones que producen una pérdida de masa que se transforma en energía, la cual se distribuye como radiación electromagnética, con un valor alrededor de unos $5.4 \times 10^{24}$ julios (J). A esta radiación electromagnética proveniente del Sol se le denomina radiación solar \cite{pareja2010}. 
+
+Para cuantificar la radiación que llega a una superficie concreta de la Tierra proveniente del Sol, se emplean los términos de irradiancia e irradiación solar.
+La irradiancia solar es la potencia de radiación solar por unidad de área incidente en una superficie (S.I. $\frac{W}{m^2}$), y la irradiación solar es la integral durante un período de tiempo de la irradiancia; es decir, la energía de radiación solar por unidad de área incidente en una superficie (S.I. $\frac{Wh}{m^2}$) \cite{perpinan2013}.
+\subsection{Naturaleza de la radiación solar}
+La radiación extraterrestre emitida por el Sol presenta pequeñas variaciones debidas a la aparición de manchas solares\footnote{Región solar con una zona central oscura ``umbra'' rodeada de otra más clara ``penumbra". Tiene una temperatura más baja que sus alrededores y presenta intensa actividad magnética.}. Se han estudiado las distintas periodicidades con las que ocurren estos sucesos, con conclusiones discutidas. Willson et al. (1981) reporta varianzas de hasta el 0,2$\%$ relacionadas con la aparicion de estas manchas, pero otros lo consideran inconcluyente o que no indica una variabilidad regular. Datos de Hickey et al. (1982) recogidos durante 2.5 años desde el satélite \textit{Nimbus 7} sugieren que la constante solar decrece un 0.02$\%$ al año. Debido a la incertidumbre de estos estudios, para propósitos ingenieriles se considera que la luz que emite el Sol es fija \cite{duffie2020}.    
+
+\begin{figure}[t]
+    \centering
+    \subfloat[\label{fig:irr_a}]{\includesvg[width=0.9\textwidth]{figuras/orbita_tierra}}    
+    
+    \subfloat[\label{fig:irr_b}]{\includesvg[width = 0.48\textwidth]{figuras/Variacion_rad_ext}}
+    \subfloat[\label{fig:irr_c}]{\includesvg[width=0.48\textwidth]{figuras/declinacion}}
+    \caption{(a) Trayectoria Sol-Tierra. Los nombres de los solsticios y equinoccios están particularizados para el hemisferio Norte. (b) Variación de la radiación atmosférica solar mensual. (c) Declinación.}
+    \label{fig:atm_irradiance}
+\end{figure}
+
+
+La radiación emitida por el Sol fuera de la atmósfera terrestre atraviesa el espacio vacío en todas direcciones sin sufrir pérdidas apreciables por interacción con medios materiales. Sin embargo, la irradiancia solar se atenúa de acuerdo con el cuadrado de la distancia, parte de la cual es interceptada por la Tierra. Por lo tanto, al ser excéntrica la órbita que describe la Tierra alrededor del Sol (Subfigura \ref{fig:irr_a}\footnote{$\delta$ es la declinación solar, ángulo entre los rayos del Sol y el ecuador terrestre. AU es ``Unidades astronómicas'' y equivale a 150 millones de kilómetros.}), la radiación atmosférica solar fluctúa en el rango de $\pm 3\%$, como puede verse en la Subfigura \ref{fig:irr_b}.
+
+\subsection{Influencia de la atmósfera terrestre en la radiación solar}
+La radiación solar es atenuada a su paso por la atmósfera, sometida a una combinación de procesos de reflexión, absorción y difusión que alteran sus características. La reflexión en las nubes disminuye la
+radiación incidente en la superficie terrestre mientras que la absorción por vapor de agua, ozono y CO2
+produce una modificación de las características espectrales de la radiación. Además, la dispersión por
+partículas modifica la distribución espacial de la radiación. 
+
+De esta forma, la radiación que llega a la superficie terrestre se puede dividir en tres componentes:
+
+\begin{itemize}
+    \item Radiación Directa, \textit{$B_s$}: respresenta la fracción de irradiancia procedente en línea recta al Sol. Es afectada por el fenómeno de absorción y varía en función de la nubosidad del momento y de la estación del año.
+    \item Radiación Difusa, \textit{D}: cuantifica la radiación procedente de todo el cielo, salvo del Sol. Es decir, de todos los rayos dispersados en la atmósfera sobre las nubes, partículas de aire y resto de procesos descritos anteriormente.
+    \item Radiación de albedo, \textit{R}: fracción de radiación procedente de la reflexión con el suelo
+\end{itemize}
+
+La suma de radiación directa, difusa y de albedo constituye la irradiancia global, que sirve para saber la capacidad de generación de energía que tienen los paneles solares de un sistema fotovoltaico.
+
+\begin{equation}
+    G = B_s + D + R
+\end{equation}
+
+\subsection{Dirección de la radiación solar directa}
+La posición del Sol relativa a un plano se define en función de varios ángulos indicados en la Figura \ref{fig:solar_ang}, que expresan las relaciones geométricas entre ese plano y una orientación particular relativa a la Tierra a cualquier hora, así como la radiación solar directa recibida.
+
+Los ángulos para posicionar un plano sobre la superficie terrestre son los siguientes:
+
+
+\begin{enumerate}
+    \item[$\phi$]\textbf{Latitud}: localización angular al norte o sur del ecuador; norte positivo. \(-90^\circ \leq {\phi} \leq 90^\circ \)
+    \item[$\lambda$] \textbf{Longitud}: localización angular al este o oeste del meridiano de Greenwich; este positivo. \( -180^\circ \leq \lambda \leq 180^\circ \).
+
+\end{enumerate}
+
+\begin{figure}[tb]
+    \centering
+    \subfloat[]{\includesvg[width=0.6\textwidth]{figuras/solar_angles}}
+    \subfloat[]{\includesvg[width = 0.38\textwidth]{figuras/solar_angles_b}}
+    \caption{(a) Ángulo cenital, pan, tilt, ángulo azimutal de la superficie y azimut solar para una superficie inclinada. (b) Ángulo azimutal solar \cite{duffie2020}.}
+    \label{fig:solar_ang}
+\end{figure}
+
+Los ángulos que posicionan la superficie:
+\begin{enumerate}
+    \item[$\beta$]\textbf{Tilt}: inclinación, ángulo entre el plano de la superficie y la horizontal;\( -180^\circ \leq \beta \leq 180^\circ \).  \item[$\gamma$]\textbf{Pan}: ángulo acimutal de la superficie, desviación de la proyección de la normal de la superficie desde el meridiano local, con cero hacia el sur, este negativo y oeste positivo;\( -180^\circ \leq \gamma \leq 180^\circ \). 
+\end{enumerate}
+
+
+Y los ángulos que posicionan al Sol respecto a la superficie:
+
+\begin{enumerate}
+    \item[$\theta_z$] \textbf{Ángulo zenital}: ángulo entre la vertical y la línea del Sol. 
+    \item [$\gamma_s$]\textbf{Azimut solar}: desplazamiento angular desde el sur de la proyección del rayo solar sobre la superficie horizontal.
+    \item[$\alpha_s$]\textbf{Elevación solar}: ángulo entre la horizontal y la línea del sol; complementario al ángulo cenital.
+    \item [$\theta$]\textbf{Ángulo de incidencia}: ángulo entre el rayo del Sol sobre la superficie y la normal de esta.  
+\end{enumerate}   
+
+\section{Efemérides Solares} \label{sec:ef_sol}
+
+La determinación de la posición de un astro en cualquier instante requiere calcular un conjunto de magnitudes conocidas como \textit{efemérides}. En concreto, si se habla del Sol, \textit{efemérides solares}. Estas variables describen la geometría Sol–Tierra a lo largo del año y permiten obtener los ángulos con los que se caracteriza la incidencia de la radiación directa sobre una superficie. Los parámetros fundamentales son: la declinación solar, la ecuación 
+del tiempo, el ángulo horario y el tiempo solar verdadero. A partir de los cuales se calculan el ángulo cenital, el azimut y la elevación solar\footnote{Estas expresiones han sido seleccionadas y reorganizadas a partir de libros de Perpiñán Lamigueiro \cite{perpinan2013}, Duffie y Beckman \cite{duffie2020}, Meeus \cite{meeus1998} y de NOAA Solar \cite{noaa_solar} de manera que, considero, hará más fluido y comprensible su contenido al lector. Forman la base del algoritmo SPA \cite{reda2008spa}, que añade correcciones astronómicas adicionales para obtener coordenadas con mayor precisión, utilizado en el programa motivo de este documento.}.
+
+En ingeniería solar es habitual emplear formulaciones aproximadas, ofreciendo una precisión suficiente para gran parte de las aplicaciones, como las expresiones armónicas publicadas por la NOAA \cite{noaa_solar}. Cuando se requiere alta exactitud (por ejemplo, para calibración de sensores o modelos de referencia), se suele recurrir a las ecuaciones astronómicas de Meeus \cite{meeus1998} o al algoritmo SPA del NREL \cite{reda2008spa}, cuya implementación calcula las efemérides solares con una error del orden de $10^{-4}$ grados.
+
+\subsection{Hora solar y hora oficial}
+
+Para calcular el tiempo solar a partir de la hora que se puede leer en un reloj, es necesario realizar diferentes correcciones.
+La hora oficial en una zona del planeta es una medida de tiempo ligada a un meridiano, denominado huso horario. En la actualidad hay 39 distintos que se cuentan a partir del meridiano de Greenwich, denominado $GMT$, considerándose positivos aquellos al Este de este huso origen. Por ejemplo, en España, aunque se pertenece a la región del meridiano de Greenwich, se utiliza el huso horario de Centroeuropa, \( 15^\circ E\), GMT+1. Al adelantar 60 minutos la hora correspondiente, se realiza una corrección [\ref{eq:deltalambda}] que tiene en cuenta la distancia angular entre el meridiano local y la longitud del huso horario.
+
+\begin{equation}
+    \Delta \lambda = \lambda_L - \lambda_H    \label{eq:deltalambda}
+\end{equation}
+
+siendo $\lambda_L$ la longitud local y $\lambda_H$ la del huso horario. $\Delta \lambda$ positiva cuando la localidad está al este del huso horario. Como diferencia adicional, ha de considerarse que algunos estados deciden utilizar un horario de verano, adelantando otros 60 minutos la hora local.
+
+Desde 1972, la medida del día solar medio con GMT (\textit{Greenwich Mean Time}) ha sido sustituida por la UTC (\textit{Coordinated Universal Time}). La relación entre el tiempo solar real y el tiempo solar medio se expresa con la ecuación del tiempo, $\mathrm{EoT}$. Esta expresión considera la órbita elíptica alrededor del Sol y la declinación.
+
+
+
+
+\subsection{Fracción del año}
+
+La variación anual de la geometría orbital se representa mediante la fracción del año, $B$, definida a partir del número de día $n$. 
+\begin{equation}
+    B = \frac{360^\circ}{365}(n - 1)
+\end{equation}
+donde n = día del año. \( 1 \leq n \leq 365 \). $B$ en grados.
+Este parámetro se utiliza para modelar la declinación solar y la ecuación del tiempo mediante series senoidales que recogen el comportamiento anual del Sol.
+
+\subsection{Declinación solar}
+
+La declinación solar determina la altura máxima que alcanza el Sol a mediodía e introduce la estacionalidad de la radiación. Para 
+aplicaciones comunes se emplea la aproximación armónica propuesta por Cooper(1969) 
+\cite{noaa_solar}:
+
+\begin{equation}
+    \delta = 23.45^\circ \, \sin\left(\frac{360^\circ}{365}(n + 284)\right)
+\end{equation}
+
+Las formulaciones astronómicas exactas, basadas en series de la oblicuidad de la eclíptica y la 
+longitud eclíptica del Sol, se encuentran desarrolladas en Meeus \cite{meeus1998} y son las que implementa el algoritmo SPA \cite{reda2008spa}.
+
+\subsection{Ecuación del tiempo}
+
+La ecuación del tiempo, $\mathrm{EoT}$, cuantifica la diferencia entre el tiempo solar verdadero y el 
+tiempo solar medio. Este desfase se debe a la excentricidad orbital terrestre y a la oblicuidad del eje. Spencer(1971) la expresa de la siguiente manera, en minutos:
+
+
+\begin{equation}
+	\begin{split}
+		\mathrm{EoT} &= 229.18\cdot(0.000075 \\
+		&\quad + 0.001868\cos(B) - 0.032077\sin(B) \\
+		&\quad - 0.04089\sin(2B) - 0.014615\cos (2B))
+	\end{split}
+\end{equation}
+
+donde $B$ es la fracción del año en radianes. Valores positivos indican que el Sol está “adelantado” respecto al tiempo medio.
+
+\subsection{Tiempo solar verdadero}
+
+A partir de la hora local, la longitud geográfica y la ecuación del tiempo se obtiene el tiempo solar real, $\mathrm{TST}$, definido como:
+
+\begin{equation}
+    \mathrm{TST}_h = TO - AO + \frac{\Delta \lambda}{15} + \frac{\mathrm{EoT}}{60}
+\end{equation}
+
+donde $TO$ es la hora local y $AO$ el adelanto durante el horario de verano. $TO$ y $AO$ en horas, $\Delta \lambda$ en grados y $\mathrm{EoT}$ en minutos.
+
+\subsection{Ángulo horario}
+
+El ángulo horario, $w$, representa el desplazamiento angular del Sol respecto al mediodía solar verdadero. Se calcula como:
+
+\begin{equation}
+    \omega = 15 \cdot(TO - AO - 12) + \Delta \lambda + \frac{\mathrm{EoT}}{4}
+\end{equation}
+
+ donde $\omega$, $\Delta \lambda$, en grados, y $\mathrm{EoT}$ está en minutos. Con $w = 0^\circ$ en el mediodía local, valores positivos por la tarde y negativos por la mañana.
+
+\subsection{Ángulo cenital, elevación y azimut solar}
+
+Una vez conocidos la latitud $\phi$, la declinación $\delta$ y el ángulo horario $w$, se obtiene el 
+ángulo cenital $\theta_z$ mediante:
+
+\begin{equation}
+    \cos\theta_z = \sin\phi\,\sin\delta + \cos\phi\,\cos\delta\,\cos h
+\end{equation}
+
+La elevación solar es el complementario del ángulo cenital:
+
+\begin{equation}
+    \alpha_s = 90^\circ - \theta_z
+\end{equation}
+
+El azimut solar puede definirse con varias convenciones. Usando la adoptada por Duffie y Beckman \cite{duffie2020}, se calcula como:
+
+\begin{equation}
+    \sin\gamma_s = \frac{\cos\delta \sin h}{\sin\theta_z}
+\end{equation}
+
+y su signo se determina mediante la posición del Sol respecto al meridiano local.
+
+
+\begin{figure}[b]
+    \centering  
+    \includesvg[width=0.8\textwidth]{figuras/Flujograma_calc_AOI}
+    \caption{Procedimiento de cálculo del ángulo de incidencia}
+\end{figure}
+
+
+
+
+\begin{table}[t]
+\centering
+\begin{tabular}{p{1.8cm} p{3.0cm} p{8.5cm}}
+\hline
+\textbf{Símbolo} & \textbf{Nombre} & \textbf{Descripción} \\
+\hline
+$\alpha_s$ & Elevación solar &
+Ángulo de altura del Sol; $\alpha_s = 90^\circ - \theta_z$. \\[2mm]
+
+$AO$ & Adelanto horario &
+Horas añadidas por horario de verano ($AO=1$ si aplica). \\[2mm]
+
+$B$ & Fracción del año &
+Variable auxiliar para modelar $\delta$ y la EoT. \\[2mm]
+
+$\beta$ & Inclinación &
+Ángulo de la superficie respecto a la horizontal. \\[2mm]
+
+$\delta$ & Declinación solar &
+Ángulo entre los rayos solares y el ecuador terrestre. \\[2mm]
+
+$\Delta\lambda$ & Corrección de longitud &
+Diferencia entre longitud local y la del huso horario. \\[2mm]
+
+$\gamma$ & Acimut del plano &
+Orientación del plano respecto al sur. \\[2mm]
+
+$\gamma_s$ & Acimut solar &
+Ángulo del Sol respecto al meridiano sur (E negativo). \\[2mm]
+
+$\mathrm{EoT}$ & Ecuación del tiempo &
+Corrección en minutos por variación del día solar. \\[2mm]
+
+$n$ & Día del año &
+Día juliano simplificado (1–365). \\[2mm]
+
+$\phi$ & Latitud &
+Positiva en el hemisferio norte. \\[2mm]
+
+$TO$ & Hora oficial &
+Hora civil mostrada en el reloj. \\[2mm]
+
+$\mathrm{TST}_h$ & Tiempo solar verdadero &
+Tiempo solar en horas decimales. \\[2mm]
+
+$\theta$ & Ángulo de incidencia &
+Ángulo entre el rayo solar y la normal del plano. \\[2mm]
+
+$\theta_z$ & Ángulo cenital &
+Ángulo entre la vertical y el rayo solar. \\[2mm]
+
+$w$ & Ángulo horario &
+Desplazamiento angular del Sol respecto al mediodía solar. \\[2mm]
+\hline
+\end{tabular}
+\caption{Símbolos utilizados en la geometría solar.}
+\end{table}
+
+\section{Cálculo de ángulos de incidencia en la superficie de la ventana}
+
+Para poder explicar el conjunto de cálculos que transforman las efemérides solares en ángulos de incidencia, es necesario definir la orientación del sistema. El plano de la ventana se sitúa sobre los ejes cardinales orientando las células transversalmente de este a oeste. El rango de operación del sistema óptico de captación de rayos concentra la luz directa reflejada cuando su pan está en el rango de \( 90^\circ \leq \gamma \leq 270^\circ \), pues para unos ángulos de pan y tilt nulos, las concentración de las lentes actúa de norte a sur, siendo imposible la captación de rayos en esta situación en el hemisferio norte. Para entender mejor este concepto, se aporta la Figura~\ref{fig:plano_ventana}, donde la flecha sobre el plano indica la dirección de concentración de las lentes de fresnel~\ref{sec:fresnel} son capaces de concentrar la luz solar, y las líneas transversales simulan la colocación de las células.
+
+
+\subsection{Transformación de efemérides solares a ángulos de incidencia}
+
+Una vez obtenidas las efemérides solares en términos de azimut solar $\gamma_s$ y elevación solar $\alpha_s$, es necesario transformarlas al sistema de referencia del módulo con el fin de calcular los ángulos de incidencia sobre el plano de la ventana. Para ello, se emplea una transformación geométrica basada en coordenadas cartesianas, que permite encadenar de forma directa las rotaciones asociadas al pan y al tilt del sistema.
+
+\subsubsection{Conversión a coordenadas cartesianas}
+
+Partiendo de las coordenadas solares horizontales, se define el vector unitario de dirección solar en un sistema cartesiano local como:
+\begin{equation}
+	\begin{aligned}
+		x &= \cos(\alpha_s)\cos(\gamma_s) \\
+		y &= \cos(\alpha_s)\sin(\gamma_s) \\
+		z &= \sin(\alpha_s)
+	\end{aligned}
+\end{equation}
+
+Este vector representa la dirección de incidencia del rayo solar antes de aplicar las rotaciones del módulo.
+
+\subsubsection{Rotación por pan}
+
+El movimiento de pan del sistema se modela como una rotación alrededor del eje $Z$. Dicha transformación se aplica en sentido horario mediante:
+\begin{equation}
+	\begin{aligned}
+		x_{pan} &= y\sin(\gamma_p) + x\cos(\gamma_p) \\
+		y_{pan} &= y\cos(\gamma_p) - x\sin(\gamma_p) \\
+		z_{pan} &= z
+	\end{aligned}
+\end{equation}
+donde $\gamma_p$ es el ángulo de pan del módulo.
+
+\subsubsection{Rotación por tilt}
+
+Posteriormente, se aplica la rotación correspondiente al tilt del sistema, definida como una rotación alrededor del eje $Y$:
+\begin{equation}
+	\begin{aligned}
+		x_{tilt} &= x_{pan}\cos(\beta) - z_{pan}\sin(\beta) \\
+		y_{tilt} &= y_{pan} \\
+		z_{tilt} &= x_{pan}\sin(\beta) + z_{pan}\cos(\beta)
+	\end{aligned}
+\end{equation}
+donde $\beta$ representa el ángulo de inclinación del módulo.
+
+\subsubsection{Corrección de orientación del módulo}
+
+Debido a la naturaleza asimétrica del sistema óptico, cuando el ángulo de tilt supera un valor umbral (por ejemplo $45^\circ$), es necesario realizar una rotación adicional de $180^\circ$ en azimut para mantener los ángulos de incidencia dentro del rango operativo de las lentes. Esta corrección se implementa mediante una rotación adicional alrededor del eje $Z$:
+\begin{equation}
+	\begin{aligned}
+		x' &= y_{tilt}\sin(180^\circ) + x_{tilt}\cos(180^\circ) \\
+		y' &= y_{tilt}\cos(180^\circ) - x_{tilt}\sin(180^\circ) \\
+		z' &= z_{tilt}
+	\end{aligned}
+\end{equation}
+
+Este umbral está relacionado con la elevación del sol y varía con la longitud en la que se sitúa la ventana. Para saber con qué inclinación es necesario hacer esta transformación, deberá estudiarse la elevación del sol durante todo el año y calcular por encima de qué ángulo de inclinación, las horas de captación del panel son menores que rotándolo $180^\circ$. La actuación de esta corrección se llamará $tilt\_correction$ en este proyecto. 
+
+\subsubsection{Obtención de efemérides relativas al módulo}
+
+A partir del vector solar transformado, se calculan las nuevas coordenadas angulares relativas al módulo:
+\begin{equation}
+	\delta = \arcsin(z')
+\end{equation}
+\begin{equation}
+	H = \arctan2(y',x')
+\end{equation}
+donde $\delta$ es la elevación relativa y $H$ el azimut relativo del Sol respecto al sistema del módulo.
+
+\subsubsection{Cálculo de los ángulos de incidencia}\label{sec:aoi}
+
+Finalmente, los ángulos de incidencia longitudinal (AOIL) y transversal (AOIT) se obtienen proyectando el vector solar sobre los planos $YZ$ y $XZ$, respectivamente:
+\begin{equation}
+	\mathrm{AOIL} = \arctan2(y', z')
+\end{equation}
+\begin{equation}
+	\mathrm{AOIT} = \arctan2(x', z')
+\end{equation}
+
+Adicionalmente, el ángulo de incidencia total respecto a la normal del plano se calcula como:
+\begin{equation}
+	\mathrm{AOI} = \arccos(z')
+\end{equation}
+
+Este procedimiento permite relacionar de forma directa las efemérides solares con la respuesta geométrica del sistema óptico, manteniendo la coherencia entre el modelo matemático y su implementación en el sistema embebido.
+
+\begin{figure}[t]
+	\centering
+	\includesvg[width=0.45\linewidth]{figuras/Orientacion_Ventana}
+	\caption{Orientación de la ventana para pan y tilt nulos.}
+	\label{fig:plano_ventana}
+\end{figure}
+
+
+\section{Interpolación bilineal}\label{sec:interpol}
+
+Para estimar valores continuos a partir de una magnitud definida sobre una malla bidimensional discreta, se ha empleado el método de interpolación bilineal. Este procedimiento permite aproximar el valor de una función escalar en un punto arbitrario del plano a partir de los valores conocidos en los cuatro nodos más próximos que delimitan la celda en la que se encuentra dicho punto.
+
+Sea una función $f(x,y)$ definida sobre una malla regular en los ejes $x$ e $y$. Dado un punto de consulta $(x,y)$ comprendido en el rectángulo delimitado por los nodos:
+\[
+(x_i, y_j), \quad (x_{i+1}, y_j), \quad (x_i, y_{j+1}), \quad (x_{i+1}, y_{j+1}),
+\]
+con valores conocidos:
+\[
+f_{00} = f(x_i, y_j), \quad
+f_{10} = f(x_{i+1}, y_j), \quad
+f_{01} = f(x_i, y_{j+1}), \quad
+f_{11} = f(x_{i+1}, y_{j+1}),
+\]
+se definen los parámetros adimensionales de interpolación como:
+\begin{equation}
+	t_x = \frac{x - x_i}{x_{i+1} - x_i}, \qquad
+	t_y = \frac{y - y_j}{y_{j+1} - y_j},
+\end{equation}
+con $0 \leq t_x, t_y \leq 1$.
+
+El procedimiento se realiza en dos etapas. En primer lugar, se interpola linealmente en la dirección $y$ para los dos valores correspondientes a $x_i$ y $x_{i+1}$:
+\begin{equation}
+	f_0 = f_{00} + t_y (f_{01} - f_{00}),
+\end{equation}
+\begin{equation}
+	f_1 = f_{10} + t_y (f_{11} - f_{10}).
+\end{equation}
+
+Posteriormente, se interpola linealmente en la dirección $x$ entre los valores obtenidos:
+\begin{equation}
+	f(x,y) = f_0 + t_x (f_1 - f_0).
+\end{equation}
+
+Este método garantiza continuidad en el valor interpolado dentro de cada celda de la malla y constituye una aproximación eficiente y suficientemente precisa cuando la función presenta variaciones suaves entre nodos adyacentes.
+
+
+\section{Fundamentos de la energía Solar Fotovoltaica}
+
+El efecto fotovoltaico es, por definición, ”el proceso por el cual se genera una diferencia de potencial entre dos puntos de un material cuando sobre el incide la radiación electromagnética. Se fundamenta en la conversión fotovoltaica, es decir, la transformación de la luz solar en electricidad sin la interferencia de ningún motor térmico. Los equipos fotovoltaicos son robustos, con un diseño simple y requieren muy poco mantenimiento. 
+
+\subsection{Células solares}
+
+La célula solar es un dispositivo electrónico de estado sólido que constituye la unidad esencial de un sistema de generación de energía. Es el lugar donde la luz solar se convierte en energía eléctrica, empleando como medio material un compuesto semiconductor que transforma la radiación solar en electricidad en un proceso de una sola etapa (absorción-conversión) o dos etapas (captación y absorción) en los sistemas FV de concentración.
+La energía eléctrica producida se suministra en forma de una corriente eléctrica continua (DC) a una carga externa conectada mediante un circuito a uno o varios grupos de células que se ensamblan en unidades compactas denominadas \textit{módulos fotovoltaicos}, los cuales pueden acoplarse en serie y paralelo hasta alcanzar los niveles de tensión y corriente adecuados \cite{eoi2008}.
+
+
+\subsubsection{Estructura de una célula fotovoltaica}
+
+Los principales elementos o secciones que conforman la estructura simplificada de una célula fotovoltaica se muestran en la Figura \ref{fig:cel}. Desde el punto de vista de los fotones incidentes, comenzando por su cara anterior, encontramos, por este orden:
+\begin{itemize}
+	\item Una capa antirreflejante (capa AR), diseñada para reducir al máximo las pérdidas por reflexión superficial. El espesor y el índice de refracción de esta capa (puede ser una capa compuesta de varias) se diseñan de forma que la reflectancia sea mínima a cierta longitud de onda y en un
+	intervalo lo más amplio posible del espectro. Además de estas capas, muchas células	presentan superficies dotadas de surcos, micro-pirámides y otras texturas creadas para reducir	aún más las pérdidas por reflexión.
+	\item  Una malla de metalización, representada en forma de peine en la Figura \ref{fig:cel}, pero que puede presentar diversas formas. El diseño de esta malla es crítico, pues debe garantizar una una colección adecuada de los lectrones del dispositivo, sin introducir una resistencia eléctrica elevada, pero al mismo tiempo debe dejar pasar la mayor cantidad posible al interior del dispositivo. Si parámetro más característico es el \textit{factor de sombra, $F_s$}, que mide la cantidad de superficie ocupada por los dedos metálicos respecto al área total del dispositivo.
+	\item Las capas activas de material semiconductor, en el que distinguimos entre las dos regiones que forman la unión p-n (denominadas \textit{emisor} y \textit{base}). Habitualmente, estas capas activas aparecen depositadas o crecidas sobre un sustrato más grueso que confiere mayor resistencia mecánica al conjunto. Además del tipo y la calidad del semiconductor empleados, el espesor de las capas y la densidad o concentración de impurezas influyen notablemente en el rendimiento final del dispositivo.
+	\item El contacto metálico posterior, que suele realizarse metalizando toda la superficie del dispositivo cuando no existe el requisito de que ésta reciba luz por su parte posterior \cite{eoi2008}.
+	
+\end{itemize} 
+
+\begin{figure}[tb]
+	\centering
+	\includesvg[width=0.8\textwidth]{figuras/celula}
+	\caption{Estructura simplificada de una célula fotovoltaica de unión p-n. Las dimensiones relativas de cada
+		elemento se han exagerado para una mejor visualización \cite{eoi2008}.}
+	\label{fig:cel}
+	
+\end{figure}
+
+\subsubsection{Principio de funcionamiento de las células solares}
+
+Se puede dividir en tres procedimientos esenciales:
+
+\begin{enumerate}
+	\item El semiconductor electrónico absorbe los fotones para generar los portadores de carga (pares electrón-hueco). La absorción de un fotón con energía $E_f$ mayor que la energía de banda prohibida, $E_F$, del material semiconductor dopado significa que su energía se utiliza para excitar un electrón desde la banda de valencia, $E_V$, hacia la banda de conducción ,$E_C$, dejando un vacío (hueco) en el nivel de valencia. La energía cinética adicional se transfiere al electrón o al hueco mediante la energía sobrante del fotón ($h\nu - h\nu_0$). $h\nu_0$ es la energía mínima o función de trabajo del semiconductor necesaria para generar un par electrón-hueco. La energía excedente se disipa como calor en el semiconductor.
+	\item Posteriormente, tiene lugar la separación de los portadores de carga generados por la luz. En un circuito solar externo, los huecos pueden alejarse de la unión a través de la región p, y los electrones pueden salir a través de la región n y pasar por el circuito antes de recombinarse con los huecos.
+	\item Por último, los electrones separados pueden utilizarse para accionar un circuito eléctrico. Después de que los electrones hayan circulado por el circuito, se recombinan con los agujeros.
+\end{enumerate}
+
+El tipo n debe ser más fino que el tipo p. De esta manera, los electrones pueden pasar a través del circuito en un corto periodo de tiempo y generar una corriente antes de recombinarse con los agujeros \cite{asi5040067}. 
+
+
+
+\subsection{Teoría de semiconductores}
+\begin{figure}[tb]
+	\centering
+	\subfloat[Silicio dopado con Antimonio (tipo n).\label{fig:n_tipe}]{\includesvg[width=0.48\textwidth]{figuras/n_tipe}}
+	\subfloat[Silicio dopado con Boro (tipo p).\label{fig:p_tipe}]{\includesvg[width=0.48\textwidth]{figuras/p_tipe}}
+
+	\subfloat[Semiconductores de tipo N y tipo P uniformemente dopados, antes de la unión]{\includesvg[width=0.5\textwidth]{figuras/p_n_split}}
+	\caption{Semiconductores tipo p y tipo n. (a) y (b) de HelioEsfera. (c) de UPV.}
+	\label{fig:Semiconductores}
+\end{figure}
+\subsubsection{Semiconductor tipo n}
+Un semiconductor extrínseco que ha sido dopado con átomos donadores de electrones se llama \textit{semiconductor de tipo n} (Subfigura \ref{fig:n_tipe}), pues sus portadores de carga en la red cristalina son electrones negativos. La estructura cristalina del silicio contiene cuatro enlaces covalentes de cuatro electrones de valencia, por lo que necesita que se le añadan impurezas pentavalentes, con cinco electrones, que actuan como donantes. Algunos dopantes pentavalentes utilizados son el arsénico, el fósforo o el antimonio, contribuyendo a la formación de electrones libres y aumentando su conductividad en gran medida.
+
+\subsubsection{Semiconductor tipo p}
+
+Cuando un semiconductor ha sido dopado con átomos aceptores de electrones se denomina \textit{semiconductor de tipo p} (Subfigura \ref{fig:p_tipe}), pues la mayoría de los portadores de carga de la red cristalina son agujeros de electrones -portadores de carga positiva-. El silicio se dopa con elementos trivalentes (grupo III) que funcionan como aceptores y reemplazan átomos de silicio en el cristal, creando un agujero de electrones. Estos agujeros suponen la falta de un electrón en una posición en la que puede existir uno. El boro, el aluminio o el galio, son algunos de los dopantes trivalentes que se utilizan para crear semiconductores de tipo p.  
+
+\subsection{Unión \textit{p-n} \label{sec:union p-n}}
+
+La unión \textit{p-n} se genera al poner en contacto dos regiones de un semiconductor dopadas de forma distinta. Se produce un desequilibrio debido a la diferente concentración de electrones y huecos en cada cristal. Para alcanzar el equilibrio se produce la difusión de portadores mayoritarios, apareciendo un movimiento de huecos desde el cristal p al cristal n, quedando p cargado negativamente. Al mismo tiempo se ocasiona un movimiento de electrones desde el cristal n al cristal p, quedando n cargado positivamente y generando un campo eléctrico en esta dirección, contraria a la de difusión. 
+
+Se alcanza un equilibrio cuando ambos movimientos, arrastre y difusión, se compensan, recombinándose y formando enlaces de electrones que provienen de p a huecos de n y viceversa. Esta recombinación se produce en la zona cercana a la unión, denominada zona de carga del espacio. 
+
+La región de carga del espacio, también llamada \textit{zona de deplexión}, es la zona alrededor de la unión en la que los portadores libres han desaparecido debido a la recombinación, quedando únicamente los iones fijos ligados a la red cristalina. Estos iones generan un campo eléctrico interno que crea la barrera de potencial característica de la unión p-n e impide el paso de portadores mayoritarios entre ambos cristales, alcanzando equilibrio y anulando la corriente eléctrica. 
+
+Para conseguir la circulación de corriente a través de la unión p-n, es necesario romper el equilibrio alcanzado polarizándola —aplicando una diferencia de potencial base emisor— de dos formas distintas \cite{perpinan2013}:
+
+\begin{itemize}
+	\item \textbf{Polarización directa}: el lado p adquiere tensión positiva y el n negativa. Se reduce la barrera de potencial y la corriente de arrastre disminuye, no pudiendo compensar la de difusión. Aparece un flujo neto de corriente y los huecos de p pueden atravesar la zona de carga de espacio, siendo inyectados en la zona n, donde son portadores minoritarios. En la zona de carga se origina un proceso de difusión y recombinación debido a un exceso de huecos. Lo mismo puede decirse de los electrones de la zona n. De esta forma, aparecen dos corrientes contrarias pero de distinto signo, por lo que en lugar de anularse, originan una corriente total aprovechable. El criterio convencional en electricidad toma como sentido de la corriente el debido a las cargas positivas, entrando la corriente en la unión por la zona p y saliendo por la zona n.
+	
+	\item \textbf{Polarización inversa}: si la diferencia de potencial aplicada consigue que la zona n esté a mayor tensión que la zona p, la unión se polariza a la inversa. La barrera de potencial queda reforzada en la unión y el paso de portadores de una zona a otra queda aún más debilitado. Así, la corriente que atraviesa la unión en polarización inversa es de muy bajo valor.
+\end{itemize}
+
+
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Creación de la zona de deplexión.
+	\label{fig:deplex}]{\includesvg[width=0.7\linewidth]{figuras/deplexion}}
+	
+	
+	\subfloat[Polarización directa \label{fig:pol_dir}]{\includesvg[width=0.48\textwidth]{figuras/pol_directa}}	
+	\subfloat[Polarización inversa
+	\label{fig:pol_inv}]{\includesvg[width=0.48\textwidth]{figuras/pol_inversa}}
+	\caption{Polarización de la unión p-n.}
+	\label{fig:p-n}
+\end{figure}
+
+
+\subsection{Conversión fotovoltaica}
+
+%La base física de la conversión fotovoltaica es el fotoeléctrico, por el cual un material semiconductor es capaz de generar portadores de carga cuando absorbe fotones con energía superior a su banda prohibida. Los electrones permanecen dentro del semiconductor, pero son promovidos a la banda de conducción dejando un hueco en la banda de valencia.
+
+Los fotones incidentes sobre la unión p-n aportan energía para que los electrones se desplacen a la banda de conducción, generando un campo eléctrico interno que permite separar los portadores generados, evitando su recombinación inmediata. Esta corriente de iluminación, \textit{fotocorriente}, puede ser aprovechada por un circuito externo. La presencia de tensión en los terminales p-n favorece los procesos de recombinación y constituyen la corriente del diodo. De esta forma, en una unión p-n iluminada se encuentran la fotocorriente, generada por la incidencia de los fotones y que circula de n a p, y la corriente de diodo, debida a la recombinación de portadores, que lo hace de p a n. Esta corriente puede expresarse de la siguiente manera (Subfigura \ref{fig:ilu}\cite{perpinan2013}) :
+
+\begin{equation}
+	I = I_L - I_D
+	\label{eq:I}
+\end{equation}
+
+\begin{figure}[t]
+	\centering
+	\label{fig:il_cur}
+	\subfloat[Corriente de iluminación y corriente de diodo en una célula solar que alimenta una carga]
+	{	
+		\label{fig:ilu}
+		\includesvg[width=0.75\linewidth]{figuras/corriente_iluminacion}
+	}
+	
+	\subfloat[Pérdidas de transmisión, reflexión y recombinación en una célula solar]
+	{
+		\label{fig:perd_ilu}
+		\includesvg[width=0.75\linewidth]{figuras/perdidas_iluminacion}
+	}
+	\caption{Iluminación sobre una célula solar}
+\end{figure}
+
+donde $I_L$ es la fotocorriente e $\mathrm{I_D}$ es la corriente de diodo. 
+\begin{equation}
+	\mathrm{I_D} =  I_0 \cdot [exp \big( \frac{V}{m \cdot V_T} \big) -1]
+\end{equation}
+donde $\mathrm{I_0}$ es la \textit{corriente inversa de saturación del diodo}, \textit{m} es el \textit{factor de idealidad del diodo}, parámetro adimensional con valores típicos entre 1 y 2, y $\mathrm{V_T}$ es el denominado \textit{voltaje térmico}, que tiene la siguiente expresión:
+
+\begin{equation}
+	\mathrm{V_T} = \frac{kT}{q}
+\end{equation}
+siendo k la constante de Boltzmann, T la temperatura absouta y q la carga del electrón. Su valor típico a $300 K$ es de $26 mV$ 
+
+\subsubsection{La unión p-n iluminada}
+
+El fenómeno de generación de portadores por efecto fotoeléctrico depende de la frecuencia de los fotones incidentes. La energía que porta un fotón se expresa en \ref{eq:ef} y la frecuencia del fotón, en \ref{eq:ff}. Si el fotón es poco energético, es decir, su energía es menor que la necesaria para sobrepasar la banda prohibida, atraviesa el semiconductor como si fuera transparente y supone las pérdidas de no-absorción. Los fotones con $E_f > E_F$ son absorbidos aunque, debido a la anchura finita del semiconductor y su coeficiente de absorción, parte de estos fotones no se absorben y constituyen las pérdidas de transmisión (Subfigura \ref{fig:perd_ilu}\cite{perpinan2013}).
+
+La diferencia entre los índices de refracción del aire y el dispositivo provoca pérdidas por reflexión. Para reducirlas, se recurre a capas que adaptan los índices de refracción del aire y del dispositivo, y al texturizado de la superficie para conseguir que el rayo de luz reflejado vuelva a introducirse en el material \cite{perpinan2013}. 
+
+La expresión que describe la energía de un fotón es la siguiente:
+\begin{equation} 
+	\label{eq:ef}
+	E_f = \frac{h\cdot c}{\lambda}	
+\end{equation}
+donde $h$ es la constante de Planck, $c$ la velocidad de la luz en el vacío y $\lambda$ la longitud de onda del fotón; siendo
+
+\begin{equation}
+	\label{eq:ff}
+	f = \frac{c}{\lambda} 
+\end{equation}
+la frecuencia del fotón. 
+
+\subsection{Caracterización eléctrica de una célula fotovoltaica: curva I--V}
+
+La caracterización del comportamiento eléctrico de una célula solar se realiza mea través de una ecuación ideal conocida como el \textit{modelo de una exponencial}, que da forma a la curva corriente–tensión (curva I-V), obtenida a partir de la respuesta del dispositivo frente a diferentes valores de carga bajo unas condiciones determinadas de irradiancia y temperatura. La curva I-V (Figura \ref{fig:iv} ) permite evaluar los parámetros más relevantes del dispositivo fotovoltaico y su rendimiento global. La corriente $I$ de la célula [\ref{eq:I}] resulta del balance de la corriente producida por la luz incidente y la correspondiente al diodo de unión p-n que forma su núcleo.
+
+
+A partir de la curva I-V se definen varios parámetros fundamentales:
+
+\begin{itemize}
+	\item \textbf{Corriente de cortocircuito, $I_{SC}$}: corriente máxima suministrada por la célula bajo iluminación cuando la tensión es nula ($V = 0$). Está directamente relacionada con la irradiancia y con la capacidad de generación de portadores.
+	\begin{equation}
+		I_{SC} = I(V=0) = I_L
+	\end{equation}
+	\item \textbf{Tensión de circuito abierto, $V_{OC}$}: tensión máxima del dispositivo cuando la corriente es cero ($I = 0$). Depende del campo eléctrico interno, la recombinación y la temperatura.
+	\item \textbf{Punto de máxima potencia, $MPP$}: punto de operación en el que el producto $I \cdot V$ es máximo, definiendo la máxima energía eléctrica que puede entregar la célula.
+	
+	\begin{equation}
+		MPP = I_{mpp} \cdot V_{mpp}		
+	\end{equation}
+	
+	donde $V_{mpp}$ e $I_{ipp}$ son la tensión y la corriente en el punto de máxima potencia.
+	
+	\item \textbf{Factor de forma, $FF$}: indica la calidad de la curva I-V y se define como
+	\begin{equation}
+		FF =\frac{MPP}{I_{SC}V_{OC}}
+	\end{equation}
+	
+
+	\item \textbf{Eficiencia, $\eta$}: relación entre la potencia máxima entregada por la célula y la potencia radiante incidente sobre su superficie.
+\end{itemize}
+
+Las condiciones externas influyen de manera significativa en la curva I-V. La irradiancia afecta principalmente a $I_{sc}$, mientras que la temperatura tiene un impacto notable en $V_{oc}$ debido al aumento de la corriente de saturación del diodo. La presencia de resistencias parásitas también modifica la curva, reduciendo el factor de forma y, por tanto, la eficiencia del dispositivo. 
+%Estos efectos pueden visualizarse en las distintas curvas I-V de la Figura \ref{fig:iv} y P-V de la Figura \ref{}  
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Curvas con parámetros característicos]{
+			\includegraphics[width=0.85\linewidth]{figuras/curva_iv}}
+	
+	\subfloat[Curvas I-V a diferentes temperaturas]{
+			\includegraphics[width=0.48\linewidth]{figuras/curva_iv_t_pdf}
+		}	
+	\subfloat[Curvas I-V con irradiancias distintas]{
+			\includegraphics[width=0.48\linewidth]{figuras/CurvaIV_irradiancia_pdf}
+	}
+	
+	\subfloat[Curvas P-V con diferentes temperaturas]{
+		\includegraphics[width=0.48\linewidth]{figuras/CurvaPV_t.pdf}
+	}	
+	\subfloat[Curvas P-V con irradiancias distintas]{
+		\includegraphics[width=0.48\linewidth]{figuras/CurvaPV_irradiancia.pdf}
+	}	
+	
+	\caption{Curvas I-V y P-V}	
+	\label{fig:iv}
+\end{figure}
+
+%\begin{figure}[h]
+%	\label{fig:iv}
+%	\centering
+%	\includegraphics[width=0.75\linewidth]{figuras/curva_iv}	
+%\end{figure}
+
+
+El análisis completo de la curva I-V proporciona información esencial para el diseño, simulación y evaluación del rendimiento de sistemas fotovoltaicos, constituyendo una herramienta imprescindible tanto en laboratorio como en campo.
+
+\FloatBarrier
+
+\subsection{Pérdidas: circuito equivalente}
+
+\begin{figure}[h]
+	\centering
+	\includesvg[width=0.8\linewidth]{figuras/circuito_equicalente}
+\end{figure}
+
+Para poder describir el funcionamiento real de una célula fotovoltaica es necesario conocer las distintas pérdidas que aparecen, que deberán ser controladas en la medida de lo posible. Una de las principales pérdidas es debida a la resistencia en serie, $R_S$, cuyas contribuciones provienen de la resistencia al paso de la corriente en los semiconductores, de las diferentes concentraciones de impurezas y de la malla de metalización, cuya aportación a las pérdidas está ligada al diseño de esta, pues si es excesivamente fina aumenta considerablemente y, si tienen mayor grosor para reducir $R_S$, aumenta el factor de sombra y se reduce la eficiencia de la célula.
+
+La resistencia de fugas, $R_P$, es la aportación de diversas causas debidas a imperfecciones o defectos en la estructura cristalina o de la unión p-n de la célula. Se caracterizan como una resistencia en paralelo con el dispositivo. Suele tener un valor muy elevado y poca importancia en el funcionamiento, disminuyendo aún más en las células que operan bajo luz concentrada.
+
+La expresión de \ref{eq:I} con las pérdidas añadidas quedaría entonces de la siguiente manera:
+\begin{equation}
+	I = I_L - I_0 \cdot [exp \big( \frac{V}{m \cdot V_T} \big) -1] - \frac{V+IR_S}{R_P}
+\end{equation}
+
+\FloatBarrier
+
+
+\section{Módulos fotovoltaicos}
+
+Un módulo fotovoltaico es la agrupación básica de células solares, conectadas en serie o paralelo, para optimizar y ajustan la cantidad de energía que producen.
+Varios módulos fotovoltaicos conforman un panel solar que puede agruparse de distintas maneras, como se puede ver en la Figura \ref{fig:array_cels}, formando un $array$. Estos $arrays$ constituyen la unidad de generación que constituye un campo fotovoltaico. 
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.9\linewidth,clip,trim=0 250 0 200]{figuras/conexioens_celulas}
+	\caption{Diferentes asociaciones de células y configuraciones de módulos \cite{en1505}}.
+	\label{fig:array_cels}
+\end{figure}
+
+\subsection{Estructura y componentes de un módulo fotovoltaico}
+
+Un módulo fotovoltaico tiene sus células ensambladas dentro de una estructura multicapa que garantiza su protección mecánica, su aislamiento eléctrico y la durabilidad necesaria para operar durante décadas en exteriores. La mayoría de los módulos comerciales comparten los mismos elementos fundamentales, que se describen a continuación.
+
+\subsubsection{Vidrio frontal}
+
+El vidrio frontal es la primera capa expuesta a la radiación incidente. Habitualmente se emplea vidrio templado de bajo contenido en hierro para maximizar la transmitancia óptica y minimizar las pérdidas por absorción.  Permite el paso del mayor número posible de fotones hacia las células y ofrece una elevada resistencia frente a impactos, abrasión o cargas mecánicas (viento, nieve, dilataciones térmicas).
+
+\subsubsection{Encapsulante frontal y trasero}
+
+Entre el vidrio frontal, las células solares y la capa posterior se sitúan las láminas encapsulantes. Su misión principal es proteger las células frente a la humedad, oxidación y vibraciones, además de garantizar la adhesión entre las distintas capas del módulo.
+El material más empleado es el EVA (Etil-Vinil-Acetato), aunque en diseños de mayor durabilidad también se utilizan películas de POE (Poliolefina Elastómera). Durante el proceso de laminación, el encapsulante se funde y envuelve completamente las células, fijándolas en su posición y asegurando su aislamiento.
+
+\subsubsection{Células solares}
+
+Se disponen normalmente en serie para aumentar la tensión de salida, aunque algunos módulos combinan conexiones serie–paralelo para equilibrar corriente, tensión y tolerancia a sombras. Su número depende del diseño, siendo habituales configuraciones de 36, 60, 72 o 144 medias células en los módulos actuales. Las células quedan inmersas en el encapsulante, lo que evita roturas, microfisuras y corrosión de los contactos metálicos.
+
+\subsubsection{Recubrimiento trasero}
+
+En la parte posterior del módulo se encuentra el recubrimiento trasero, que puede ser una lámina polimérica multicapa o una segunda lámina de vidrio en el caso de los módulos vidrio–vidrio. 
+Su función es proteger eléctricamente la parte trasera, impedir la entrada de humedad y aportar estabilidad mecánica al conjunto. Los módulos vidrio–vidrio ofrecen mayor durabilidad y resistencia frente a degradación, aunque son más pesados.
+
+\subsubsection{Marco}
+
+Muchos módulos incorporan un marco periférico de aluminio anodizado. Este elemento facilita la manipulación, el montaje sobre la estructura y la disipación térmica, además de proporcionar rigidez y resistencia frente a torsión y cargas mecánicas. También cumple un papel relevante en la conexión a tierra del módulo. Existen módulos sin marco, cada vez más comunes en sistemas BIPV, donde la integración arquitectónica es prioritaria.
+
+\subsubsection{Caja de conexiones}
+
+En la parte posterior se sitúa la caja de conexiones, donde convergen los terminales positivos y negativos del módulo. En su interior se alojan uno o varios diodos de bypass, cuya función es evitar puntos calientes y proteger las células cuando parte del módulo queda sombreada. La caja suele estar sellada para evitar la entrada de humedad y se conecta mediante cables y conectores estandarizados al resto del sistema.
+
+\subsection{Tipos de arrays fotovoltaicos}
+
+Los $arrays$ de paneles solares comerciales pueden ser fijos, orientados al Sur en el hemisferio Norte y hacia el Norte en el hemisferio Sur, o móviles, rotando siguiendo el movimiento del Sol. 
+Pueden configurarase de dos maneras distintas, con una fila de paneles en vertical (configuración V), o con dos hileras verticales (configuración 2V). Dependiendo de las características de captación de luz, pueden ser monofaciales, captando radiación solar solo por una cara del panel, y bifaciales, haciéndolo por ambas. A su vez, pueden estar dispuestos o no de lentes de concentración, que concentran la radiación solar directa de una superficie del panel en la célula, cuyas propiedades concretas se tratan en \ref{}.
+
+Los paneles fijos deben tener una inclinación que está relacionada con el ángulo óptimo, que será igual a la latitud donde se encuentre el panel, recomendándose evitar inclinaciones menores a los 15$^\circ$ para favorecer la limpieza de las partículas que se depositen en el panel con la lluvia. 
+
+Es importante considerar la sombra que proyectan los paneles sobre la superficie para instalar filas una detrás de otra.Cada $array$ de módulos fotovoltaicos debe tener una separación que se calcula típicamente con la siguiente expresión:
+
+\begin{equation}
+	D_p = \frac{h}{tan(61^\circ- latitud)}
+\end{equation}
+
+donde $D_p$ es la distancia entre filas, $h$ la altura máxima del panel y la latitud es aquella en la que se encuentra el panel, en grados.
+
+A continuación, se hará una breve descripción y comparación de estas disposiciones.
+   
+\begin{itemize}
+	
+	\item \textbf{Paneles monofaciales}: son los más comunes en instalaciones fotovoltaicas. Este tipo de módulo solo aprovecha la radiación incidente en su cara frontal, por lo que suelen instalarse sobre estructuras inclinadas con el ángulo óptimo para maximizar la captación directa. Por dar una referencia de módulos comerciales, Trina Solar tiene una serie de panales monofaciales con una potencia de 430–460$W$ con eficiencias entre $\approx21.5\%$ y $23.0\%$ bajo condiciones estándar de funcionamiento.
+	
+	\item \textbf{Paneles bifaciales}: permiten la captación de radiación por ambas caras. Sustituyen el recubrimiento trasero opaco por una lámina de vidrio y la caja de conexiones es más compacta para evitar sombreado. La ganancia bifacial depende del albedo, la distancia al suelo, la inclinación y el sombreado estructural. De manera general, el incremento de energía se sitúa entre un $5\%$ y un $20\%$, pudiendo alcanzarse valores del orden del $30\%$ en terrenos con alto albedo o configuraciones elevadas \cite{chander2015,gupta2019}. Por este motivo, estas tecnologías suelen utilizarse con estructuras más altas y en configuraciones que permitan la entrada de radiación difusa y reflejada.
+	
+	\item \textbf{Configuración V}: la estructura que soporta los paneles únicamente dispone de un $array$ vertical. Es la opción más utilizada cuando la superficie disponible no es limitada, ya que presenta la mejor relación entre coste y energía generada. Su comportamiento es equivalente al de los paneles inclinados convencionales, aunque con mayor distancia entre filas para evitar sombras.
+	
+	\item \textbf{Configuración 2V}: en este caso, la estructura sostiene dos $arrays$ verticales, uno sobre otro. La mayor altura permite aumentar la captación total de radiación y la energía generada por metro lineal de estructura. Dependiendo del diseño de la planta y del albedo del terreno, la producción anual puede aumentar entre un $10\%$ y un $20\%$ respecto a una configuración V equivalente \cite{mason2021}. Este tipo de instalación se utiliza cuando se desea maximizar la energía por unidad de longitud o cuando la superficie disponible es limitada.
+	
+	\item \textbf{Seguidores solares}: son $arrays$ que incluyen un sistema mecánico para variar su orientación siguiendo la trayectoria solar. Los seguidores de un eje (rotación Este-Oeste) suelen incrementar la generación anual entre un $15\%$ y un $25\%$ respecto a estructuras fijas optimizadas \cite{mousazadeh2009}. Los seguidores de dos ejes, mucho menos empleados por su mayor coste, permiten un seguimiento completo del Sol y pueden aumentar la energía producida en torno a un $35–40\%$ respecto a un sistema fijo.
+	
+\end{itemize}
+
+
+\begin{figure}[h]
+	\centering
+	\subfloat[Arrays fijos en un huerto solar. Repsol.]
+	{	
+		\includesvg[width=0.45\linewidth]{figuras/array_repsol}
+	}	
+	\subfloat[Seguidores bifaciales. Xataka]
+	{
+		\includesvg[width=0.45\linewidth]{figuras/seguidor_bifacial}
+	}
+	\caption{Distintas distribuciones de arrays en campos solares}
+\end{figure}
+
+
+Como se ha introducido en la sección \ref{chapter:introduccion}, el empleo del suelo es limitado y restringe su explotación para otro tipo de actividades. Por esta razón, cada vez está tomando más protagonismo la integración fotovoltaica en edificios.
+
+\subsection{BIPV}
+La energía solar fotovoltaica integrada en edificios, Building Integrated Photovoltaics en Inglés, es un método por el cual los módulos PV pueden ser incorporados en la fachada y la techumbre de los edificios \cite{HENEMANN200814}. 
+
+\subsubsection{Ventanas BIPV}
+Las ventanas BIPV integran células solares en el acristalamiento. No solo interesa que produzcan electricidad, sino que también pueden suponer un componente estético para el edificio y proporcionar un efecto de sombreado de persiana en el interior \cite{YU2021111355}. 
+
+Desde un punto de vista conceptual, las soluciones BIPV permiten que los elementos constructivos tradicionales asuman simultáneamente una función energética. En el caso de las ventanas, esta integración plantea un compromiso entre generación eléctrica, transmisión luminosa y confort visual, ya que el acristalamiento deja de ser un elemento ópticamente neutro. 
+
+En función de la tecnología empleada, las ventanas BIPV pueden actuar como elementos semitransparentes, filtros espectrales o sistemas de sombreado activo, modificando tanto la cantidad como la calidad de la radiación que penetra en el interior del edificio. Este doble papel, como cerramiento y como sistema energético, convierte a las ventanas BIPV en un caso particular dentro de la integración fotovoltaica en edificios, donde las consideraciones ópticas adquieren un peso relevante en el diseño del sistema.
+
+
+\section{Óptica geométrica}
+
+La óptica geométrica proporciona un marco simplificado para el análisis de sistemas ópticos en los que la propagación de la luz puede aproximarse mediante trayectorias rectilíneas \cite{Optics}.
+
+\subsection{Principio de Fermat}\label{sec:fermat}
+El principio de Fermat establece que la trayectoria que sigue un rayo de luz entre dos puntos es aquella en la que el tiempo empleado es mínimo, o más precisamente, estacionario (un mínimo, un máximo o un punto de inflexión) respecto a posibles variaciones cercanas, lo que en la práctica suele ser el tiempo mínimo. Este principio constituye la base teórica a partir de la cual se describen fenómenos como la reflexión y la refracción, y resulta especialmente útil para el análisis de sistemas ópticos formados por superficies refractantes.
+
+\subsection{Refracción de la luz y ley de Snell}
+Cuando un rayo de luz atraviesa la frontera entre dos medios transparentes con distinto índice de refracción, su dirección de propagación cambia, fenómeno conocido como refracción. Este comportamiento se describe mediante la ley de Snell, que relaciona los ángulos de incidencia y refracción con los índices ópticos de ambos medios.
+
+Desde el punto de vista de la óptica geométrica, la refracción puede interpretarse como una consecuencia directa del principio de Fermat, ya que el rayo adopta la trayectoria que minimiza el tiempo de propagación al atravesar materiales con diferentes velocidades de la luz. Este principio es fundamental para comprender el funcionamiento de sistemas ópticos basados en lentes, donde la desviación controlada de los rayos permite modificar su convergencia o divergencia.
+
+\subsection{Lentes delgadas}
+\begin{figure}[t]
+	\centering
+	\subfloat[Lente convergente.]{
+		\includesvg[width=0.45\linewidth]{figuras/delgada_convergente}
+	}	
+	\subfloat[Lente divergente.]{
+		\includesvg[width=0.45\linewidth]{figuras/delgada_divergente}
+	}
+	\caption{Lentes delgadas.}
+	\label{fig:lentesdelgadas}
+\end{figure}
+Una lente es un sistema óptico que modifica la trayectoria de los rayos luminosos mediante refracción en sus superficies. En función de su geometría, las lentes pueden clasificarse como convergentes o divergentes (Figura~\ref{fig:lentesdelgadas}). 
+
+Las lentes convergentes hacen que rayos inicialmente paralelos al eje óptico se concentren en un punto denominado foco, mientras que las lentes divergentes separan los rayos, produciendo un foco virtual. La distancia entre la lente y el foco define la distancia focal, parámetro clave en el diseño de sistemas ópticos de concentración.
+
+En aplicaciones de captación solar, las lentes convergentes permiten aumentar la densidad de potencia luminosa sobre una superficie reducida, facilitando el uso de células fotovoltaicas de menor área y mejorando la eficiencia del sistema.
+
+\subsubsection{Ecuación de la lente delgada}
+Bajo la aproximación de lente delgada, válida cuando el espesor de la lente es pequeño frente a las distancias características del sistema, la formación de imagen puede describirse mediante una relación sencilla entre la distancia al objeto $s$, la distancia a la imagen $s'$ y la distancia focal $f$:
+\begin{equation}
+	\frac{1}{f} = \frac{1}{s} + \frac{1}{s'}
+\end{equation}
+
+donde $\mathrm{f}$ es la distancia focal de la lente, $\mathrm{s}$ la distancia del objeto a la lente y $s'$
+la distancia de la imagen formada. 
+
+En el caso particular de una fuente situada en el infinito —como ocurre de forma aproximada con la radiación solar—, los rayos incidentes pueden considerarse paralelos y la imagen se forma en el plano focal de la lente.
+
+
+\subsubsection{Ecuación del fabricante de lentes}
+La distancia focal de una lente no es un parámetro arbitrario, sino que depende de la geometría de sus superficies y del índice de refracción del material. Para una lente delgada inmersa en aire, esta dependencia puede expresarse como:
+\begin{equation}
+	\frac{1}{f} = (n - 1)\left( \frac{1}{R_1} - \frac{1}{R_2} \right)
+\end{equation}
+donde $n$ es el índice de refracción del material de la lente, y $R_1$ y $R_2$ son los radios de curvatura de sus caras anterior y posterior, respectivamente. Esta expresión muestra cómo la capacidad de una lente para desviar y concentrar la luz está directamente relacionada con la curvatura de sus superficies.
+
+
+\subsubsection{Desplazamiento del foco y dependencia angular}
+
+Desde el punto de vista geométrico, el comportamiento puede analizarse aplicando la formulación de lente delgada en el plano de curvatura, mientras que en la dirección perpendicular no se produce enfoque. Esta característica resulta especialmente adecuada para sistemas en los que el movimiento relativo entre la fuente y el concentrador se produce principalmente a lo largo de un eje.
+
+
+Cuando la radiación incidente no es normal a la lente, el foco deja de situarse sobre el eje óptico y se produce un desplazamiento lateral de la línea focal. Para pequeños ángulos de incidencia $\theta$, este desplazamiento puede aproximarse como:
+\begin{equation}
+	\Delta x \approx f \tan{\theta}
+\end{equation}
+
+Este efecto es especialmente relevante en aplicaciones solares, ya que la posición del foco varía continuamente a lo largo del día debido al movimiento aparente del Sol. En sistemas de concentración estáticos, este desplazamiento reduce la eficiencia de captación, mientras que en sistemas con seguimiento permite definir estrategias de control para mantener el receptor alineado con la región de máxima concentración.
+
+\subsection{Concentración de la radiación solar}
+La concentración óptica consiste en redirigir la radiación incidente desde una superficie de entrada amplia hacia una región de salida más pequeña, aumentando la irradiancia efectiva sobre el receptor. Este principio se emplea ampliamente en sistemas solares fotovoltaicos para reducir la cantidad de material activo necesario.
+
+Desde el punto de vista geométrico, la concentración se logra controlando el ángulo de incidencia y la trayectoria de los rayos mediante elementos ópticos pasivos. No obstante, la eficiencia del proceso depende fuertemente de la posición relativa entre la fuente, el sis 	tema óptico y el receptor, así como de las pérdidas por reflexión y aberraciones.
+
+\subsection{Lente de Fresnel}
+Una lente de Fresnel puede definirse como una lente ordinaria “segmentada” en anillos concéntricos o tiras longitudinales, donde cada sección conserva la geometría óptica necesaria para desviar los rayos de igual manera que lo haría una lente gruesa de curvatura continua \cite{smith2007}. Esta segmentación permite que la lente mantenga su distancia focal, eliminando la mayor parte del material y reduciendo peso y espesor. Existen dos configuraciones relevantes.
+\begin{itemize}
+	\item \textbf{Lentes de Fresnel concéntricas}: los anillos siguen una disposición circular alrededor del eje óptico y producen un enfoque puntual, común en iluminación y en concentración solar puntual.
+	\item\textbf{Lentes de Fresnel lineales}: los elementos ópticos son secciones rectas paralelas. El sistema concentra la luz en una línea focal en lugar de un punto. Es adecuado para aplicaciones donde el movimiento o la captación se produce a lo largo de un eje. \cite{pedrotti2017}.
+\end{itemize}
+
+En particular, las lentes de fresnel permiten implementar sistemas de concentración con un espesor reducido y una geometría compatible con superficies planas, lo que las hace especia0lmente adecuadas para su integración en soluciones arquitectónicas activas basadas en concentración óptica. En configuraciones lineales, la concentración se produce en una dimensión, simplificando el sistema mecánico y óptico, y adaptándose de forma natural a dispositivos donde el movimiento relativo se realiza a lo largo de uno o dos ejes.
+
+En el caso de las lentes lineales, la curvatura se presenta únicamente en una dirección, mientras que en la dirección ortogonal la geometría permanece constante. Como consecuencia, la concentración de la luz no se produce en un punto focal, sino a lo largo de una línea focal.
+
+
+\begin{figure}[t]
+	\centering
+	
+	\subfloat[Comparación fresnel y lente delgada.]{
+		\includesvg[width=0.45\linewidth]{figuras/fresnelvsdelgada}
+	}
+	\subfloat[Lente de fresnel concéntrica en un faro.]{
+		\includesvg[width=0.45\linewidth]{figuras/fresnel_faro_con}
+	}	
+	
+	\subfloat[Lente divergente.]{
+		\includesvg[width=0.45\linewidth]{figuras/fresnel_lineal}
+	}
+	\subfloat[Lente de fresnel por imprimación ultravioleta para concentración solar en paneles fotovoltaicos.]{
+		\includesvg[width=0.45\linewidth]{figuras/fresnel_concentracion_solarl}
+	}
+	\caption{Lentes de fresnel.}
+	\label{fig:fresnel}
+\end{figure}
+

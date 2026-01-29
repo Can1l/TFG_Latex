@@ -1,0 +1,267 @@
+\chapter{Diseño del sistema de control}
+\section{Enfoque general del diseño}
+
+En un sistema embebido de control, el hardware y el software están estrechamente integrados. El diseño se divide en dos partes diferenciadas por su naturaleza, pero concebidas de forma conjunta: el diseño electrónico y el diseño software.
+
+Por una parte, el diseño electrónico comprende los aspectos relativos a la selección e interconexión de los distintos componentes físicos que conforman el sistema, incluyendo la unidad de control, el sistema de accionamiento, los sensores y referencias físicas, así como la alimentación y las consideraciones eléctricas asociadas. Esta parte del diseño da respuesta principalmente a los requisitos de precisión en el posicionamiento, robustez frente a errores del usuario y fiabilidad del sistema, al establecer los límites físicos de operación, los mecanismos de referencia y la arquitectura de potencia y control.
+
+Por la otra parte, el diseño software aborda la implementación de las funcionalidades del sistema de control sobre la plataforma embebida seleccionada. Incluye la arquitectura software, la gestión de los distintos modos de funcionamiento, el control del movimiento del panel móvil, la gestión del tiempo y de los errores y la interfaz de usuario. Esta parte del diseño responde directamente a los requisitos funcionales definidos, garantizando la correcta ejecución de los algoritmos de cálculo, la interacción con el usuario y la operación estable del sistema durante periodos prolongados de tiempo.
+
+La separación conceptual entre diseño electrónico y diseño software permite analizar cada parte de forma estructurada y sin perder de vista su integración, pues las decisiones adoptadas en una de las partes condicionan el comportamiento global del prototipo.
+
+
+\section{Diseño electrónico}
+
+\subsection{Arquitectura hardware}
+
+
+\begin{figure}[t]
+	\centering
+	\includesvg[width=0.9\linewidth]{figuras/Diseno_electronico}
+	\caption{Diagrama de diseño de interconexiones hardware.}
+	\label{fig:dis_elect}
+\end{figure}
+
+
+La arquitectura hardware del sistema de control se ha definido con el objetivo de integrar, de forma clara y  modular, los distintos subsistemas necesarios para el accionamiento del plano móvil. La Figura~\ref{fig:dis_elect} muestra el diagrama de bloques de la arquitectura hardware, donde se representan los principales componentes y las interconexiones funcionales entre ellos.
+
+El sistema se organiza en torno al microcontrolador, que centraliza la lógica de control y la comunicación con el usuario. Este bloque se comunica con el sistema de accionamiento, integrado en una placa CNC Shield equipada con drivers A4988, encargados de excitar los motores paso a paso responsables del movimiento del panel móvil.
+
+Los motores, de tipo NEMA-15 y NEMA-17, transmiten el movimiento a la plataforma móvil mediante mecanismos de correas y husillos, permitiendo el desplazamiento en los ejes horizontal y vertical. La posición extrema del sistema es delimitada por finales de carrera, que proporcionan referencias físicas y protección frente a movimientos fuera de rango. Estos motores pueden visualizarse en la Figura~\Ref{}
+
+La referencia temporal necesaria para el cálculo de la posición solar se obtiene mediante un módulo GPS conectado directamente al microcontrolador a través de una interfaz serie. El sistema se alimenta a partir de una fuente de 12~V, destinada principalmente al accionamiento de los motores, mientras que la electrónica de control se alimenta mediante un convertidor DC-DC que genera las tensiones requeridas por la lógica.
+
+Esta arquitectura permite una clara separación entre los subsistemas de potencia, control, accionamiento y planta, facilitando la integración del hardware, la depuración del sistema y su posible adaptación a futuras modificaciones del prototipo.
+
+\FloatBarrier
+
+\subsection{Subsistema de alimentación}
+
+El subsistema de alimentación es el encargado de proporcionar las tensiones necesarias para el correcto funcionamiento de los distintos bloques del sistema. Está compuesto por una fuente de alimentación principal de 12~V, encargada de suministrar energía al sistema de accionamiento, y por un convertidor DC-DC reductor que genera las tensiones necesarias para la lógica de control, es decir, para el correcto funcionamiento de las placas de expansión y del microcontrolador. Se escoge un convertidor Buck DC-DC que reduce con rectificación síncrona en un rango de 9-36~V a 5.2~V estables. Esta estabilidad resulta crítica para el correcto funcionamiento de la lógica de control. La separación entre la alimentación de potencia (motores) y de lógica permite amortiguar posibles interferencias eléctricas y garantizar una operación estable del microcontrolador y de los dispositivos de comunicación, contribuyendo a la fiabilidad global del sistema. Asimismo, cuenta con protección contra sobrecorriente y cortocircuito, protegiendo así los componentes conectados. Como puede apreciarse en el propio módulo, este convertidor permite la conexión USB con el microcontrolador y con cableado para la placa de expansión. Estas características han hecho este convertidor sobresalientemente adecuado para la alimentación de los componentes lógicos.
+
+\subsection{Subsistema de control}
+
+El subsistema de control está basado en un microcontrolador ESP32-S3, que actúa como núcleo del sistema embebido. Este bloque es responsable de la ejecución de los algoritmos de cálculo, la gestión de los modos de funcionamiento, el control del movimiento del panel móvil y la comunicación con el usuario. Recibe la referencia temporal a través de un módulo GPS conectado mediante una interfaz serie, garantizando la precisión necesaria para el cálculo de la posición solar. Asimismo, procesa las señales procedentes de los finales de carrera, que proporcionan información sobre los límites físicos del sistema y permiten implementar mecanismos de referencia y protección frente a errores.
+
+Este enfoque centralizado simplifica la coordinación entre los distintos subsistemas y facilita la adopción de estrategias de supervisión y la implementación del control.
+
+
+\subsection{Subsistema de accionamiento}    
+El subsistema de accionamiento está constituido por dos placas de expansión CNC Shield y los drivers de los motores paso a paso. Se empleará una para el movimiento vertical y otra para el horizontal, facilitando de esta forma la implementación y la posible modificación del conexionado. Este bloque actúa como interfaz entre el subsistema de control y los actuadores, traduciendo las señales lógicas generadas por el microcontrolador en corrientes adecuadas para el control de los motores. La comunicación entre el microcontrolador y el sistema de accionamiento se realiza mediante señales de control de tipo \textit{step} y \textit{direction}, coherentes con la estrategia de control en lazo abierto adoptada, acorde con los requisitos del prototipo experimental. Esta arquitectura permite un control preciso del desplazamiento del panel sin necesidad de realimentación continua de posición.
+
+
+\subsection{Subsistema de la planta}
+El sistema físico de la ventana está compuesto por la plataforma móvil, los motores paso a paso y los finales de carrera. Los motores transmiten el movimiento a la plataforma mediante mecanismos de correas y husillos, permitiendo el desplazamiento del panel en los ejes horizontal y vertical. Los finales de carrera delimitan los recorridos máximos permitidos y proporcionan referencias físicas al sistema de control, garantizando que el movimiento del panel se mantiene dentro de los límites mecánicos establecidos. 
+
+
+\subsection{Discusión de la arquitectura hardware}
+La arquitectura propuesta permite una clara separación entre potencia, control y planta, facilitando la identificación de responsabilidades de cada subsistema y simplificando la integración del hardware y software. Esta organización resulta especialmente adecuada para el carácter experimental del proyecto, ya que permite modificar o sustituir bloques individuales sin afectar al conjunto del sistema.
+
+La centralización de la lógica de control en el microcontrolador y el uso de interfaces estándar favorecen la escalabilidad del sistema y su posible migración a otras plataformas hardware en fases posteriores del proyecto.
+
+\section{Arquitectura funcional del sistema de control}
+
+Antes de abordar en detalle la arquitectura software y la implementación de los distintos módulos del sistema, es conveniente presentar una visión funcional de alto nivel del sistema de control. Esta representación permite identificar los principales bloques que intervienen en el sistema, así como los flujos de información entre el usuario, el sistema embebido y la planta física.
+
+La Figura~\ref{fig:arq_func} muestra el diagrama de arquitectura funcional del sistema, donde se integran los subsistemas de control, interfaz de usuario, accionamiento y planta, independientemente de su implementación hardware o software concreta.
+
+El usuario interactúa con el sistema a través de una interfaz gráfica, accesible mediante una web cliente, que se comunica de forma inalámbrica con el sistema embebido. Las peticiones del usuario son procesadas por el servidor web, que actúa como intermediario entre la interfaz y el microcontrolador.
+
+El microcontrolador centraliza la lógica de control del sistema, integrando la información temporal proporcionada por el módulo GPS y el estado de los sensores de fin de carrera. A partir de esta información, genera las señales de control necesarias para el accionamiento de los motores, que producen el desplazamiento de la plataforma móvil. El estado del sistema es comunicado de vuelta al usuario mediante la misma cadena de comunicación inversa.
+
+
+\begin{figure}[t]
+	\centering
+	\includesvg[width=0.9\linewidth]{figuras/functional_architecture}
+	\caption{Diagrama de diseño funcional.}
+	\label{fig:arq_func}
+\end{figure}
+
+\FloatBarrier
+
+\section{Diseño software}
+
+El diseño del software del sistema se aborda desde una perspectiva funcional y orientada al comportamiento, donde se prioriza la claridad en la descripción de los flujos de ejecución y de los intercambios de información frente a una abstracción descompuesta en bloques software.
+
+Dado el carácter embebido del sistema, la lógica de control se articula principalmente en torno a eventos, estados y secuencias de ejecución bien definidas. En este contexto, el uso de diagramas de bloques software de alto nivel no representa eficazmente el funcionamiento real del sistema, ya que no refleja adecuadamente las interacciones temporales ni la dependencia entre los distintos modos de operación.
+
+Por este motivo, el diseño software se documenta mediante diagramas de flujo, diagramas de flujo de datos y diagramas de secuencia UML, que permiten describir de forma más precisa y comprensible el comportamiento del sistema en sus distintos modos de funcionamiento.
+
+
+\subsection{Arquitectura software}
+La arquitectura software se ha diseñado con un enfoque orientado a funcionalidades. En el contexto del sistema embebido desarrollado, el uso de un diseño fuertemente orientado a objetos no resulta especialmente adecuado, dado que no se trabaja con objetos dinámicos ni con jerarquías complejas, sino con algoritmos, estados y flujos de ejecución bien definidos. En este sentido, el diseño se estructura alrededor de la implementación de los distintos algoritmos de control, cuyos datos se gestionan mediante estructuras globales compartidas que facilitan la interacción entre los bloques lógicos y la interfaz web.
+
+El acceso a estas estructuras se encuentra condicionado por variables de estado que determinan el modo de funcionamiento activo, garantizando una ejecución coherente del sistema. De este modo, el programa se estructura de forma atómica, implementando cada modo y funcionalidad de manera independiente, lo que permite realizar pruebas específicas sobre cada bloque y comprobar su correcto funcionamiento de forma aislada.
+
+Este enfoque favorece una elevada cohesión interna de cada módulo y un acoplamiento moderado entre ellos, priorizando la simplicidad, la rapidez de implementación y la facilidad de depuración, aspectos especialmente relevantes en el carácter experimental del proyecto. El sacrificio parcial en encapsulación se ve compensado por la agilidad en el desarrollo y la posibilidad de introducir modificaciones sin necesidad de reestructurar grandes secciones del código.
+
+Los distintos algoritmos empleados han sido detallados en el marco teórico, por lo que en esta sección se hará referencia a ellos únicamente en el contexto de los modos de funcionamiento, sin entrar en profundidad en su formulación matemática.
+
+La visibilidad entre bloques del sistema debe permitir que los parámetros introducidos por el usuario en la interfaz lleguen a los algoritmos de los distintos modos de funcionamiento, por lo que es necesario establecer una comunicación eficiente. Para ello, la web debe permitir el envío de parámetros al servidor, responsable de lanzar los distintos modos, siendo estos los responsables, a su vez, de ejecutar los algoritmos y controlar los motores. También se encarga de gestionar de manera activa el guardado de variables en la flash y la propia interfaz web. Figura~\ref{fig:comunicacion}
+
+Con el objetivo de materializar este mecanismo de control, se ha definido una máquina de estados finitos que gobierna el comportamiento global del sistema y regula las transiciones entre los distintos modos de funcionamiento. Esta máquina de estados finitos tiene la responsabilidad de coercionar el acceso del usuario, a través de las condiciones de cambio de estado, a distintas funcionalidades que causarían un funcionamiento indeseado o inesperado en el programa. Asimismo, es el encargado de gestionar la resincronización del GPS, el modo automático y la manera en la que el microcontrolador entra en suspensión y sale de esta.
+Este enfoque resulta especialmente adecuado para sistemas embebidos reactivos, donde el comportamiento depende del estado global y de eventos externos asincrónicos.
+
+
+La Figura~\ref{fig:fsm} muestra la máquina de estados implementada, donde se representan los estados principales del sistema y las condiciones que habilitan las transiciones entre ellos.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/communication}
+	\caption{Diagrama de comunicación.}
+	\label{fig:comunicacion}
+\end{figure}  
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/FSM_plantuml}
+	\caption{Máquina de estados finitos del sistema.}
+	\label{fig:fsm}
+\end{figure}  
+
+La máquina de estados no pretende detallar el comportamiento interno de cada modo, sino definir las condiciones de acceso, salida y coexistencia entre ellos, garantizando un uso coherente y seguro del sistema.
+
+El entorno de Arduino propone utilizar una función inicial, setup, donde se inicializan los distintos componentes que forman el sistema y una función loop que se ejecuta en un bucle infinito. El comportamiento dual del microcontrolador permite mantener el servidor web de forma asícrona mientras se maneja este bucle.
+
+La Figura~\ref{fig:web_gps_init} muestra el flujo de ejecución asociado a la inicialización del servidor web y al proceso de sincronización temporal mediante GPS. En ella se observa cómo, tras el arranque del sistema, se habilitan los servicios de comunicación y se gestiona de forma robusta la adquisición de la referencia temporal, incluyendo mecanismos de reintento ante fallos de sincronización. De forma complementaria, la Figura~\ref{fig:init_sec} presenta un diagrama secuencial UML que describe el orden de ejecución de las rutinas de inicialización durante la fase de arranque.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/init_secuence}
+	\caption{Rutinas de inicio del servidor web y GPS.}
+	\label{fig:web_gps_init}
+\end{figure}
+
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/init_secuence_UML}
+	\caption{Diagrama secuencial de los procesos de inicio.}
+	\label{fig:init_sec}
+\end{figure}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/config_data.pdf}
+	\caption{Flujo de datos del sistema.}
+	\label{fig:flujo_datos}
+\end{figure}
+
+El sistema tiene unos valores de configuración predefinidos para una lucernaria localizada en Madrid, orientada al sur. Estos valores deben ser configurables y rigen el flujo de datos del sistema. 
+Con independencia del modo de funcionamiento activo, el sistema emplea un conjunto común de estructuras de datos que centralizan la información de configuración, posición y estado.  
+La Figura~\ref{fig:flujo_datos} muestra el flujo de adquisición y actualización de estos datos, así como las distintas fuentes que pueden intervenir en su modificación.
+
+
+Por último, se describen en detalle los distintos modos de funcionamiento implementados en el sistema de control. Cada modo responde a un objetivo operativo concreto y presenta diferencias tanto en el origen de los datos como en la cadena de procesamiento.
+
+La descripción de cada modo es acompañada de los diagramas de flujo de datos y los diagramas secuenciales correspondientes, con el fin de ilustrar de manera clara el comportamiento del sistema, el intercambio de información entre bloques y la secuencia de ejecución asociada. Este enfoque permite comprender no solo qué hace el sistema en cada modo, sino también cómo y en qué orden se llevan a cabo las distintas operaciones, manteniendo la coherencia con la máquina de estados definida previamente.
+
+\FloatBarrier
+
+\subsubsection{Modo automático}
+
+El modo automático se ejecuta en bucle e incluye los tres algoritmos que se implementan en la primera fase de desarrollo. Para el cálculo de efemérides solares, es necesario que el sistema conozca de antemano la fecha y la hora, pues es necesario ajustar el reloj del microcontrolador y para poder consultarlas en cada iteración y no depender constantemente del GPS, que permanecerá activo solo para la resincronización necesaria debido al desvío que se produce en el reloj interno de dicho microcontrolador, reduciendo los recursos que esta condición acarrea. También será necesario conocer la latitud y longitud donde se ubica la ventana, que se introduce en la configuración del sistema y permanece constante a no ser que se reconfigure. Este bloque utiliza el algoritmo SPA (Solar Position Array) de NMEA, versión extendida y precisa del procedimiento explicado en \ref{sec:ef_sol}. 
+
+Una vez conocidos los ángulos azimutal y de elevación, junto con los parámetros de configuración de pan, tilt y corrección del tilt, se puede proceder al cálculo de los ángulos de incidencia~[\ref{sec:aoi}], de los que se obtendrá la posición que debe ocupar el panel realizando una interpolación bilineal~[\ref{sec:interpol}] de las matrices de ángulos de incidencia elaboradas en~[\ref{sec:matriz}]. 
+   
+Por último, se enviará la posición que debe ocupar el panel a las funciones de movimiento que gestionan los motores.
+
+El flujo de ejecución de este modo puede visualizarse en la Figura~\ref{fig:autoex} a través de un diagrama secuencial UML. Adicionalmente, mediante la Figura~\ref{fig:auto_sec} se muestra el diagrama de flujo de datos necesarios para la correcta ejecución de este modo.
+
+\begin{figure}[b]
+	\centering
+	\includesvg[width= 0.9\linewidth]{figuras/auto_mode}
+	\caption{Diagrama secuencial del modo automático.}
+	\label{fig:auto_sec}
+\end{figure}  
+
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width= 0.9\linewidth]{figuras/AutoMode_DFD}
+	\caption{Diagrama de flujo del modo automático.}
+	\label{fig:autoex}
+\end{figure}  
+
+\FloatBarrier
+
+\subsubsection{Modo efemérides}
+
+Este modo recibe como parámetros una elevación y azimut introducidos por el usuario a través de la interfaz web, simulando una posición del Sol en el cielo, y desplaza el panel móvil a la posición correspondiente. Consecuentemente, es necesario que este modo calcule los ángulos de incidencia y realice la interpolación bilineal.
+
+A pesar de que el modo efemérides reutilice gran parte de los bloques funcionales del modo automático, se documenta de forma independiente debido a la modificación en el origen de los datos y en la estructura del flujo de información. En este modo, los valores de azimut y elevación no se obtienen mediante el cálculo de efemérides, sino que son introducidos directamente por el usuario a través de la interfaz web, siendo gestionados por el CoreSystem.
+
+El diagrama de flujo de datos mostrado en la Figura~\ref{fig:eph_dfd} pone de manifiesto esta diferencia, al eliminar el bloque de cálculo de efemérides y modificar la entrada de datos al sistema, manteniendo inalterados los bloques de cálculo de ángulos de incidencia, interpolación y movimiento.
+
+
+\subsubsection{Modo manual}
+
+El modo manual constituye el modo de control más directo del sistema y está diseñado deliberadamente con una estructura mínima. Su objetivo no es la ejecución de algoritmos de cálculo, sino proporcionar al usuario un control inmediato sobre el movimiento del panel móvil, tanto mediante desplazamientos incrementales como a través de la introducción directa de coordenadas de posición.
+
+En este modo, la cadena de ejecución se reduce a la recepción de órdenes desde la interfaz web, su validación por parte del sistema de control y la generación directa de las señales de movimiento correspondientes.
+
+Este modo será necesario en futuros proyectos sobre la maqueta para parametrizar la iluminación de la ventana en el modo de generación o de máxima iluminación.
+
+La Figura~\ref{fig:manual_dfd} muestra el diagrama de flujo de datos del modo manual. En él puede observarse la simplicidad del flujo, donde las órdenes introducidas por el usuario a través de la interfaz web se transmiten directamente al sistema de control para la ejecución del movimiento, sin bloques intermedios de procesamiento.
+
+El flujo de ejecución de los modos manual y efemérides se representa mediante un único diagrama secuencial, mostrado en la Figura~\ref{fig:manual_eph_seq}, con el objetivo de simplificar la documentación y evitar la duplicación de diagramas con estructuras muy similares.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/EphMode}
+	\caption{Diagrama de flujo de datos del modo efemérides.}
+	\label{fig:eph_dfd}
+\end{figure}  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/ManualMode_DOF}
+	\caption{Diagrama de flujo de datos del modo manual.}
+	\label{fig:manual_dfd}
+\end{figure}  
+\begin{figure}[h]
+	\centering
+	\includegraphics[width= 0.95\linewidth]{figuras/manual_eph_mode.pdf}
+	\caption{Diagrama secuencial de los modos manual y efemérides.}
+	\label{fig:manual_eph_seq}
+\end{figure}  
+
+\FloatBarrier
+
+
+\section{Diseño de la interfaz}
+
+El diseño de la interfaz debe permitir que el usuario acceda a todas las funcionalidades del programa. Esta se divide en cinco secciones, ordenadas según su disposición en la página web empezando por la superior: configuración, modo efemérides, modo manual, estado del sistema y botones generales para el modo automático, entrada del microcontrolador en \textit{sleep}, reset y sincronizar la hora con el GPS. Las tres primeras secciones son accesible mediante un botón de inicio, \textit{begin}, que permite acceder a ella, uno para el envío de formulario y uno último de vuelta a reposo. Como se ha mencionado anteriormente, las peticiones del usuario son validadas a través de la FSM, no permitiendo usar botones generales estando dentro de modos ni enviar peticiones sin estar en el estado correspondiente, y mediante los límites físicos de movimiento. La situación del sistema mostrada en \textit{System Status} se actualiza cada segundo para poder seguirla en tiempo real. Los distintos bloques de la interfaz pueden visualizarse en la Figura~\ref{fig:interfaz}.
+\begin{figure}[t]
+	\centering
+	\subfloat[Configuración.]
+	{	
+		\includesvg[width=0.45\linewidth]{figuras/i_config}		
+	}
+	\subfloat[Estado.]
+	{
+		\includesvg[width=0.45\linewidth]{figuras/i_status}		
+	}
+	
+	\subfloat[Modo efemérides.]
+	{	
+		\includesvg[width=0.45\linewidth]{figuras/i_eph}	
+	}
+	\subfloat[Modo manual.]
+	{
+		\includesvg[width=0.45\linewidth]{figuras/i_manual}		
+	}	
+	
+	\subfloat[Botones.]
+	{
+		\includesvg[width=0.8\linewidth]{figuras/i_boton}
+	}	
+
+	
+	\caption{Interfaz gráfica de usuario.}
+	\label{fig:interfaz}
+\end{figure}
+
+

@@ -1,0 +1,97 @@
+\chapter{Introducción}\label{chapter:introduccion}
+
+
+El aprovechamiento de la energía solar se ha convertido en uno de los pilares de la transición energética. Su integración en edificios (BIPV) es una estrategia clave para aprovechar superficies ya existentes y abre un nuevo abanico de posibilidades arquitectónicas, como elementos pasivos de generación o una aproximación híbrida entre un sistema de concentración solar y un elemento arquitectónico activo. 
+
+En la fotovoltaica integrada en edificios surgen constantemente nuevos conceptos para el aprovechamiento de la luz solar, y los más clásicos, como los paneles en las techumbres de los edificios, no dejan de reinventarse para maximizar su eficiencia energética. El elemento máximo de interés en relación con este proyecto son las ventanas BIPV, potencial candidato para reemplazar las ventanas convencionales, mejorando sus características ópticas, eléctricas y de transmisión de calor \cite{su152215876}. 
+
+Los seguidores solares convencionales rotan siguiendo el Sol para maximizar la eficiencia. Dado que no es viable modificar la orientación de un edificio para maximizar la captación solar de sus elementos BIPV -en este caso, las ventanas- se deduce que el propio elemento integrado debe incorporar partes móviles capaces de obtener un rendimiento similar al de los seguidores solares. De esta aproximación nace el objeto de este proyecto: desarrollar el sistema de control de un panel transparente con células fotovoltaicas dispuestas en tiras transversales, situado dentro de una ventana, que realiza un seguimiento de la luz solar. Esta luz es previamente procesada por unas lentes longitudinales de concentración de fresnel, que conforman la parte exterior de la ventana y concentran la radiación directa del Sol en franjas horizontales que inciden sobre las células del panel móvil. Estas franjas de luz se desplazan sobre el plano a lo largo del día con el movimiento del Sol, razón por la cual es necesario el control de un sistema mecatrónico que responda a esta necesidad de mover el panel para generar energía.
+
+\section{Motivación del proyecto}
+Una de las problemáticas de la generación de energía solar fotovoltaica es el gran espacio que ocupan los seguidores solares, restringiendo el suelo para otros usos. De la necesidad de aprovechar la superficie, nace la fotovoltaica integrada en edificios, que permite volver a emplear superficies arquitectónicas ya existentes para la generación de energía o creación de nuevas con elementos integrados. Este proyecto surge de reinventar el concepto que se tenía hasta el momento de la ventana solar, donde se utilizan paneles translúcidos o coloreados para decoración. Un panel semitransparente deja pasar parte de la luz directa del Sol dentro del edificio, produciendo deslumbramientos indeseados.
+
+A raíz de estos inconvenientes, se propone utilizar la tecnología fotovoltaica de concentración para crear una ventana que, además de generar electricidad, produzca un efecto similar al de una persiana dentro de la habitación, dejando pasar solo la luz difusa para lograr una alta generación y bajo deslumbramiento, o la luz difusa y franjas de luz directa para una alta iluminación. De este modo, no solo tendrá una finalidad generativa, sino que aporta, además, una finalidad arquitectónica novedosa para controlar la cantidad de luz que se requiere dentro del edificio y coadyuvar a condiciones lumínicas adecuadas.
+
+Este sistema innovador no solo incrementa la eficiencia energética, sino que también garantiza el confort visual de los usuarios al ofrecer un preciso control sobre la cantidad y tipo de luz que entra en el espacio. Al filtrar la luz directa y proporcionar una iluminación difusa, se reduce el deslumbramiento y se propicia un ambiente más agradable y saludable, mejorando la productividad y el bienestar dentro del edificio. Este enfoque arquitectónico no solo responde a necesidades energéticas, sino que también promueve un entorno visualmente cómodo, adaptado a las diversas condiciones de luz a lo largo del día.
+Este proyecto pretende sentar las bases para futuras líneas de investigación en ventanas fotovoltaicas activas, integrando conceptos de energía solar, electrónica de control y diseño óptico.
+
+\section{Objetivos}
+
+\subsection{Objetivo general}
+El principal objetivo que ha estado presente desde el inicio del proyecto es desarrollar un sistema de control capaz de posicionar el panel móvil de la ventana, permitiendo seguir el desplazamiento de las franjas de luz directa concentrada producidas por las lentes de fresnel con el movimiento del Sol al cambiar el foco de la lente, garantizando así la captación óptima de radiación. Es necesario caracterizar el correcto funcionamiento del programa.
+
+\subsection{Objetivos específicos} \label{sec:obj_esp}
+\begin{itemize}
+	\item Diseñar un sistema de control con tres modos de funcionamiento diferenciados.
+	\item Implementar un modo automático capaz de seguir el desplazamiento de las franjas de luz directa.
+	\item Desarrollar un modo manual que permita el posicionamiento directo del panel.
+	\item Incorporar un modo de simulación basado en ángulos azimutales y de elevación.
+	\item Integrar el sistema de control en un microcontrolador de bajo consumo.
+\end{itemize}
+
+
+\subsection{Alcance del proyecto}
+
+El alcance de este proyecto se limita al diseño, implementación y validación de un sistema de control para una ventana fotovoltaica activa a escala de prototipo de laboratorio. El trabajo se centra en el desarrollo del software de control, la integración con el hardware seleccionado y la caracterización experimental del sistema en términos de precisión de movimiento y consumo eléctrico. 
+
+Quedan fuera del alcance de este proyecto el diseño estructural de la ventana, caracterizar la generación del sistema ,su optimización industrial y su análisis económico a gran escala.
+
+
+\section{Materiales utilizados}
+
+
+\subsection{Hardware}
+\begin{itemize}
+    \item \textbf{ESP32-S3-DevkitC1}, microcontrolador con sistema operativo \textit{FreeRTOS}, punto de acceso WIFI y conexión Bluetooth.
+    \item Módulo \textbf {GPS NEO-6M}, es un módulo integrable en \textit{Arduino} utilizado para proporcionar la fecha y la hora al microcontrolador.
+    \item Motores paso a paso \textbf{NEMA-15} y \textbf{NEMA-17}, empleados para producir el movimiento del panel.
+    \item Finales de carrera, para detectar los límites físicos de la maqueta que restringen el movimiento del panel.
+    \item Reductor buck LM2596S-Like de $12-24\, \mathrm{V}$ a $5\, \mathrm{V}$
+\end{itemize}
+
+\begin{figure}[t]
+	\centering
+	\subfloat[ESP32-S3-DevkitC1]{
+		\includesvg[width=0.45\linewidth]{figuras/esp_micro}	
+	}	
+	
+	\subfloat[Nema-15]{
+		\includesvg[width=0.45\linewidth]{figuras/nema15}		
+	}
+	\subfloat[Nema-17]{
+		\includesvg[width=0.45\linewidth]{figuras/nema17}		
+	}
+	
+	\subfloat[CNC-Shield con drivers A4998]{
+		\includesvg[width=0.45\linewidth]{figuras/cncdriver}			
+	}
+	\subfloat[Convertidor DC-DC Buck]{
+		\includesvg[width=0.45\linewidth]{figuras/buck}			
+	}
+\end{figure}
+
+\subsection{Software}
+El desarrollo del código para el control de la ventana se realiza en el entorno de \textit{Arduino} \footnote{\url{https://www.arduino.cc/}}, \textit{Arduino-IDE}, motivado por la gran compatibilidad de bibliotecas que ofrece para implementar el punto de acceso wifi e integrar el GPS.
+
+\section{Estructura del documento}
+
+A continuación, y para facilitar la lectura del documento, se detalla el contenido de cada capítulo.
+
+\begin{itemize}
+\item En el capítulo 1 se realiza una introducción donde se relatan el objeto, la motivación del documento y los objetivos. Define los materiales utilizados a nivel de Hardware y Software.
+\item En el capítulo 2 se hace un repaso de los conceptos teóricos que facilitan el seguimiento y comprensión del proyecto. Se tratan aquí la energía solar fotovoltaica, desarrollando  y su aplicación integrada en edificios, óptica de geométrica de concentración, los distintos algoritmos empleados, la ubicación del Sol respecto de un plano y la obtención de sus ángulos de incidencia y la interpolación bilineal de la que se obtienen las posiciones de desplazamiento para el seguimiento del Sol.
+\item En el capítulo 3 se ubica el estado del arte, donde se mencionan distintas líneas de investigación en materia de ventanas BIPV, entrando en profundidad en aquella que da vida al proyecto.
+\item En el capítulo 4 se presenta la maqueta a controlar y se determinan las características mecánicas que deben considerarse en el diseño.
+\item En el capítulo 5 se plantean los requisitos funcionales y no funcionales que definen el programa, junto a los criterios de selección necesarios sobre los que se escoge la plataforma hardware a emplear de entre una lista de candidatos.
+\item En el capítulo 6 se desarrolla el diseño del programa, incluyendo las arquitecturas software, hardware y la interfaz gráfica de usuario.
+\item En el capítulo 7 se explican las estrategias adoptadas que solventan los inconvenientes mecatrónicos que aparecen durante la implementación y el origen de estos.
+\item En el capítulo 8 se recogen los resultados que surgen de la demostración del movimiento, la validación de precisión en el posicionamiento y de los distintos modos y el consumo del sistema.
+\item En el capítulo 9 tienen lugar las conclusiones, que incluyen una  valoración de los resultados obtenidos y de la fidelidad del diseño respecto al resultado final, así como los posibles desarrollos futuros y el alcance del impacto ambiental del sistema. 
+\end{itemize}
+
+\begin{figure}[t]
+	\centering
+	\includesvg[width=0.95\linewidth]{figuras/ventana}
+	\caption{Prototipo de la ventana a controlar.}
+	\label{fig:ventana}
+\end{figure}

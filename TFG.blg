@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: TFG.aux
+A level-1 auxiliary file: capitulos/portada.aux
+A level-1 auxiliary file: capitulos/firmas.aux
+A level-1 auxiliary file: capitulos/licencia.aux
+A level-1 auxiliary file: capitulos/evaluacion.aux
+A level-1 auxiliary file: capitulos/agradecimientos.aux
+A level-1 auxiliary file: capitulos/resumen.aux
+A level-1 auxiliary file: capitulos/simbolos.aux
+A level-1 auxiliary file: capitulos/introduccion.aux
+A level-1 auxiliary file: capitulos/marcoteorico.aux
+A level-1 auxiliary file: capitulos/estadoarte.aux
+A level-1 auxiliary file: capitulos/presentacionprototipo.aux
+A level-1 auxiliary file: capitulos/planteamiento.aux
+A level-1 auxiliary file: capitulos/disenio.aux
+A level-1 auxiliary file: capitulos/implementacion.aux
+A level-1 auxiliary file: capitulos/resultados.aux
+The style file: plain.bst
+Database file #1: bibliografia/bibliografia.bib
+You've used 22 entries,
+            2118 wiz_defined-function locations,
+            641 strings with 7630 characters,
+and the built_in function-call counts, 6383 in all, are:
+= -- 625
+> -- 286
+< -- 2
++ -- 118
+- -- 92
+* -- 395
+:= -- 1100
+add.period$ -- 69
+call.type$ -- 22
+change.case$ -- 111
+chr.to.int$ -- 0
+cite$ -- 22
+duplicate$ -- 246
+empty$ -- 516
+format.name$ -- 92
+if$ -- 1327
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 23
+newline$ -- 115
+num.names$ -- 44
+pop$ -- 125
+preamble$ -- 1
+purify$ -- 90
+quote$ -- 0
+skip$ -- 171
+stack$ -- 0
+substring$ -- 327
+swap$ -- 37
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 76
+warning$ -- 0
+while$ -- 58
+width$ -- 24
+write$ -- 245

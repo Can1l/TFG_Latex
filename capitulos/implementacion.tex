@@ -1,0 +1,56 @@
+\chapter{Implementación del control de movimiento}
+
+Este capítulo describe el proceso de implementación y depuración del control de movimiento del sistema, poniendo el foco en las decisiones prácticas adoptadas y en los problemas reales detectados durante las pruebas experimentales. A diferencia del capítulo de diseño, donde se definen arquitecturas y responsabilidades, aquí se aborda cómo el sistema ha evolucionado desde una implementación mínima hasta una solución funcional y robusta, adecuada para la validación experimental del prototipo.
+
+\section{Implementación inicial del movimiento}
+
+En una primera etapa del desarrollo, el control del movimiento del panel móvil se implementó mediante una única función elemental, encargada de transformar desplazamientos expresados en milímetros en secuencias de pasos para los motores paso a paso. Esta función, denominada \texttt{move()}, coordinaba el movimiento de los motores asociados a los ejes vertical y horizontal, generando directamente las señales de tipo \textit{step} y \textit{direction} necesarias para el accionamiento.
+
+En esta fase inicial no se implementaron rutinas de homing, mecanismos de compensación de holguras ni estrategias de protección frente a errores mecánicos o de sensorización. El objetivo de este enfoque deliberadamente simple era validar, lo más directamente posible, el funcionamiento básico del sistema de movimiento y comprobar la correcta generación de trayectorias, coordinadas por el usuario.
+
+Este planteamiento permitió detectar de manera temprana una serie de problemas que no estaban relacionados con el software, sino con la integración mecánica y el comportamiento real del sistema físico.
+
+\section{Detección de problemas mecánicos}
+
+Durante las primeras pruebas de movimiento manual, se observó que uno de los motores asociados al eje vertical no respondía de forma consistente, a pesar de que las señales de control generadas por el microcontrolador eran correctas. Este comportamiento condujo a una profunda inspección del conjunto mecánico, en la que se detectó que el eje del motor no se encontraba correctamente fijado, careciendo de los tornillos de apriete necesarios para asegurar la transmisión del par.
+
+Esta falta de apriete provocaba un desacoplo total entre el motor y el sistema mecánico, dando lugar a movimientos erráticos en la plataforma, debidos a la inmovilidad de este motor, que, desde el punto de vista del software, eran indistinguibles de un fallo de control. Una vez corregido este problema mecánico, el sistema comenzó a comportarse de forma coherente en el eje vertical, permitiendo avanzar en la validación del resto del sistema.
+
+Superado este primer inconveniente, las pruebas pusieron de manifiesto un segundo problema en el eje horizontal (eje Z). Los motores encargados del desplazamiento de los patines no se movían de forma completamente sincronizada, especialmente en el movimiento milímetro a milímetro con el pad de direcciones y en los cambios de sentido. Esto provocaba errores de posicionamiento y falta de repetibilidad, evidenciando la presencia de holguras mecánicas (\textit{backlash}) en el conjunto husillo–correa-patín, así como diferencias en la respuesta dinámica de los motores.
+
+\section{Problema de backlash e histéresis en el eje Z}\label{sec:backlash}
+
+El \textit{backlash}, o juego mecánico, aparece como una diferencia en la posición final alcanzada por el sistema, dependiendo del sentido desde el que se llega a dicha posición. En el modelo desarrollado, este efecto se hacía especialmente evidente en el eje Z, donde los cambios de sentido y las órdenes intermitentes de control provocaban pequeños desplazamientos no deseados antes de que el movimiento efectivo se transmitiera al panel móvil.
+
+Este fenómeno introduce histéresis en el sistema, degradando la precisión y la repetibilidad del posicionamiento. Además, en las primeras pruebas, la combinación de holguras mecánicas y esfuerzos no compensados llegó a provocar situaciones de sobrecorriente en los drivers de los motores, derivando en la avería de algunos de ellos, que tuvieron que ser sustituidos. Estas incidencias manifestaron la necesidad de introducir mecanismos específicos de protección y compensación desde el software de control.
+
+Adicionalmente, se identificó que parte del comportamiento no deseado del sistema no tenía su origen exclusivamente en la mecánica, sino también en la forma en la que se generaban las órdenes de movimiento durante el modo manual. En la implementación inicial, el pad de control manual enviaba comandos incrementales que provocaban desplazamientos inmediatos de la posición del sistema, ejecutando pequeños movimientos consecutivos cada vez que se pulsaba una dirección.
+
+Este esquema de control paso a paso, aunque conceptualmente sencillo, acentuaba los efectos del backlash y la histéresis, especialmente en el eje Z. La sucesión de órdenes de pequeño desplazamiento a través de la interfaz web impedía que los patines y los elementos de transmisión funcionaran correctamente, dando lugar a movimientos imprecisos, falta de repetibilidad y esfuerzos innecesarios sobre los motores y los drivers. Esta falta de repetibilidad hace ineficiente la implementación de algoritmos de corrección de pasos, como el algoritmo de Bresenham, donde se cuantifica el error y se aplican avances o retrocesos en función de este error acumulado.
+
+Por esta razón y, siendo suficiente para el ensayo experimental el movimiento manual mediante la introducción de posiciones absolutas, se ha decidido retirar el pad del sistema.
+
+\section{Implementación del homing y establecimiento de referencias}
+
+Para dar respuesta a los problemas detectados, se implementó una rutina de homing destinada a establecer una referencia absoluta de posición tras el arranque del sistema y al inicio de cada modo de funcionamiento. Este procedimiento permite eliminar la dependencia de la posición inicial del panel y garantizar que el sistema parte siempre de un estado conocido.
+
+El proceso de homing se basa en una aproximación rápida a los finales de carrera, seguida de un retroceso controlado (\textit{backoff}) y una segunda aproximación a velocidad reducida (\textit{slow touch}). Esta estrategia permite mejorar la precisión en la detección de la posición de referencia y reducir los efectos de rebotes mecánicos o imprecisiones en los sensores.
+
+Adicionalmente, se incorporaron contadores de seguridad que limitan el número máximo de pasos durante el proceso de homing, protegiendo el sistema frente a fallos en los finales de carrera o desconexiones accidentales. Una vez completado el homing, los contadores internos de posición se reinician y el sistema queda preparado para ejecutar movimientos relativos con una referencia coherente.
+
+\section{Compensación del backlash}
+
+Para mitigar los efectos del backlash en el eje Z, se implementó una función específica de compensación que se ejecuta durante la fase de inicialización de los motores y cada cierto tiempo, garantizado la estabilidad prolongada del sistema. Esta rutina consiste en la realización de ciclos controlados de avance y retroceso, forzando el asentamiento del sistema mecánico en una condición inicial reproducible.
+
+Este enfoque no pretende eliminar el juego mecánico mediante modelos matemáticos complejos, sino reducir su impacto práctico asegurando que los elementos mecánicos parten siempre de una posición de contacto consistente. De este modo, se mejora de forma significativa la repetibilidad del movimiento, especialmente en aplicaciones donde los cambios de sentido son frecuentes.
+
+\section{Resultado de la evolución del control de movimiento}
+
+La implementación final del control de movimiento es el resultado de un proceso iterativo de prueba, detección de fallos y refinamiento progresivo. Partiendo de una función de movimiento básica, el sistema ha evolucionado incorporando rutinas de homing, mecanismos de protección y compensación de holguras, adaptándose a las limitaciones reales del sistema físico.
+
+Este proceso ha permitido transformar un control puramente cinemático en un sistema de movimiento más robusto, repetible y seguro, adecuado para la validación experimental de los distintos modos de funcionamiento del sistema y para la obtención de resultados consistentes en las pruebas posteriores.
+
+\section{Detección de problemas software}
+
+Al ejecutar el modo efemérides, el movimiento prolongado de los motores provocaba que saltase un \textit{watchdog} que reiniciaba el MCU, pues el proceso de motores bloqueaba la recepción de mensajes por parte del servidor (proceso \textit{asynctcp}). Al crear un proceso ligero que aglutine el movimiento de los motores, se puede decidir qué procesador se emplea para la tarea FreeRTOS para evitar que se produzca esta colisión. 
+

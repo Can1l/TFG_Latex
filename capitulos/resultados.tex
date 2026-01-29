@@ -1,0 +1,305 @@
+\chapter{Resultados}
+
+
+En este capítulo se presentan los resultados obtenidos tras la implementación, depuración y validación del sistema de control de movimiento. El objetivo principal de esta fase es verificar que el sistema es capaz de ejecutar desplazamientos precisos y reproducibles, coherentes con las posiciones teóricas definidas por el usuario o calculadas por los algoritmos de control.
+
+Para ello, se han realizado ensayos experimentales en los distintos modos de funcionamiento, comparando las posiciones objetivo con las posiciones reales alcanzadas por el sistema, así como comprobando la correcta inicialización mediante el proceso de homing y la estabilidad del movimiento tras múltiples ciclos de operación.
+
+
+\section{Demostración del movimiento del sistema}
+
+Como primer paso, se ha verificado el correcto funcionamiento del sistema mecánico y del control de movimiento. El objetivo de esta prueba es demostrar que los ejes pueden desplazarse de forma independiente y conjunta, así como comprobar la correcta ejecución del proceso de homing, fundamental para garantizar una referencia absoluta del sistema. 
+
+Por esta razón, la demostración debe validar los siguientes aspectos: 
+
+\begin{itemize}
+	\item La correcta ejecución del proceso de homing.
+	\item El movimiento independiente de los ejes vertical y horizontal.
+	\item La coordinación entre ambos ejes en movimientos combinados.
+	\item La capacidad del sistema para re-referenciarse tras desplazamientos arbitrarios.
+\end{itemize}
+
+La secuencia de imágenes fotográficas de la Figura~\ref{fig:cm} conforma una serie de escenarios ensayados representativos que demuestran el movimiento del sistema. Estos son:
+
+\begin{enumerate}
+	\item Estado inicial del sistema, partiendo de una posición arbitraria \ref{fig:cm1}.
+	\item Ejecución del proceso de homing~\ref{fig:cm2}.
+	\item Movimiento únicamente vertical (eje X)~\ref{fig:cm3}.
+	\item Movimiento únicamente horizontal (eje Z)~\ref{fig:cm4}.
+	\item Segunda ejecución del homing tras los desplazamientos~\ref{fig:cm5}.
+	\item Movimiento combinado en los ejes X y Z~\ref{fig:cm6}.
+\end{enumerate}
+
+
+Estas pruebas gráficas permiten verificar visualmente que el sistema es capaz de recuperar correctamente su referencia mediante el proceso de homing, los movimientos en cada eje se realizan de forma independiente cuando así se solicita y el movimiento combinado se ejecuta sin interferencias entre ejes.
+
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Posición inicial arbitraria.]
+	{	
+		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_1}		
+		\label{fig:cm1}
+	}
+	\subfloat[Homing.]
+	{	
+		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_2}	
+		\label{fig:cm2}
+	}
+	
+	\subfloat[Desplazamiento vertical.]
+	{
+		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_3}		
+		\label{fig:cm3}
+	}	
+	\subfloat[Desplazamiento horizontal.]
+	{
+		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_4}		
+		\label{fig:cm4}	
+	}
+	
+	\subfloat[Homing.]
+	{
+		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_5}
+		\label{fig:cm5}
+	}	
+	\subfloat[Desplazamiento horizontal y vertical.]
+	{
+		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_6}		
+		\label{fig:cm6}
+	}
+
+	\caption{Secuencia de demostración del movimiento.}
+	\label{fig:cm}
+\end{figure}
+
+
+
+\section{Validación de la precisión de posicionamiento}
+
+Una vez comprobada la capacidad de movimiento del sistema, se ha evaluado la precisión del posicionamiento en los distintos modos de funcionamiento. Para ello, se han comparado las posiciones teóricas calculadas por el sistema con las posiciones reales alcanzadas por la maqueta.
+
+Las pruebas se han realizado en los tres modos, midiendo con un flexómetro los desplazamientos en los ejes X y Z para distintos comandos de entrada, sin realizar \textit{homing} entre movimientos. Se ha considerado suficiente para la validación de posición medidas con precisión de milímetro, pues un error absoluto menor que esta unidad se considera aceptable para la posterior caracterización. Una vez eliminados los problemas de implementación ligados al software[~\ref{sec:backlash}], el sistema no muestra error de posición, corroborando el buen posicionamiento del panel móvil durante periodos prolongados de actividad, con cambios de sentido involucrados. 
+
+Tras separar en dos procesadores distintos el movimiento y el servidor Wi-Fi, el mecanismo de movimiento horizontal ha reducido casi completamente el error de desplazamiento que se resultaba del movimiento con el pad unidad a unidad. Sin embargo, el movimiento intermitente de los motores de manera prolongada seguía propiciando la aparición de holguras que provocan un funcionamiento indeseado del sistema.
+  
+\section{Resultados en el modo automático}
+
+El modo automático recibe como entradas del sistema la fecha y la hora, a partir de las cuales se calculan internamente los ángulos solares mediante el algoritmo SPA. Para la validación de este modo, se han probado distintas configuraciones de fecha y hora a lo largo del día.
+
+Para cada configuración, se ha registrado:
+\begin{itemize}
+	\item Fecha y hora introducidas.
+	\item Ángulos solares calculados (azimut y elevación).
+	\item Ángulos de incidencia resultantes.
+	\item Desplazamientos teóricos en los ejes X y Z.
+	\item Posición real alcanzada por el sistema.
+\end{itemize}
+
+Los resultados obtenidos se han comparado con cálculos externos realizados en python, empleando la librería PVLIB extensamente empleada para la caracterización y validación de sistemas seguidores fotovoltaicos. De esta forma se verifica que los ángulos solares y los desplazamientos coinciden con los valores obtenidos por el microcontrolador. Finalmente, se ha comprobado de forma experimental que la maqueta alcanza las posiciones correspondientes a cada configuración temporal.
+
+
+\begin{table}[h!]
+	\centering
+	\scriptsize
+	\setlength{\tabcolsep}{4pt}
+\begin{tabular}{|c|l|c|c|l|c|c|}
+	\hline
+	\multicolumn{7}{|c|}{\textbf{Configuración}} \\ \hline
+	\textbf{Caso} & \textbf{Ciudad} & \textbf{Lat (°)} & \textbf{Lon (°)} & \textbf{Fecha y hora} & \textbf{Tilt (°)} & \textbf{Pan (°)} \\ \hline
+	1 & Madrid        & 40.41  & -3.70  & 2026-01-15 15:37:49 +02 & 90 & 180 \\
+	2 & Madrid        & 40.41  & -3.70  & 2026-01-15 13:19:12 +02 & 90 & 180 \\
+	3 & Madrid        & 40.41  & -3.70  & 2026-01-15 15:35:54 +02 & 75 & 200 \\
+	4 & Madrid        & 40.41  & -3.70  & 2026-01-15 15:58:37 +02 & 85 & 135 \\
+	5 & Buenos Aires  & -34.61 & -58.38 & 2026-01-20 11:48:20 -03 & 0  & 0   \\ 
+	5 & Bia\text{\l}ystok & -34.61 & -58.38 & 2026-01-20 11:48:20 -03 & 0  & 0   \\ \hline
+\end{tabular}
+
+	\vspace{0.4cm}
+	
+	\begin{tabular}{|c|ccc|ccc|}
+		\hline
+		\multicolumn{7}{|c|}{\textbf{Azimut y Elevación}} \\ \hline
+		\textbf{Caso} &
+		\multicolumn{3}{c|}{Azimut (°)} &
+		\multicolumn{3}{c|}{Elevación (°)} \\ \cline{2-7}
+		& py & esp & error & py & esp & error \\ \hline
+		1 & 199.16 & 199.16 & 0.00 & 26.22 & 26.22 & 0.00 \\
+		2 & 163.01 & 163.01 & 0.00 & 26.71 & 26.70 & 0.01 \\
+		3 & 198.68 & 198.65 & 0.03 & 26.34 & 26.34 & 0.00 \\
+		4 & 204.29 & 204.28 & 0.01 & 24.76 & 24.76 & 0.00 \\
+		5 & 54.04  & 54.05  & 0.01 & 6.77  & 6.77  & 0.00 \\
+		6 & 170.41 & 170.41 & 0.00 & 18.03 & 18.02 & 0.01  \\ \hline
+	\end{tabular}
+	
+	\vspace{0.4cm}
+	
+	\begin{tabular}{|c|ccc|ccc|}
+		\hline
+		\multicolumn{7}{|c|}{\textbf{Ángulos de Incidencia (AOI)}} \\ \hline
+		\textbf{Caso} &
+		\multicolumn{3}{c|}{AOIL (°)} &
+		\multicolumn{3}{c|}{AOIT (°)} \\ \cline{2-7}
+		& py & esp & error & py & esp & error \\ \hline
+		1 & -19.16 & -19.16 & 0.00 & 27.54 & 27.53 & 0.01 \\
+		2 & 16.99  & 16.97  & 0.02 & 27.75 & 27.76 & 0.01 \\
+		3 & 12.03  & 12.03   & 0.00 & 11.34 & 11.35 & 0.01 \\
+		4 & -67.23 & -67.22 & 0.01 & 47.52 & 47.50 & 0.02 \\
+		5 & 18.33  & 18.34  & 0.01 & 13.52 & 13.52 & 0.00 \\ 
+		6 & 9.12  & 9.13  & 0.01 & 3.27 & 3.26 & 0.01  \\ \hline
+	\end{tabular}
+	
+	\vspace{0.4cm}
+	
+	\begin{tabular}{|c|ccc|ccc|}
+		\hline
+		\multicolumn{7}{|c|}{\textbf{Posición (X, Z)}} \\ \hline
+		\textbf{Caso} &
+		\multicolumn{3}{c|}{X} &
+		\multicolumn{3}{c|}{Z} \\ \cline{2-7}
+		& py & esp & error & py & esp & error \\ \hline
+		1 & 23.89 & 23.93 & 0.04 & 64.88 & 64.89 & 0.01 \\
+		2 & 28.56 & 28.57 & 0.01 & 65.89 & 65.88 & 0.01 \\
+		3 & 14.34 & 14.35 & 0.01 & 71.44 & 71.44 & 0.00 \\
+		4 & 20.35 & 20.35 & 0.00 & 20.51 & 20.41 & 0.10 \\
+		5 & 15.85 & 15.85 & 0.00 & 67.52 & 67.52 & 0.00 \\ 
+		6 & 4.59  & 4.58  & 0.01 & 61.80 & 61.79 & 0.01 \\ \hline
+	\end{tabular}
+	\caption{Comparación entre resultados Python y ESP con error absoluto}
+	\label{tab:auto}
+\end{table}
+
+A partir de los valores obtenidos para las posiciones calculadas, se ha evaluado el error absoluto medio entre los resultados generados por el modelo en Python y los obtenidos en el sistema embebido (ESP). El error absoluto promedio en la coordenada $X$ es de $0.010$, mientras que en la coordenada $Z$ el valor asciende a $0.022$. Estos resultados indican una alta concordancia entre ambos sistemas, siendo las discrepancias numéricas reducidas y atribuibles principalmente a efectos de redondeo y diferencias en la precisión del método de cálculo, pues PVLIB de Python tiene mayor precisión que el algoritmo de SPA empleado. 
+
+
+
+
+
+\section{Validación del modo efemérides}
+
+Para la validación de este modo, se han empleado los ángulos azimutales y de elevación que han resultado de las distintas validaciones del modo automático. A partir de estos valores, el sistema calcula los desplazamientos correspondientes en los ejes X y Z. En la Figura~\ref{fig:ephvsauto} puede visualizarse como el posicionamiento es idéntico en ambos modos, comprobados en el caso 6 la Tabla~\ref{tab:auto}.
+
+\begin{figure}
+	\centering
+	\subfloat[Modo automático.]
+	{	
+		\includesvg[width=0.45\linewidth]{figuras/autovseph}		
+	}
+	\subfloat[Modo efemérides.]
+	{	
+		\includesvg[width=0.45\linewidth]{figuras/ephvsauto}		
+	}
+	\label{fig:ephvsauto}
+\end{figure}
+
+\section{Consumo energético}
+
+Para medir el consumo del sistema se ha empleado un multímetro que registra los datos medidos y pueden ser extraídos en formato csv. El estudio se realiza durante veinte minutos recogiendo la medida instantánea de la corriente tomando tres muestras cada intervalo de diez segundos. Este dispositivo agrega los picos máximos y mínimos para la integración de la corriente media, dando un resultado con precisión suficiente para su análisis. Las mediciones pueden consultarse en la tabla~\ref{tabla:intensidad}.
+
+\begin{table}[b]
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{} & \textbf{$I_{\max}$ [A]} & \textbf{$\langle I \rangle$ [A]} \\
+		\hline
+		Fuente 12V           & 1.6253 & 0.1896 \\
+		Fuente sleep         &        & 0.1202 \\
+		MCU + GPS 5V         & 0.4076 & 0.3383 \\
+		MCU\_SLEEP + GPS     &        & 0.2124 \\
+		GPS                  &        & 0.0403 \\
+		\hline
+	\end{tabular}
+	\caption{Consumo de corriente.}
+	\label{tabla:intensidad}
+\end{table}
+
+Mientras que el procesador ESP32 consume en el orden de micro-amperios, los elementos auxiliares de la placa de desarrollo, como el conversor USB-UART, el regulador de tensión y los LEDs y el LDO, permanecen activos incluso cuando el núcleo del microcontrolador se encuentra en reposo.
+
+En la Figura~\ref{fig:corriente_tiempo} se representa la evolución temporal de la corriente media consumida por el microcontrolador, obtenida a partir de las medidas experimentales realizadas con una tensión de alimentación constante en el convertidor buck DC-DC de $5\,\mathrm{V}$, y de la fuente de alimentación, con una tensión de $12\,\mathrm{V}$ y hasta $6\,\mathrm{A}$. 
+
+A partir de los valores de corriente registrados, se ha calculado la potencia instantánea como el producto de la tensión de alimentación y la corriente media medida. Con una intensidad media en la fuente de $0.1896,\mathrm{A}$:
+
+\begin{equation}
+	P_{\mathrm{24/7}} = 12.3,\mathrm{V} \cdot 0.1896,\mathrm{A}
+	= 2.333,\mathrm{W}
+\end{equation}
+
+\begin{figure}[h]
+	\centering
+	\includesvg[width=0.95\linewidth]{figuras/corriente_tiempo}	
+	\caption{Corrientes frente al tiempo. Izquierda MCU, derecha fuente de alimentación.}
+	\label{fig:corriente_tiempo}
+\end{figure}
+
+\begin{equation}
+	E_{20\, min} = 0.57\, Wh
+\end{equation}
+
+
+Suponiendo un funcionamiento continuo del sistema durante las $24\, h$ del día, la potencia media obtenida a partir del ensayo se ha extrapolado a un periodo anual completo. Bajo esta hipótesis pesimista, el consumo energético anual del microcontrolador vendría dado por:
+
+\begin{equation}
+	E_{\mathrm{anual,24/7}} = 2.333,\mathrm{W} \cdot 8760,\mathrm{h} \approx 20.4,\mathrm{kWh/a\tilde{n}o}
+\end{equation}
+
+Como aproximación más realista, se ha considerado un modelo de funcionamiento diferenciado entre periodo diurno y nocturno. Durante las horas nocturnas, el microcontrolador se mantiene en estado activo sin ejecución de tareas adicionales, conservando la conectividad Wi-Fi. La corriente media de la fuente en este estado es de $0.1638\, \mathrm{V}$. La potencia consumida durante el periodo nocturno viene dada por:
+
+\begin{equation}
+P_{\mathrm{noche}} = 12.3,\mathrm{V} \cdot 0.1638,\mathrm{A} \approx 2.01,\mathrm{W}
+\end{equation}
+
+Durante el periodo diurno, el sistema opera en modo automático con seguimiento solar activo, presentando una corriente media en la fuente de $0.1896,\mathrm{A}$, lo que corresponde a una potencia media de:
+
+\begin{equation}
+P_{\mathrm{dia}} = 12.3,\mathrm{V} \cdot 0.1896,\mathrm{A}	\approx 2.33,\mathrm{W}
+\end{equation}
+
+Para la localización de Madrid se han considerado aproximadamente $2900\,\mathrm{h/a\tilde{n}o}$ de funcionamiento diurno y $5860\,\mathrm{h/a\tilde{n}o}$ de funcionamiento nocturno. De este modo, el consumo energético anual total del microcontrolador se estima como:
+
+\begin{equation}
+	\begin{split}
+		E_{\mathrm{anual}} &=
+		P_{\mathrm{d\text{í}a}} \cdot 2900
+		+ P_{\mathrm{noche}} \cdot 5860 \\
+		&\approx 2.33 \cdot 2900 + 2.01 \cdot 5860 \\
+		&\approx 18.5\,\mathrm{kWh/a\tilde{n}o}
+	\end{split}
+\end{equation}
+
+Los microprocesadores de 32 bits tienen distintas estrategias de ahorro energético. En el MCU seleccionado se puede escoger entre distintos modos de "sueño", donde el microprocesador se desprende de una parte o la totalidad de sus funciones. Para este sistema generador se usa el sueño profundo, siendo este el de mayor ahorro energético, pues el sistema debe consumir lo menos posible durante el transcurrir la noche. El estado de sueño profundo al que entra el MCU desde el modo automático cuando anochece, despertando al amanecer, o seleccionándolo durante un periodo de tiempo específico desde \textit{standby} o el propio modo automático, solo mantiene el RTC y las interrupciones. De este modo, permanece durmiendo  hasta que se active una señal física de despertar o llegue la hora indicada.    
+
+Siguiendo el procedimiento anterior considerando la corriente de la fuente en modo sueño profundo, se obtiene:
+\begin{equation}
+	E_{\mathrm{anual}} \approx 15,4\,\mathrm{kWh/a\tilde{n}o}
+\end{equation}
+
+Una vez que se tienen los consumos anuales para los distintos casos, es procedente calcular el porcentaje de reducción de consumo que se consigue al emplear el modo de sueño para las horas de oscuridad de la siguiente manera:
+
+\begin{align}
+	E_{\mathrm{anual, normal}} &\approx 18,5~\mathrm{kWh/a\tilde{n}o} && \text{(sin sueño profundo)} \\
+	E_{\mathrm{anual, profundo}} &\approx 15,4~\mathrm{kWh/a\tilde{n}o} && \text{(con sueño profundo)} \\
+	\Delta E &= E_{\mathrm{anual, normal}} - E_{\mathrm{anual, profundo}} \\
+	&= 18,5 - 15,4 \\
+	&= 3,1~\mathrm{kWh/a\tilde{n}o} \\
+	\text{Reducción \%} &= \frac{\Delta E}{E_{\mathrm{anual, normal}}} \cdot 100 \\
+	&= \frac{3,1}{18,5} \cdot 100 \\
+	&\approx 16,8\%
+\end{align}
+
+
+Consultando ensayos anteriores sobre las células que se emplearán para la caracterización del sistema sobre un panel de $140x75\, \mathrm{cm}$ ubicado en Madrid, con un tilt de $75^\circ$ y un pan de $180^\circ$  se ha estimado que produce una energía anual de $148.27\, \mathrm{kWh}\slash a\tilde{n}o$, lo que supone un coeficiente de rendimiento respecto a un panel comercial convencional del $60.53\%$. Entonces, para un panel móvil con dimensiones de $75x75\, \mathrm{cm}$:
+
+\begin{equation}
+	E_{\mathrm{120x60}} \approx 101,67~\mathrm{kWh/a\tilde{n}o}
+\end{equation}
+
+y considerando el consumo eléctrico invertido en alimentar el sistema:
+
+\begin{equation}
+	E_{th\_prototipo} \approx 86,27~\mathrm{kWh/a\tilde{n}o}
+\end{equation}
+ 
+ 
+ 
+
+

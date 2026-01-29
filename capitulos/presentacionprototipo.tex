@@ -1,0 +1,82 @@
+\chapter{Presentación del prototipo}
+
+\section{Punto de partida}
+
+La maqueta a controlar~[\ref{fig:ventana}] ha sido cedida al IES por la Universidad de Salerno como parte del proyecto SMARTWIN, explicado en el estado del arte [\ref{chapter:eoa}].
+Este prototipo cuenta con seis motores paso a paso, dos NEMA-15 enfrentados para el movimiento horizontal, con un mecanismo de correas que producen desplazamiento en los patines que sujetan la ventana, y cuatro NEMA-17 enfrentados dos a dos para el vertical, con un mecanismo de husillo que eleva o desciende la plataforma. Estos están integrados en una placa de expansión, CNC-Shield, que permiten el acoplamiento de drivers, en este caso A4988. Esta metodología es muy utilizada para fresadoras CNC, impresoras 3D, grabadoras láser, u otros usos que requieran de desplazamiento en ejes cartesianos. También se entregaron seis finales de carrera que no estaban integrados en la maqueta y que deberán de ajustarse a las necesidades de este proyecto. El control se realizó en una ESP32-Wroover, con un programa que permitía elegir la posición absoluta a la que se movía el plano de la ventana móvil a la posición introducida en una interfaz HTML cliente-servidor en el microcontrolador. Los motores vienen alimentados con una fuente de 12 V y 6 A conectada a instalación eléctrica. A la hora de decantarse por una plataforma hardware se deben tener en cuenta todos estos componentes, parte del prototipado, y su integración al modelo de control que se realizará siguiendo unos criterios de selección bien establecidos y diferenciados.
+
+\subsection{Movimiento vertical}
+
+El movimiento vertical depende del número de pasos ejecutados por los motores paso a paso del eje vertical y del paso del husillo de bolas, que es de $2\,\mathrm{mm}$. Tal y como se muestra en la Subigura~\ref{fig:vertic}, cuando ambos motores verticales (1) se encuentran energizados, permanecen fijados a la estructura del sistema. Los husillos de bolas (2) transforman el movimiento rotacional en desplazamiento lineal, provocando el movimiento de la parte horizontal inferior, la cual se desliza a lo largo de una guía lineal. La parte superior se encuentra unida mecánicamente a la misma guía, por lo que ambas se desplazan de forma solidaria.
+
+Los motores paso a paso empleados presentan un ángulo de paso de $1.8^\circ$, que corresponde a $200$ pasos por vuelta completa. Considerando un husillo con un paso de $8\,\mathrm{mm}$ por revolución, la relación de transmisión entre los pasos del motor y el desplazamiento lineal puede calcularse como:
+
+\begin{equation}
+	\Delta x_{\text{paso}} = \frac{8\,\mathrm{mm}}{200} = 0.04\,\mathrm{mm/paso}
+\end{equation}
+
+De este modo, cada paso del motor produce un desplazamiento vertical de $0.04\,\mathrm{mm}$ en el eje $Z$, lo que supone:
+
+\begin{equation}
+	1\,\mathrm{mm} \;\longleftrightarrow\; 20 \;\text{pasos}
+\end{equation}
+
+Esta relación se utiliza directamente en el software de control para el posicionamiento vertical del sistema, garantizando un movimiento preciso y repetible.
+
+\subsection{Movimiento horizontal}
+
+El movimiento horizontal depende del número de pasos ejecutados por el motor horizontal y del sistema de transmisión por correa dentada, tal y como se ilustra en la Subfigura~\ref{fig:horiz}. El motor acciona una polea central de $20$ dientes, que transmite el movimiento a la correa, desplazando el carro horizontal unido al panel de policarbonato.
+
+El motor paso a paso utilizado presenta un ángulo de paso de $18^\circ$, correspondiente a $20$ pasos por revolución. En la configuración mecánica empleada, una revolución completa del motor produce un desplazamiento lineal de $4\,\mathrm{mm}$ del carro horizontal.
+
+Por tanto, sin aplicar microstepping, la resolución lineal del sistema es:
+
+\begin{equation}
+	\Delta z = \frac{4\,\mathrm{mm}}{20} = 0.2\,\mathrm{mm \; por \; paso}
+\end{equation}
+
+equivalente a:
+
+\begin{equation}
+	1\,\mathrm{mm} \;\longleftrightarrow\; 5 \;\text{pasos}
+\end{equation}
+
+Para aumentar la resolución del sistema, se emplean drivers A4988 configurados en modo de microstepping $1/4$, mediante el conexionado de los pines de selección correspondientes en la CNC Shield. Esta configuración multiplica por cuatro el número de pasos efectivos por revolución:
+
+\begin{equation}
+	20 \times 4 = 80 \;\text{micro-pasos por revolución}
+\end{equation}
+
+Como consecuencia, la resolución lineal final del eje horizontal pasa a ser:
+
+\begin{equation}
+	\Delta x = \frac{4\,\mathrm{mm}}{80} = 0.05\,\mathrm{mm \; por \; paso}
+\end{equation}
+
+lo que implica:
+
+\begin{equation}
+	1\,\mathrm{mm} \;\longleftrightarrow\; 20 \;\text{pasos}
+\end{equation}
+
+Esta es la relación empleada en el software de control para el posicionamiento horizontal del sistema.
+
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Mecanismo del movimiento vertical.]
+	{
+		\includesvg[width=0.48\linewidth]{figuras/vertical}
+		\label{fig:vertic}
+	}		
+	\subfloat[Mecanismo de un lateral, replicado en el lado opuesto.]
+	{
+		\includesvg[width=0.48\linewidth]{figuras/lado}
+	}
+	
+	\subfloat[Mecanismo del movimiento horizontal.]
+	{
+		\includesvg[width=0.60\linewidth]{figuras/horizontal}
+		\label{fig:horiz}
+	}
+\end{figure}

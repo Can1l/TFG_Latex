@@ -1,0 +1,68 @@
+\chapter{Conclusiones}
+
+En este trabajo se ha desarrollado y validado un sistema de control para la captación solar de una ventana que combina concentración óptica lineal, seguimiento activo en dos ejes y generación fotovoltaica. El objetivo principal del proyecto ha sido estudiar la viabilidad técnica de este tipo de dispositivos, así como sentar las bases para su control y optimización, en el marco de aplicaciones BIPV con capacidad de adaptación al entorno solar.
+
+A lo largo del proyecto se ha abordado el problema desde una perspectiva multidisciplinar, integrando aspectos de óptica geométrica, diseño mecánico, electrónica de control y modelado del movimiento solar. Esta aproximación ha permitido no solo construir un prototipo funcional, sino también brindar la oportunidad de analizar de forma coherente el comportamiento del sistema en condiciones reales de operación.
+
+\section{Evaluación global de los resultados}
+
+Los resultados obtenidos confirman que el sistema es capaz de seguir de forma consistente el movimiento solar mediante el uso de efemérides y transformaciones geométricas, manteniendo alineado el plano móvil con la posición de máxima captación del sistema óptico. El modelo de conversión entre coordenadas solares y coordenadas del módulo demuestra ser adecuado para describir la posición relativa del Sol respecto al sistema, permitiendo calcular los ángulos de incidencia relevantes con una precisión tal, que no produce desviaciones de posición suficientemente significativas.
+
+Desde el punto de vista mecánico, los mecanismos de desplazamiento vertical y horizontal presentan un comportamiento suficientemente robusto y preciso para el rango de aplicación considerado. La resolución obtenida mediante el uso de husillos, correas dentadas y microstepping resulta coherente con los requisitos del sistema, permitiendo posicionar teóricamente la línea focal concentrada dentro de la región activa de las células fotovoltaicas. A partir de la validación del los distintos modos de funcionamiento en fechas, lugares y horas distintas, se concluye que el sistema es capaz de ejecutar movimientos fiables y repetibles en los ejes X y Z, recuperar una referencia absoluta mediante el proceso de homing y traducir correctamente entradas de tipo geométrico (posiciones espaciales y azimut y elevación) y temporal (fecha y hora) en movimientos físicos.
+
+Estos resultados validan el funcionamiento del sistema de control desarrollado y sientan las bases para futuras mejoras y ampliaciones del prototipo.
+En términos energéticos, el consumo del sistema se sitúa dentro de valores compatibles con una aplicación autónoma o semi-autónoma. El análisis diferenciado entre funcionamiento diurno y nocturno muestra que el uso de estrategias de gestión energética, como los modos de reposo del microcontrolador, tiene un impacto significativo en el consumo anual, reforzando la importancia del control no solo óptico y mecánico, sino también energético. 
+
+\section{Discusión de aspectos clave}
+
+Uno de los aspectos más relevantes del proyecto es la validación experimental del concepto de concentración lineal aplicada a un sistema tipo ventana. A diferencia de sistemas de concentración puntual, la configuración lineal simplifica tanto el diseño óptico como el mecánico, adaptándose de forma natural a dispositivos alargados y planos, como los elementos acristalados en fachadas.
+
+Asimismo, el uso de seguimiento activo permite mitigar uno de los principales problemas de los sistemas de concentración estáticos: la pérdida de eficiencia debida al desplazamiento del foco a lo largo del día. Los resultados muestran que, incluso con un control relativamente sencillo -movimiento en dos ejes cartesianos-, es posible mantener condiciones favorables de incidencia durante una parte significativa del ciclo solar.
+
+El modelo de control basado en efemérides, en lugar de sensores solares directos, aporta robustez y previsibilidad al sistema, reduciendo la dependencia de condiciones atmosféricas variables. Esta elección resulta especialmente adecuada en aplicaciones arquitectónicas, donde la fiabilidad y la integración discreta son factores clave.
+
+\section{Rendimiento de la selección tecnológica}
+
+La elección del entorno de Arduino ha resultado enormemente satisfactoria desde el comienzo de la programación, gracias a que permite monitorear constantemente la ejecución del programa a través de la comunicación serie entre la computadora y el microcontrolador. Asimismo, la inmensa cantidad de documentación que el su foro alberga, han sido de gran utilidad solucionando errores comunes y no tan comunes que aparecen en desarrollos similares.
+
+El ESP32 se ha comunicado con el GPS satisfactoriamente sin grandes esfuerzos de programación, han quedado libres varios pines de comunicación configurables que permiten la inclusión de nuevos dispositivos en el sistema y ha reaccionado favorablemente durante todas las validaciones del sistema de control. El doble núcleo del procesador permite que no haya bloqueos en la ejecución de procesos prolongados gracias a permitir ligar tareas o procesos ligeros a uno de sus procesadores, solventando limitaciones de seguridad hardware que, de eliminarse, pueden producir daños severos al MCU.  
+
+Esta serie de cuestiones evidencia por qué selecciones tecnológicas basadas en microcontroladores de la misma familia están reemplazando los módulos de arduino convencionales. Asímismo, para proyectos de características similares donde sea necesaria la comunicación Wi-Fi, resulta un serio competidor de la familia STM32.
+
+\section{Fiabilidad del diseño}
+
+El planteamiento arquitectónico inicial del sistema ha resultado especialmente robusto, ya que ha permitido completar el desarrollo sin introducir cambios estructurales respecto al diseño original. El prototipo final se ajusta de forma precisa a la concepción inicial, validando la corrección de las decisiones tomadas en las primeras etapas del proyecto.
+
+Además, la modularidad del diseño ha facilitado la incorporación de nuevas funcionalidades y la resolución de incidencias durante la implementación, demostrando una elevada flexibilidad y capacidad de adaptación sin comprometer la estabilidad del sistema.
+
+\section{Limitaciones del sistema}
+
+A pesar de los resultados satisfactorios, el sistema presenta una serie de limitaciones inherentes al carácter experimental del prototipo. La presencia de holguras en el desplazamiento horizontal deja de manifiesto que, en el caso de mantenerse un diseño con correas, estas deben de ser de algún material que resista posibles tensiones generadas en el mecanismo provocadas por el movimiento y los cambios de sentido y temperaturas extremas que puedan producirse en el interior de la ventana. 
+
+Por último, el consumo energético del sistema, aunque razonable, está condicionado por el uso de una placa de desarrollo y componentes auxiliares que no están optimizados para bajo consumo, lo que abre la puerta a mejoras significativas en futuras iteraciones.
+
+\section{Aportación del proyecto}
+
+Este proyecto aporta una demostración práctica de la viabilidad de integrar concentración óptica, seguimiento solar y generación fotovoltaica en un dispositivo tipo ventana compacto. Más allá del prototipo construido, se ha desarrollado una metodología clara para el modelado geométrico, el control del movimiento y la evaluación energética del sistema.
+
+El trabajo se enmarca en una línea de investigación emergente orientada a envolventes arquitectónicas activas, capaces de adaptarse dinámicamente a las condiciones solares. En este contexto, el sistema desarrollado puede considerarse un banco de pruebas para futuras soluciones BIPV avanzadas, como las exploradas en el proyecto SMARTWIN.
+
+\section{Líneas de trabajo futuro}
+
+Como continuación natural de este trabajo viene el proceso de caracterización del sistema. Para ello, una vez validado el programa de movimiento, se debe fijar la lente de fresnel en el frontal de la ventana y colocar los módulos lineales en el plano móvil. De esta forma puede dar comienzo un análisis exhaustivo de la óptica y la generación de este sistema compacto.
+
+Se plantean diversas líneas de mejora, como la optimización del diseño mecánico para reducir holguras y mejorar la repetibilidad o la integración de estrategias software y componentes electrónicos específicamente diseñados para bajo consumo. En una primera aproximación cabría considerar el empleo de MOSFET que apaguen totalmente el suministro de los motores y demás componentes activos al entrar en sueño profundo, además de una batería que mantenga al microcontrolador en este estado. Adicionalmente, se podrían emplear modos de sueño ligeros para reducir el consumo del sistema entre el final de los algoritmos de desplazamiento y las iteraciones de movimiento de motores.   
+
+Finalmente, la validación del sistema en un entorno arquitectónico real, evaluando simultáneamente generación eléctrica, iluminación natural y confort térmico, constituiría un paso decisivo hacia la aplicación práctica de este tipo de soluciones en edificios.
+
+\section{Impacto ambiental}
+
+En el contexto actual de transición energética y descarbonización del sector de la edificación, el desarrollo de soluciones BIPV avanzadas se alinea con los objetivos establecidos por la Unión Europea en materia de eficiencia energética y reducción de emisiones. En particular, las directivas y estrategias europeas para 2030 y 2050 plantean una mejora sustancial del comportamiento energético de los edificios, tanto residenciales como no residenciales, así como una progresiva integración de generación renovable distribuida.
+
+En este marco, si los resultados de caracterización fotovoltaica del sistema desarrollado en este trabajo resultan positivos, la generalización de soluciones de este tipo podría contribuir a mejorar la eficiencia energética de las envolventes arquitectónicas, transformando elementos tradicionalmente pasivos, como las ventanas, en componentes activos capaces de generar energía eléctrica.
+
+La integración de concentración óptica y seguimiento solar en dispositivos acristalados permitiría aumentar el aprovechamiento del recurso solar disponible en entornos urbanos densos, donde la superficie útil para generación renovable es limitada. De este modo, este tipo de sistemas podría aportar una vía complementaria para reducir la demanda energética neta de los edificios y, en consecuencia, sus emisiones asociadas.
+
+Asimismo, la adopción de soluciones de generación distribuida integradas en fachadas podría favorecer, a largo plazo, un mayor grado de autosuficiencia energética en grandes núcleos urbanos, contribuyendo a la resiliencia del sistema energético y a la reducción de pérdidas asociadas al transporte de energía.
+
+En cualquier caso, el alcance real de este impacto dependerá de factores externos al propio sistema, como el marco normativo, la viabilidad económica, la aceptación por parte del sector de la edificación y la integración con las infraestructuras energéticas existentes. El presente trabajo no pretende cuantificar dicho impacto a gran escala, sino aportar una base técnica que permita evaluar el potencial de este tipo de soluciones en futuros desarrollos.

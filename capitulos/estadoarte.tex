@@ -1,0 +1,114 @@
+\chapter{Estado del arte}\label{chapter:eoa}
+
+
+La integración de sistemas fotovoltaicos en la envolvente de los edificios, conocida como \textit{Building Integrated Photovoltaics} (BIPV), constituye una de las líneas de investigación más consolidadas dentro del ámbito de la arquitectura energética y la generación distribuida. Tradicionalmente, esta integración se ha materializado en cubiertas y fachadas opacas, donde la prioridad ha sido maximizar la potencia instalada sin condicionantes significativos de transparencia o interacción con el usuario.
+
+Sin embargo, en la última década ha crecido el interés por trasladar esta integración a elementos arquitectónicos transparentes, en particular a las ventanas. Las denominadas \textit{ventanas fotovoltaicas} buscan compatibilizar tres funciones tradicionalmente enfrentadas: permitir el paso de luz natural, mantener la relación visual con el exterior y generar energía eléctrica. Los primeros enfoques se basaron en la inclusión de células fotovoltaicas semitransparentes en el vidrio, lo que permitía una generación limitada a costa de una reducción apreciable de la transmitancia óptica. Este tipo de configuraciones son, a su vez, un componente estético atractivo que ha ido ganando peso paulatinamente en diseños arquitectónicos modernos, al poder emplear vidrios de tonalidades muy variadas.  
+
+Con el objetivo de superar estas limitaciones, han surgido propuestas más recientes que utilizan recubrimientos selectivos y arquitecturas ópticas capaces de capturar parte de la radiación solar incidente y conducirla hacia zonas activas situadas en los bordes del vidrio. En este contexto se enmarcan diversos proyectos europeos de investigación orientados al desarrollo de ventanas generadoras de energía con altos niveles de transparencia y una integración compatible con los procesos constructivos habituales de la edificación. Estos trabajos han demostrado la viabilidad del concepto de ventana activa desde el punto de vista energético y arquitectónico, aunque con potencias específicas moderadas y sin incorporar mecanismos de adaptación dinámica.
+
+Paralelamente, la investigación en fachadas energéticas ha evolucionado hacia sistemas más complejos y activos, donde la generación fotovoltaica se combina con estrategias de seguimiento solar y gestión de la iluminación natural. En este ámbito destacan las denominadas fachadas solares adaptativas, en las que elementos móviles integran módulos fotovoltaicos capaces de modificar su orientación en función de la posición solar, las condiciones ambientales o las necesidades del edificio. Estas soluciones, desarrolladas principalmente en entornos académicos y de investigación aplicada, incorporan conceptos como seguimiento solar, sombreado dinámico y optimización energética global del edificio.
+
+Algunos desarrollos recientes han logrado trasladar estos conceptos a aplicaciones reales, dando lugar a envolventes arquitectónicas capaces de combinar microgeneración con movimientos activos que responden a la posición del Sol y a las condiciones ambientales. Por ejemplo, el proyecto Adaptive Solar Facade desarrollado por el grupo de investigación \textit{Architecture and Building Systems} de la ETH Zurich ha implementado módulos fotovoltaicos montados sobre una estructura de fachada que pueden orientarse individualmente para maximizar la captación solar y gestionar simultáneamente la iluminación y la generación energética (ver ASF y prototipos instalados). En estas fachadas dinámicas, cada módulo puede ajustar su ángulo de incidencia en ambos ejes para realizar un seguimiento solar continuo, lo que permite incrementar la energía generada y adaptar la fachada al entorno inmediato en tiempo real \cite{ASF_ETH2024}.  
+
+De manera similar, investigaciones recientes como el sistema \textit{FlectoSol} proponen elementos de fachada con actuadores que permiten el movimiento de los paneles PV en dos direcciones para seguir la trayectoria solar y, de esta forma, maximizar la generación eléctrica directamente desde la envolvente del edificio. Este tipo de desarrollos representan un cambio de paradigma respecto a las fachadas PV estáticas, al incorporar microseguimiento activo y microgeneración dentro de una misma solución de envolvente arquitectónica \cite{BORN2024100372}.
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Adaptive Solar Facade. ETH Zurich.]{
+		\includesvg[width=0.45\linewidth]{figuras/zurich}
+	}	
+	\subfloat[FlectoSol. Stuttgart University.]{
+		\includesvg[width=0.45\linewidth]{figuras/flectosol}		
+	}
+	
+	\subfloat[Sistemas convencionales. Izquierda de colores, centro semitransparentes y derecha opacos. Cortesía de Solreina.]{
+		\includesvg[width=0.95\linewidth]{figuras/vidrioscolores}		
+	}
+\end{figure}
+\FloatBarrier
+
+Estas aplicaciones novedosas surgen de la necesidad de solucionar los inconvenientes propios de los sistemas convencionales. Estos producen sombreados en el edificio que pueden perjudicar el confort visual, no tienen un control directo sobre las propiedades de la luz diurna, tienen baja eficiencia comparada con los sistemas fotovoltaicos adosados a edificios y tienen un alto ratio de coste por vatio pico.  
+
+En este contexto se sitúa el proyecto \textbf{SMARTWIN}, cuyo planteamiento recoge elementos de ambas líneas de investigación: por un lado, la integración fotovoltaica en un elemento transparente propio de la edificación, y por otro, la incorporación de estrategias activas de control y orientación que controlan el deslumbramiento y las propiedades de la luz solar. SMARTWIN propone un enfoque modular y específicamente orientado a aplicaciones de ventana y muro-cortina, donde la concentración óptica, el seguimiento solar y la generación eléctrica se combinan en un único sistema compacto. Este posicionamiento permite explorar soluciones intermedias entre las ventanas BIPV tradicionales y las fachadas adaptativas complejas, aportando una aproximación específica y focalizada al problema de la captación solar en entornos arquitectónicos transparentes. Este sistema consta de tres partes principales que lo caracterizan:
+
+\begin{itemize}
+	\item Un vidrio exterior con lentes de fresnel asimétricas basadas en el principio de Fermat~\ref{sec:fermat} que actúa concentrando longitudinalmente la radiación solar directa que recibe. Subfigura~\ref{fig:lentesis}
+	\item Un panel móvil con células longitudinales colocadas transversalmente que se mueve siguiendo la luz concentrada por el panel exterior. Subfigura~\ref{fig:arraysis}
+	\item Un sistema de control que permite al panel móvil hacer un seguimiento efectivo de los focos longitudinales que van desplazándose con el movimiento del Sol a lo largo del día. 
+\end{itemize} 
+
+
+
+Para la caracterización del sistema óptico se emplea el simulador solar Helios 3198~\cite{dominguez2009characterization}, que permite, mediante un espejo colimador que refleja el foco de luz incidente con el paralelismo característico de los rayos de luz solar, identificar las posiciones que ocupa la línea focal de la luz concentrada en un plano para un rango de ángulos de incidencia de $0-85^\circ$. El estudio solo incluye el rango hasta $85^\circ$, pues la eficiencia de generación eléctrica para ángulos cercanos a $90^\circ$ es muy limitada, Subfigura~\ref{fig:eficienciaaoi}, debido al comportamiento de estas lentes de fresnel, permitiendo operar entre $0-90^\circ$. La Subfigura~\ref{fig:microtracking} muestra las posiciones $x$ y $z$ del micro-seguimiento de la posición solar durante los solsticios y equinoccios. 
+\label{sec:matriz}
+De esta manera, se construyen dos matrices 85x85 que recogen las coordenadas $x$ y $z$ para los ángulos de incidencia rango de operación definido. 
+
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Prototipo de vidrio con lentes de fresnel.]{
+		\includesvg[width=0.45\linewidth]{figuras/lente_sistema}
+		\label{fig:lentesis}
+	}	
+	\subfloat[Prototipo de panel con células comerciales encapsuladas.]{
+		\includesvg[width=0.45\linewidth]{figuras/linear_array_pp}		
+		\label{fig:arraysis}
+	}
+	
+	\subfloat[Conjunto conceptual.]{
+		\includesvg[width=0.9\linewidth]{figuras/conjunto}
+	}
+\end{figure}
+
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Sistema Helios 3198 para caracterización de lentes de fresnel.]{
+		\includesvg[width=0.65\linewidth]{figuras/Helios_caracteriazacion_solar}
+	}	
+	
+	\subfloat[Eficiencia de la captura de luz directa.]{
+		\includesvg[width=0.45\linewidth]{figuras/aoil_efeiciencia}		
+		\label{fig:eficienciaaoi}
+	}	
+	\subfloat[]{
+		\includesvg[width=0.45\linewidth]{figuras/microtracking_luz}		
+		\label{fig:microtracking}
+	}
+\end{figure}
+
+Esta configuración permite controlar el deslumbramiento dentro del edificio, pues, como se muestra en la Figura~\ref{fig:daylighting}, las células solares recogen la luz directa mientras el espacio entre ellas deja pasar la luz difusa al interior. De forma análoga, si las células no se encuentran sobre la línea focal, el sistema permite tanto la entrada de luz difusa, como de luz directa. La Figura~\ref{fig:glarecomp} compara la iluminación de una habitación empleando ventanas convencionales y de módulos BIPV semitransparentes con los modos de alto y bajo deslumbramiento de SMARTWIN.
+
+\begin{figure}
+	\centering
+	\includesvg[width=0.667\linewidth]{figuras/daylighting}
+	\caption{Captación de luz del sistema SMARTWIN.}
+	\label{fig:daylighting}
+\end{figure}
+
+\begin{figure}[t]
+	\centering
+	\subfloat[Probabilidad de deslumbramiento con luz diurna.]{
+		\includesvg[width=0.5\linewidth]{figuras/daylighting_glare}
+	}	
+	
+	\subfloat[Módulo BIPV semitransparente convencional.]{
+		\includesvg[width=0.45\linewidth]{figuras/conventional_semitransparent}	
+	}	
+	\subfloat[Módulo SMARTWIN baja transmitancia.]{
+		\includesvg[width=0.45\linewidth]{figuras/smartvsconventional}
+	}
+	
+		\subfloat[Módulo BIPV semitransparente convencional.]{
+		\includesvg[width=0.45\linewidth]{figuras/standarwindow}	
+	}	
+	\subfloat[Módulo SMARTWIN baja transmitancia.]{
+		\includesvg[width=0.45\linewidth]{figuras/smartvsstandar}
+	}
+	\caption{Comparativa deslumbramiento con distintas configuraciones y sistemas.}
+	\label{fig:glarecomp}
+\end{figure}
+
+Este enfoque de ventana generadora compacta que permite controlar el deslumbramiento en el interior de los edificios necesita un sistema de control que sea capaz de seguir con precisión las líneas focales y permutar entre diferentes configuraciones de iluminación. De este modo nace el objeto de este documento, validar un sistema de control que permita el seguimiento de estas líneas focales para una ventana situada en cualquier parte del globo.
+

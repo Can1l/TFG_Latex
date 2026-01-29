@@ -1,0 +1,110 @@
+\babel@toc {spanish}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {ESP32-S3-DevkitC1}}}{5}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Nema-15}}}{5}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Nema-17}}}{5}{subfigure.1.3}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {CNC-Shield con drivers A4998}}}{5}{subfigure.1.4}%
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Convertidor DC-DC Buck}}}{5}{subfigure.1.5}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Prototipo de la ventana a controlar.}}{6}{figure.caption.11}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces (a) Trayectoria Sol-Tierra. Los nombres de los solsticios y equinoccios están particularizados para el hemisferio Norte. (b) Variación de la radiación atmosférica solar mensual. (c) Declinación.}}{8}{figure.caption.12}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{8}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{8}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{8}{subfigure.1.3}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces (a) Ángulo cenital, pan, tilt, ángulo azimutal de la superficie y azimut solar para una superficie inclinada. (b) Ángulo azimutal solar \cite {duffie2020}.}}{9}{figure.caption.13}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{9}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{9}{subfigure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Procedimiento de cálculo del ángulo de incidencia}}{12}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Orientación de la ventana para pan y tilt nulos.}}{15}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Estructura simplificada de una célula fotovoltaica de unión p-n. Las dimensiones relativas de cada elemento se han exagerado para una mejor visualización \cite {eoi2008}.}}{17}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Semiconductores tipo p y tipo n. (a) y (b) de HelioEsfera. (c) de UPV.}}{19}{figure.caption.26}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Silicio dopado con Antimonio (tipo n).}}}{19}{subfigure.6.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Silicio dopado con Boro (tipo p).}}}{19}{subfigure.6.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Semiconductores de tipo N y tipo P uniformemente dopados, antes de la unión}}}{19}{subfigure.6.3}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Polarización de la unión p-n.}}{23}{figure.caption.29}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Creación de la zona de deplexión. }}}{23}{subfigure.7.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Polarización directa }}}{23}{subfigure.7.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Polarización inversa }}}{23}{subfigure.7.3}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Iluminación sobre una célula solar}}{24}{figure.caption.30}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Corriente de iluminación y corriente de diodo en una célula solar que alimenta una carga}}}{24}{subfigure.8.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Pérdidas de transmisión, reflexión y recombinación en una célula solar}}}{24}{subfigure.8.2}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Curvas I-V y P-V}}{25}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Curvas con parámetros característicos}}}{25}{subfigure.9.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Curvas I-V a diferentes temperaturas}}}{25}{subfigure.9.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Curvas I-V con irradiancias distintas}}}{25}{subfigure.9.3}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Curvas P-V con diferentes temperaturas}}}{25}{subfigure.9.4}%
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Curvas P-V con irradiancias distintas}}}{25}{subfigure.9.5}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Diferentes asociaciones de células y configuraciones de módulos \cite {en1505}}}{27}{figure.caption.34}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Distintas distribuciones de arrays en campos solares}}{30}{figure.caption.41}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Arrays fijos en un huerto solar. Repsol.}}}{30}{subfigure.11.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Seguidores bifaciales. Xataka}}}{30}{subfigure.11.2}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Lentes delgadas.}}{31}{figure.caption.43}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Lente convergente.}}}{31}{subfigure.12.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Lente divergente.}}}{31}{subfigure.12.2}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Lentes de fresnel.}}{34}{figure.caption.47}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Comparación fresnel y lente delgada.}}}{34}{subfigure.13.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Lente de fresnel concéntrica en un faro.}}}{34}{subfigure.13.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Lente divergente.}}}{34}{subfigure.13.3}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Lente de fresnel por imprimación ultravioleta para concentración solar en paneles fotovoltaicos.}}}{34}{subfigure.13.4}%
+\addvspace {10\p@ }
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Adaptive Solar Facade. ETH Zurich.}}}{36}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {FlectoSol. Stuttgart University.}}}{36}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Sistemas convencionales. Izquierda de colores, centro semitransparentes y derecha opacos. Cortesía de Solreina.}}}{36}{subfigure.1.3}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Prototipo de vidrio con lentes de fresnel.}}}{38}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Prototipo de panel con células comerciales encapsuladas.}}}{38}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Conjunto conceptual.}}}{38}{subfigure.1.3}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Sistema Helios 3198 para caracterización de lentes de fresnel.}}}{39}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Eficiencia de la captura de luz directa.}}}{39}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{39}{subfigure.1.3}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Captación de luz del sistema SMARTWIN.}}{39}{figure.caption.51}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Comparativa deslumbramiento con distintas configuraciones y sistemas.}}{40}{figure.caption.52}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Probabilidad de deslumbramiento con luz diurna.}}}{40}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Módulo BIPV semitransparente convencional.}}}{40}{subfigure.2.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Módulo SMARTWIN baja transmitancia.}}}{40}{subfigure.2.3}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Módulo BIPV semitransparente convencional.}}}{40}{subfigure.2.4}%
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Módulo SMARTWIN baja transmitancia.}}}{40}{subfigure.2.5}%
+\addvspace {10\p@ }
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Mecanismo del movimiento vertical.}}}{43}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Mecanismo de un lateral, replicado en el lado opuesto.}}}{43}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Mecanismo del movimiento horizontal.}}}{43}{subfigure.1.3}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Diagrama de diseño de interconexiones hardware.}}{61}{figure.caption.54}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Diagrama de diseño funcional.}}{64}{figure.caption.55}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Diagrama de comunicación.}}{66}{figure.caption.56}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Máquina de estados finitos del sistema.}}{67}{figure.caption.57}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Rutinas de inicio del servidor web y GPS.}}{68}{figure.caption.58}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Diagrama secuencial de los procesos de inicio.}}{68}{figure.caption.59}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Flujo de datos del sistema.}}{69}{figure.caption.60}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Diagrama secuencial del modo automático.}}{71}{figure.caption.62}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Diagrama de flujo del modo automático.}}{71}{figure.caption.63}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Diagrama de flujo de datos del modo efemérides.}}{73}{figure.caption.66}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Diagrama de flujo de datos del modo manual.}}{73}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Diagrama secuencial de los modos manual y efemérides.}}{73}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Interfaz gráfica de usuario.}}{75}{figure.caption.69}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Configuración.}}}{75}{subfigure.13.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Estado.}}}{75}{subfigure.13.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Modo efemérides.}}}{75}{subfigure.13.3}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Modo manual.}}}{75}{subfigure.13.4}%
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Botones.}}}{75}{subfigure.13.5}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Secuencia de demostración del movimiento.}}{87}{figure.caption.70}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Posición inicial arbitraria.}}}{87}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Homing.}}}{87}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Desplazamiento vertical.}}}{87}{subfigure.1.3}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Desplazamiento horizontal.}}}{87}{subfigure.1.4}%
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Homing.}}}{87}{subfigure.1.5}%
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {Desplazamiento horizontal y vertical.}}}{87}{subfigure.1.6}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Modo automático.}}}{88}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Modo efemérides.}}}{88}{subfigure.2.2}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Corrientes frente al tiempo. Izquierda MCU, derecha fuente de alimentación.}}{88}{figure.caption.74}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Esquemático.}}{94}{figure.caption.75}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{94}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{94}{subfigure.1.2}%
