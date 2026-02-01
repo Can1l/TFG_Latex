@@ -2,7 +2,7 @@
 
 \section{Consideraciones iniciales}
 
-El prototipo desarrollado por la Universidad de Salerno cuenta con seis motores paso a paso, dos NEMA-15 enfrentados para el movimiento horizontal, y cuatro NEMA-17 enfrentados dos a dos para el vertical. Estos están integrados en una placa de expansión, CNC-Shield, que permiten el acoplamiento de drivers, en este caso A4988. Esta metodología es muy utilizada para fresadoras CNC, impresoras 3D, grabadoras láser, u otros usos que requieran de desplazamiento en ejes cartesianos. También se entregaron seis finales de carrera que no estaban integrados en la maqueta y que deberán de ajustarse a las necesidades de este proyecto. El control se realizó en una ESP32-Wroover, con un programa que permitía elegir la posición absoluta a la que se movía el plano de la ventana móvil a la posición introducida en una interfaz HTML cliente-servidor en el microcontrolador. Los motores vienen alimentados con una fuente de 12 V y 6 A conectada a la instalación eléctrica. Estas características imponen una serie de condicionantes técnicos que deben ser tenidos en cuenta en el diseño del sistema de control y en la selección de la plataforma hardware. 
+El prototipo desarrollado por la Universidad de Salerno cuenta con seis motores paso a paso, dos enfrentados para el movimiento horizontal, y cuatro enfrentados dos a dos para el vertical. Estos están integrados en una placa de expansión, CNC-Shield, que permiten el acoplamiento de drivers, en este caso A4988. Esta metodología es muy utilizada para fresadoras CNC, impresoras 3D, grabadoras láser, u otros usos que requieran de desplazamiento en ejes cartesianos. También se entregaron seis finales de carrera que no estaban integrados en la maqueta y que deberán de ajustarse a las necesidades de este proyecto. El control se realizó en una ESP32-Wroover, con un programa que permitía elegir la posición absoluta a la que se movía el plano de la ventana móvil a la posición introducida en una interfaz HTML cliente-servidor en el microcontrolador. Los motores vienen alimentados con una fuente de 12 V y 6 A conectada a la instalación eléctrica. Estas características imponen una serie de condicionantes técnicos que deben ser tenidos en cuenta en el diseño del sistema de control y en la selección de la plataforma hardware. 
 Cabe destacar que el control, microcontrolador y entorno de programación desarrollado y empleado para la integración del sistema por la Universidad de Salerno no tiene ningún peso sobre la elección de de la plataforma seleccionada, pues se basa en un análisis riguroso de distintos dispositivos, centrándose en el cumplimiento de los requisitos funcionales y no funcionales atendiendo a una serie de criterios de selección tecnológica.
 
 \section{Planteamiento de requisitos y selección tecnológica}
@@ -250,7 +250,7 @@ Una vez definida la plataforma de desarrollo y el entorno de programación, se r
 \begin{itemize}
 	\item \textbf{ESP32-S3-DevkitC1}, microcontrolador con sistema operativo \textit{FreeRTOS}, punto de acceso WIFI y conexión Bluetooth.
 	\item Módulo \textbf {GPS NEO-6M}, es un módulo integrable en \textit{Arduino} utilizado para proporcionar la fecha y la hora al microcontrolador.
-	\item Motores paso a paso \textbf{NEMA-15} y \textbf{NEMA-17}, empleados para producir el movimiento del panel móvil.
+	\item Motores paso a paso \textbf{NEMA-17}, empleados para producir el movimiento del panel móvil.
 	\item Finales de carrera, para detectar los límites físicos de la maqueta que restringen el movimiento del panel móvil.
 	\item Reductor buck LM2596S-Like de $12-24\, \mathrm{V}$ a $5\, \mathrm{V}$.
 \end{itemize}
@@ -264,10 +264,10 @@ Una vez definida la plataforma de desarrollo y el entorno de programación, se r
 		\includesvg[width=0.45\linewidth]{figuras/gpsneo}	
 	}	
 	
-	\subfloat[Nema-15.]{
+	\subfloat[Nema-17 42x42x38]{
 		\includesvg[width=0.45\linewidth]{figuras/nema15}		
 	}
-	\subfloat[Nema-17.]{
+	\subfloat[Nema-17 42x42x48mm]{
 		\includesvg[width=0.45\linewidth]{figuras/nema17}		
 	}
 	

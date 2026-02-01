@@ -70,7 +70,7 @@
 \contentsline {section}{\numberline {4.2}Sistema móvil}{36}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Movimiento vertical}{36}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Movimiento horizontal}{37}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Firmware de los motores}{37}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.3}Drivers de los motores}{37}{subsection.4.2.3}%
 \contentsline {chapter}{\numberline {5}Diseño del proyecto}{43}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Consideraciones iniciales}{43}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Planteamiento de requisitos y selección tecnológica}{43}{section.5.2}%
@@ -124,15 +124,17 @@
 \contentsline {section}{\numberline {6.5}Resultados en el modo automático}{72}{section.6.5}%
 \contentsline {section}{\numberline {6.6}Validación del modo efemérides}{73}{section.6.6}%
 \contentsline {section}{\numberline {6.7}Consumo energético}{73}{section.6.7}%
-\contentsline {chapter}{\numberline {7}Conclusiones}{87}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Evaluación global de los resultados}{87}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Discusión de aspectos clave}{87}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Rendimiento de la selección tecnológica}{88}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Fiabilidad del diseño}{88}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Limitaciones del sistema}{88}{section.7.5}%
-\contentsline {section}{\numberline {7.6}Aportación del proyecto}{88}{section.7.6}%
-\contentsline {section}{\numberline {7.7}Líneas de trabajo futuro}{89}{section.7.7}%
-\contentsline {section}{\numberline {7.8}Impacto ambiental}{89}{section.7.8}%
-\contentsline {chapter}{\numberline {A}Anexo}{91}{appendix.Alph1}%
-\contentsline {section}{\numberline {A.1}ESP32-S3-Devkit-C1}{91}{section.Alph1.1}%
-\contentsline {chapter}{Bibliografia}{93}{figure.caption.87}%
+\contentsline {chapter}{\numberline {7}Conclusiones}{85}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Evaluación global de los resultados}{85}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Discusión de aspectos clave}{85}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Rendimiento de la selección tecnológica}{86}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Fiabilidad del diseño}{86}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Limitaciones del sistema}{86}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Aportación del proyecto}{86}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Líneas de trabajo futuro}{87}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Impacto ambiental}{87}{section.7.8}%
+\contentsline {chapter}{\numberline {A}Anexo}{89}{appendix.Alph1}%
+\contentsline {section}{\numberline {A.1}Ensayos de movimiento}{89}{section.Alph1.1}%
+\contentsline {section}{\numberline {A.2}Hojas de características}{89}{section.Alph1.2}%
+\contentsline {subsection}{\numberline {A.2.1}ESP32-S3-Devkit-C1}{89}{subsection.Alph1.2.1}%
+\contentsline {chapter}{Bibliografia}{99}{figure.caption.93}%

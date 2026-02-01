@@ -4,12 +4,12 @@
 
 La maqueta a controlar~[\ref{fig:ventana}] ha sido desarrollada por la Universidad de Salerno bajo la dirección del IES como parte del proyecto SMARTWIN, explicado en el estado del arte [\ref{chapter:eoa}]. Tras una breve descripción del prototipo en la introducción~[\ref{chapter:introduccion}] con la es necesario definir exhaustivamente como funciona el mecanismo de movimiento para cada eje, los elementos que lo integran y la electrónica necesaria para ello.
 
-A continuación se realiza una breve explicación del prototipo para introducir el concepto de manera representativa a partir de la Figura~\ref{fig:ventana}. La imagen contiene el prototipo visto desde la parte trasera. En ella puede apreciarse el panel transparente que simula tener incorporada la matriz de células solares, que debe de poder desplazarse en el interior del panel vertical y horizontalmente. El mecanismo de desplazamiento está basado en un sistema de motores con husillos (flechas rosas) que mueven dos plataformas móviles (flechas azules) alojadas en los laterales del marco por los raíles verticales (flechas verdes). Estas plataformas tienen un motor (flechas rojas) que gira una rueda dentada que, mediante una correa, produce movimiento horizontal en los patines (flechas negras) que deslizan sobre los raíles horizontales (flechas amarillas). De esta forma, el panel móvil, que está anclado a los patines de la plataforma móvil, puede desplazarse verticalmente, eje X positivo hacia abajo, y horizontalmente, eje Z positivo hacia el interior de la ventana. De esta manera, se dota al sistema del movimiento necesario para realizar los movimientos en dos ejes que permitan la captación de las líneas focales. El origen de coordenadas para el movimiento del panel queda definido por la posición de los finales de carrera (flechas naranjas).
+A continuación se realiza una breve explicación del prototipo para introducir el concepto de manera representativa a partir de la Figura~\ref{fig:ventana}. La imagen contiene el prototipo visto desde la parte trasera. En ella puede apreciarse el panel transparente que simula tener incorporada la matriz de células solares, que debe de poder desplazarse en el interior del panel vertical y horizontalmente. El mecanismo de desplazamiento está basado en un sistema de motores con husillos (1) que mueven dos plataformas móviles (2) alojadas en los laterales del marco por los raíles verticales (3). Estas plataformas tienen un motor (4) que gira una rueda dentada que, mediante una correa, produce movimiento horizontal en los patines (5) que deslizan sobre los raíles horizontales (6). De esta forma, el panel móvil, que está anclado a los patines de la plataforma móvil, puede desplazarse verticalmente, eje X positivo hacia abajo, y horizontalmente, eje Z positivo hacia el interior de la ventana. De esta manera, se dota al sistema del movimiento necesario para realizar los movimientos en dos ejes que permitan la captación de las líneas focales. El origen de coordenadas para el movimiento del panel queda definido por la posición de los finales de carrera (flechas naranjas).
 
 \begin{figure}[h]
 	\centering
-	\includesvg[width=0.95\linewidth]{figuras/ventana}
-	\caption{Prototipo de la ventana a controlar. Flechas de señalamiento: verdes para raíles verticales, azules para la plataforma, amarillas para raíles horizontales, negras para patines, rosas para motores del movimiento vertical y naranjas para finales de carreara.}
+	\includesvg[width=0.95\linewidth]{figuras/ventanao}
+	\caption{Prototipo de la ventana a controlar. Etiquetas: (1) para motores de movimiento vertical, (2) para las plataformas móviles, (3) para los raíles verticales, (4) para raíles horizontales, (5) para patines, (6) para motores del movimiento vertical y flechas naranjas para finales de carreara.}
 	\label{fig:ventana}
 \end{figure}
 \FloatBarrier
@@ -52,9 +52,9 @@ Esta relación se utiliza directamente en el software de control para el posicio
 
 \subsection{Movimiento horizontal}
 
-El movimiento horizontal depende del número de pasos ejecutados por el motor horizontal y del sistema de transmisión por correa dentada, tal y como se ilustra en la Subfigura~\ref{fig:horiz}. El motor acciona una polea central de $20$ dientes, que transmite el movimiento a la correa, desplazando los patines que sujetan el plano móvil transparente sobre el que se colocarían las matriz de células. 
+El movimiento horizontal depende del número de pasos ejecutados por el motor horizontal y del sistema de transmisión la con rueda dentada motriz y rodamientos con correa dentada, tal y como se ilustra en la Subfigura~\ref{fig:horiz}. El motor acciona una polea central de $20$ dientes, que transmite el movimiento a la correa, desplazando los patines que sujetan el plano móvil transparente sobre el que se colocarían las matriz de células. 
 
-El motor paso a paso utilizado presenta un ángulo de paso de $18^\circ$, correspondiente a $20$ pasos por revolución. En la configuración mecánica empleada, una revolución completa del motor produce un desplazamiento lineal de $4\,\mathrm{mm}$ del carro horizontal.
+La relación de transmisión efectiva entre el motor y la rueda dentada es de $18^\circ$ por paso, correspondiente a $20$ pasos por revolución. En la configuración mecánica empleada, una revolución completa del motor produce un desplazamiento lineal de $4\,\mathrm{mm}$ del carro horizontal.
 
 Por tanto, sin aplicar microstepping, la resolución lineal del sistema es:
 
@@ -89,9 +89,9 @@ lo que implica:
 Esta es la relación empleada en el software de control para el posicionamiento horizontal del sistema.
 
 
-\subsection{Firmware de los motores}
+\subsection{Drivers de los motores}
 
-Los motores NEMA que se emplean tienen cuatro conexiones eléctricas, identificadas como A+, A-, B+ y B-. Corresponden a las bobinas internas de los motores, A y B, que actúan como electroimanes cuya polaridad puede invertirse con el sentido de la corriente. 
+Los motores NEMA-17 que se emplean tienen cuatro conexiones eléctricas, identificadas como A+, A-, B+ y B-. Corresponden a las bobinas internas de los motores, A y B, que actúan como electroimanes cuya polaridad puede invertirse con el sentido de la corriente. 
 
 Los motores no se controlan directamente desde el microcontrolador, sino que van acoplados a las placas de expansión CNC-Shield-V3 y su movimiento individual es gobernado por cada driver A4998 instalado en ella. 
 

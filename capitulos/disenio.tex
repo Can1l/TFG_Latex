@@ -27,7 +27,7 @@ La arquitectura hardware del sistema de control se ha definido con el objetivo d
 
 El sistema se organiza en torno al microcontrolador, que centraliza la lógica de control y la comunicación con el usuario. Este bloque se comunica con el sistema de accionamiento, integrado en una placa CNC Shield equipada con drivers A4988, encargados de excitar los motores paso a paso responsables del movimiento del panel móvil.
 
-Los motores paso a paso, de tipo NEMA-15 y NEMA-17,DC,  transmiten el movimiento a la plataforma móvil mediante mecanismos de correas y husillos, permitiendo el desplazamiento en los ejes horizontal y vertical. La posición extrema del sistema es delimitada por finales de carrera, que proporcionan referencias físicas y protección frente a movimientos fuera de rango.
+Los motores paso a paso, de tipo NEMA-17, DC,  transmiten el movimiento a la plataforma móvil mediante mecanismos de correas y husillos, permitiendo el desplazamiento en los ejes horizontal y vertical. La posición extrema del sistema es delimitada por finales de carrera, que proporcionan referencias físicas y protección frente a movimientos fuera de rango.
 
 La referencia temporal necesaria para el cálculo de la posición solar se obtiene mediante un módulo GPS conectado directamente al microcontrolador a través de una interfaz serie. El sistema se alimenta a partir de una fuente de 12~V, destinada principalmente al accionamiento de los motores, mientras que la electrónica de control se alimenta mediante un convertidor DC-DC que genera las tensiones requeridas por la lógica.
 
