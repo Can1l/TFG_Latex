@@ -1,7 +1,6 @@
-\chapter{Resultados}
+\section{Validación del prototipo}
 
-
-En este capítulo se presentan los resultados obtenidos tras la implementación, depuración y validación del sistema de control de movimiento. El objetivo principal de esta fase es verificar que el sistema es capaz de ejecutar desplazamientos precisos y reproducibles, coherentes con las posiciones teóricas definidas por el usuario o calculadas por los algoritmos de control.
+En esta sección se presentan los resultados obtenidos tras la implementación, depuración y validación del sistema de control de movimiento. El objetivo principal de esta fase es verificar que el sistema es capaz de ejecutar desplazamientos precisos y reproducibles, coherentes con las posiciones teóricas definidas por el usuario o calculadas por los algoritmos de control.
 
 Para ello, se han realizado ensayos experimentales en los distintos modos de funcionamiento, comparando las posiciones objetivo con las posiciones reales alcanzadas por el sistema, así como comprobando la correcta inicialización mediante el proceso de homing y la estabilidad del movimiento tras múltiples ciclos de operación.
 
@@ -16,17 +15,16 @@ Por esta razón, la demostración debe validar los siguientes aspectos:
 	\item La correcta ejecución del proceso de homing.
 	\item El movimiento independiente de los ejes vertical y horizontal.
 	\item La coordinación entre ambos ejes en movimientos combinados.
-	\item La capacidad del sistema para re-referenciarse tras desplazamientos arbitrarios.
+	\item La capacidad del sistema para referenciarse tras desplazamientos arbitrarios.
 \end{itemize}
 
 La secuencia de imágenes fotográficas de la Figura~\ref{fig:cm} conforma una serie de escenarios ensayados representativos que demuestran el movimiento del sistema. Estos son:
 
 \begin{enumerate}
-	\item Estado inicial del sistema, partiendo de una posición arbitraria \ref{fig:cm1}.
-	\item Ejecución del proceso de homing~\ref{fig:cm2}.
+	\item Estado inicial del sistema, partiendo de una posición arbitraria~\ref{fig:cm1}. 
+	\item Homing~\ref{fig:cm2}.
 	\item Movimiento únicamente vertical (eje X)~\ref{fig:cm3}.
 	\item Movimiento únicamente horizontal (eje Z)~\ref{fig:cm4}.
-	\item Segunda ejecución del homing tras los desplazamientos~\ref{fig:cm5}.
 	\item Movimiento combinado en los ejes X y Z~\ref{fig:cm6}.
 \end{enumerate}
 
@@ -38,50 +36,266 @@ Estas pruebas gráficas permiten verificar visualmente que el sistema es capaz d
 	\centering
 	\subfloat[Posición inicial arbitraria.]
 	{	
-		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_1}		
+		\includegraphics[width=0.45\linewidth]{figuras/dm1}		
 		\label{fig:cm1}
 	}
-	\subfloat[Homing.]
+	\subfloat[Home.]
 	{	
-		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_2}	
+		\includegraphics[width=0.45\linewidth]{figuras/dm2}	
 		\label{fig:cm2}
 	}
 	
 	\subfloat[Desplazamiento vertical.]
 	{
-		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_3}		
+		\includegraphics[width=0.45\linewidth]{figuras/dm3}		
 		\label{fig:cm3}
 	}	
 	\subfloat[Desplazamiento horizontal.]
 	{
-		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_4}		
+		\includegraphics[width=0.45\linewidth]{figuras/dm4}		
 		\label{fig:cm4}	
 	}
 	
-	\subfloat[Homing.]
+\end{figure}
+
+\begin{figure}
+	\centering
+	\ContinuedFloat
+		\subfloat[Desplazamiento horizontal y vertical.]
 	{
-		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_5}
-		\label{fig:cm5}
-	}	
-	\subfloat[Desplazamiento horizontal y vertical.]
-	{
-		\includegraphics[width=0.45\linewidth]{figuras/dem_mov_6}		
+		\includegraphics[width=0.45\linewidth]{figuras/dm5}		
 		\label{fig:cm6}
 	}
-
+	
 	\caption{Secuencia de demostración del movimiento.}
 	\label{fig:cm}
 \end{figure}
-
-
 
 \section{Validación de la precisión de posicionamiento}
 
 Una vez comprobada la capacidad de movimiento del sistema, se ha evaluado la precisión del posicionamiento en los distintos modos de funcionamiento. Para ello, se han comparado las posiciones teóricas calculadas por el sistema con las posiciones reales alcanzadas por la maqueta.
 
-Las pruebas se han realizado en los tres modos, midiendo con un flexómetro los desplazamientos en los ejes X y Z para distintos comandos de entrada, sin realizar \textit{homing} entre movimientos. Se ha considerado suficiente para la validación de posición medidas con precisión de milímetro, pues un error absoluto menor que esta unidad se considera aceptable para la posterior caracterización. Una vez eliminados los problemas de implementación ligados al software[~\ref{sec:backlash}], el sistema no muestra error de posición, corroborando el buen posicionamiento del panel móvil durante periodos prolongados de actividad, con cambios de sentido involucrados. 
+Las pruebas se llevan a cabo en los tres modos, midiendo con un flexómetro los desplazamientos en los ejes X y Z para distintos comandos de entrada, sin realizar \textit{homing} entre movimientos. Se considera suficiente para la validación de posición medidas con precisión de milímetro, pues un error absoluto menor que esta unidad se considera aceptable para la posterior caracterización. 
 
-Tras separar en dos procesadores distintos el movimiento y el servidor Wi-Fi, el mecanismo de movimiento horizontal ha reducido casi completamente el error de desplazamiento que se resultaba del movimiento con el pad unidad a unidad. Sin embargo, el movimiento intermitente de los motores de manera prolongada seguía propiciando la aparición de holguras que provocan un funcionamiento indeseado del sistema.
+Para la correcta validación de la precisión se han seguido las siguientes estrategias:
+
+\begin{itemize}
+	\item Para el modo manual se realizan, de manera continuada sin volver a referenciarse en \textit{home}, varios movimientos tanto horizontales como verticales. Estos serán de longitudes desde pocos milímitros a varios centímetros, para comprobar que opera como se espera para todo el rango. Figura~\ref{fig:precman}.
+	\item En el modo efemérides se introducen dos pares de ángulos y se comprueba que cada movimiento concuerda con la posición que indica la interfaz de usuario. Figura~\ref{fig:precef}.
+	\item  En el modo automático se validará que la primera posición es la que indica la interfaz y se dejará operar cierto tiempo. De esta manera se conoce si el sistema acumula error de pequeños movimientos prolongados en el tiempo. Figura~\ref{fig:precaut}.
+\end{itemize}
+
+\begin{figure}[t]
+	\centering
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[$X_0 = 10\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmm_referencia_vertical}
+		}
+		\subfloat[$Z_0 = 85\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmm_referencia_horizontal}
+		}
+		
+		\caption*{Referencias en $X_0\,\mathrm{mm}$ y $Z_0\,\mathrm{mm}$.}
+	\end{minipage}
+	
+	% ===== PAREJA 1 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[$X_1 = 35 - 10 = 25\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmva}
+		}
+		\subfloat[$Z_1 = 85 - 60 = 25\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmha}
+		}
+		
+		\caption*{\textbf{Caso A:} Movimiento a $X=25\,\mathrm{mm}$ y $Z=25\,\mathrm{mm}$.}
+	\end{minipage}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\ContinuedFloat
+	
+		% ===== PAREJA 2 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[$X_2 = 60 - 10 = 50\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmvb}
+		}
+		\subfloat[$Z_2 = 85 - 35 = 50\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmhb}
+		}
+		
+		\caption*{\textbf{Caso B:} Movimiento a $X=50\,\mathrm{mm}$ y $Z=50\,\mathrm{mm}$.}
+	\end{minipage}
+	
+	\vspace{1em}	
+	
+	% ===== PAREJA 3 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[$X_3 = 52 - 10 = 42\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmvc}
+		}
+		\subfloat[$Z_3 = 85 - 39 = 46\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmhc}
+		}
+		
+		\caption*{\textbf{Caso C:} Movimiento a $X=42\,\mathrm{mm}$ y $Z=46\,\mathrm{mm}$.}
+	\end{minipage}
+	
+\end{figure}
+
+
+\begin{figure}
+	\ContinuedFloat
+		
+	% ===== PAREJA 4 =====
+	\begin{minipage}{\linewidth}
+	\centering
+		\subfloat[$X_4 = 25 - 10 = 50\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmvd}
+		}
+		\subfloat[$Z_4 = 85 - 25 = 60\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmhd}
+		}
+		
+		\caption*{\textbf{Caso D:} Movimiento a $X=15\,\mathrm{mm}$ y $Z=60\,\mathrm{mm}$.}
+	\end{minipage}	
+	
+	% ===== PAREJA 5 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[$X_5 = 27 - 10 = 17\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmve}
+		}
+		\subfloat[$Z_5 = 85 - 27 = 58\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmmhe}
+		}
+		
+		\caption*{\textbf{Caso E:} Movimiento a $X=17\,\mathrm{mm}$ y $Z=58\,\mathrm{mm}$.}
+	\end{minipage}	
+			
+	% ===== CAPTION GLOBAL =====
+	\caption{Resultados experimentales de la precisión de movimiento del sistema para el modo manual.}
+	\label{fig:precman}
+\end{figure}
+
+\begin{figure}[t]
+	\centering
+	
+	% ===== PAREJA 1 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[Interfaz]{
+			\includesvg[width=0.45\linewidth]{figuras/Caso_a_eph_interface}
+		}
+		
+		\subfloat[$X_1 = 43 - 10 = 33\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmeva}
+		}	
+		\subfloat[$Z_1 = 85 - 13 = 72\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmeha}
+		}
+		
+		\caption*{\textbf{Caso A}}
+	\end{minipage}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\ContinuedFloat
+
+	% ===== PAREJA 2 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[Interfaz]{
+			\includesvg[width=0.45\linewidth]{figuras/Caso_b_eph_interface}
+		}
+		
+		\subfloat[$X_2 = 46 - 10 = 36\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmevb}
+		}
+		\subfloat[$Z_2 = 85 - 57 = 28\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmehb}
+		}
+		
+		\caption*{\textbf{Caso B:} Movimiento a $X=50\,\mathrm{mm}$ y $Z=50\,\mathrm{mm}$.}
+	\end{minipage}
+	
+	% ===== CAPTION GLOBAL =====
+	\caption{Resultados experimentales de la precisión de movimiento del sistema en modo efemérides.}
+	\label{fig:precef}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+		% ===== PAREJA 1 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[Interfaz]{
+			\includesvg[width=0.45\linewidth]{figuras/inicio_precision_auo}
+		}
+		
+		\subfloat[$X_i = 39 - 10 = 29\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmavi}
+		}	
+		\subfloat[$Z_i = 85 - 31 = 54\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmahi}
+		}
+		
+		\caption*{\textbf{Caso A}}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\ContinuedFloat
+		% ===== PAREJA 2 =====
+	\begin{minipage}{\linewidth}
+		\centering
+		\subfloat[Interfaz]{
+			\includesvg[width=0.45\linewidth]{figuras/fin_precision_auo}
+		}
+		
+		\subfloat[$X_f = 30 - 10 = 20\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmavf}
+		}
+		\subfloat[$Z_f = 85 - 41 = 44\,\mathrm{mm}$]{
+			\includegraphics[width=0.45\linewidth]{figuras/pmahf}
+		}
+		
+		\caption*{\textbf{Caso B:} Movimiento a $X=50\,\mathrm{mm}$ y $Z=50\,\mathrm{mm}$.}
+	\end{minipage}
+	
+	\caption{Resultados experimentales de la precisión de movimiento del modo automático.}
+	\label{fig:precaut}
+\end{figure}
+
+
+Como puede observarse en la colección de figuras, vez eliminados los problemas de implementación ligados al software[~\ref{sec:backlash}], el sistema no muestra error de posición, corroborando el buen posicionamiento del panel móvil durante periodos prolongados de actividad, con cambios de sentido involucrados. 
+
+Tras separar en dos procesadores distintos el movimiento y el servidor Wi-Fi, el mecanismo de movimiento horizontal ha reducido casi completamente el error de desplazamiento que se resultaba del movimiento con el pad unidad a unidad. Sin embargo, el movimiento intermitente de los motores con entradas desde el servidor web sigue propiciando la aparición de holguras que provocan un funcionamiento indeseado del sistema. Estos efectos hacen que la posición Z del panel móvil no se corresponda con la que indica la interfaz, como puede apreciarse en la Figura~\ref{fig:manual_error}.
+  
+\begin{figure}
+	\centering
+	\subfloat[Patines desalineados.]{
+		\includegraphics[width=0.75\linewidth]{figuras/error_pad_dual}
+	}
+	
+	\subfloat[Interfaz con $Z = 43\,\mathrm{mm}$.]{
+		\includesvg[width=0.4\linewidth]{figuras/error_posicion}
+	}
+	\subfloat[$Z = 85 - 50 = 35\,\mathrm{mm}$.]{
+		\includegraphics[width=0.4\linewidth]{figuras/error_cm}
+	}	
+	\caption{Error en el movimiento con el pad.}
+	\label{fig:manual_error}	
+\end{figure}  
   
 \section{Resultados en el modo automático}
 
@@ -96,7 +310,7 @@ Para cada configuración, se ha registrado:
 	\item Posición real alcanzada por el sistema.
 \end{itemize}
 
-Los resultados obtenidos se han comparado con cálculos externos realizados en python, empleando la librería PVLIB extensamente empleada para la caracterización y validación de sistemas seguidores fotovoltaicos. De esta forma se verifica que los ángulos solares y los desplazamientos coinciden con los valores obtenidos por el microcontrolador. Finalmente, se ha comprobado de forma experimental que la maqueta alcanza las posiciones correspondientes a cada configuración temporal.
+Los resultados obtenidos se han comparado con cálculos externos realizados en python, empleando la librería PVLIB extensamente empleada para la caracterización y validación de sistemas seguidores fotovoltaicos. De esta forma se verifica que los ángulos solares y los desplazamientos coinciden con los valores obtenidos por el microcontrolador.
 
 
 \begin{table}[h!]
@@ -169,10 +383,7 @@ Los resultados obtenidos se han comparado con cálculos externos realizados en p
 	\label{tab:auto}
 \end{table}
 
-A partir de los valores obtenidos para las posiciones calculadas, se ha evaluado el error absoluto medio entre los resultados generados por el modelo en Python y los obtenidos en el sistema embebido (ESP). El error absoluto promedio en la coordenada $X$ es de $0.010$, mientras que en la coordenada $Z$ el valor asciende a $0.022$. Estos resultados indican una alta concordancia entre ambos sistemas, siendo las discrepancias numéricas reducidas y atribuibles principalmente a efectos de redondeo y diferencias en la precisión del método de cálculo, pues PVLIB de Python tiene mayor precisión que el algoritmo de SPA empleado. 
-
-
-
+A partir de los valores obtenidos para las posiciones calculadas, se ha evaluado el error absoluto medio entre los resultados generados por el modelo en Python (PY) y los obtenidos en el sistema embebido (ESP). El error absoluto promedio en la coordenada $X$ es de $0.010$, mientras que en la coordenada $Z$ el valor asciende a $0.022$. Estos resultados indican una alta concordancia entre ambos sistemas, siendo las discrepancias numéricas reducidas y atribuibles principalmente a efectos de redondeo y diferencias en la precisión del método de cálculo, pues PVLIB de Python tiene mayor precisión que el algoritmo de SPA empleado. 
 
 
 \section{Validación del modo efemérides}
@@ -189,6 +400,7 @@ Para la validación de este modo, se han empleado los ángulos azimutales y de e
 	{	
 		\includesvg[width=0.45\linewidth]{figuras/ephvsauto}		
 	}
+	\caption{Comparación modo efemérides y automático}
 	\label{fig:ephvsauto}
 \end{figure}
 

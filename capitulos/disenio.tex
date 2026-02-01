@@ -1,5 +1,6 @@
-\chapter{Diseño del sistema de control}
-\section{Enfoque general del diseño}
+\section{Diseño del sistema de control}
+
+\subsection{Enfoque general del diseño}
 
 En un sistema embebido de control, el hardware y el software están estrechamente integrados. El diseño se divide en dos partes diferenciadas por su naturaleza, pero concebidas de forma conjunta: el diseño electrónico y el diseño software.
 
@@ -10,9 +11,8 @@ Por la otra parte, el diseño software aborda la implementación de las funciona
 La separación conceptual entre diseño electrónico y diseño software permite analizar cada parte de forma estructurada y sin perder de vista su integración, pues las decisiones adoptadas en una de las partes condicionan el comportamiento global del prototipo.
 
 
-\section{Diseño electrónico}
 
-\subsection{Arquitectura hardware}
+\section{Arquitectura hardware}
 
 
 \begin{figure}[t]
@@ -27,7 +27,7 @@ La arquitectura hardware del sistema de control se ha definido con el objetivo d
 
 El sistema se organiza en torno al microcontrolador, que centraliza la lógica de control y la comunicación con el usuario. Este bloque se comunica con el sistema de accionamiento, integrado en una placa CNC Shield equipada con drivers A4988, encargados de excitar los motores paso a paso responsables del movimiento del panel móvil.
 
-Los motores, de tipo NEMA-15 y NEMA-17, transmiten el movimiento a la plataforma móvil mediante mecanismos de correas y husillos, permitiendo el desplazamiento en los ejes horizontal y vertical. La posición extrema del sistema es delimitada por finales de carrera, que proporcionan referencias físicas y protección frente a movimientos fuera de rango. Estos motores pueden visualizarse en la Figura~\Ref{}
+Los motores paso a paso, de tipo NEMA-15 y NEMA-17,DC,  transmiten el movimiento a la plataforma móvil mediante mecanismos de correas y husillos, permitiendo el desplazamiento en los ejes horizontal y vertical. La posición extrema del sistema es delimitada por finales de carrera, que proporcionan referencias físicas y protección frente a movimientos fuera de rango.
 
 La referencia temporal necesaria para el cálculo de la posición solar se obtiene mediante un módulo GPS conectado directamente al microcontrolador a través de una interfaz serie. El sistema se alimenta a partir de una fuente de 12~V, destinada principalmente al accionamiento de los motores, mientras que la electrónica de control se alimenta mediante un convertidor DC-DC que genera las tensiones requeridas por la lógica.
 
@@ -87,7 +87,6 @@ Dado el carácter embebido del sistema, la lógica de control se articula princi
 
 Por este motivo, el diseño software se documenta mediante diagramas de flujo, diagramas de flujo de datos y diagramas de secuencia UML, que permiten describir de forma más precisa y comprensible el comportamiento del sistema en sus distintos modos de funcionamiento.
 
-
 \subsection{Arquitectura software}
 La arquitectura software se ha diseñado con un enfoque orientado a funcionalidades. En el contexto del sistema embebido desarrollado, el uso de un diseño fuertemente orientado a objetos no resulta especialmente adecuado, dado que no se trabaja con objetos dinámicos ni con jerarquías complejas, sino con algoritmos, estados y flujos de ejecución bien definidos. En este sentido, el diseño se estructura alrededor de la implementación de los distintos algoritmos de control, cuyos datos se gestionan mediante estructuras globales compartidas que facilitan la interacción entre los bloques lógicos y la interfaz web.
 
@@ -95,9 +94,7 @@ El acceso a estas estructuras se encuentra condicionado por variables de estado 
 
 Este enfoque favorece una elevada cohesión interna de cada módulo y un acoplamiento moderado entre ellos, priorizando la simplicidad, la rapidez de implementación y la facilidad de depuración, aspectos especialmente relevantes en el carácter experimental del proyecto. El sacrificio parcial en encapsulación se ve compensado por la agilidad en el desarrollo y la posibilidad de introducir modificaciones sin necesidad de reestructurar grandes secciones del código.
 
-Los distintos algoritmos empleados han sido detallados en el marco teórico, por lo que en esta sección se hará referencia a ellos únicamente en el contexto de los modos de funcionamiento, sin entrar en profundidad en su formulación matemática.
-
-La visibilidad entre bloques del sistema debe permitir que los parámetros introducidos por el usuario en la interfaz lleguen a los algoritmos de los distintos modos de funcionamiento, por lo que es necesario establecer una comunicación eficiente. Para ello, la web debe permitir el envío de parámetros al servidor, responsable de lanzar los distintos modos, siendo estos los responsables, a su vez, de ejecutar los algoritmos y controlar los motores. También se encarga de gestionar de manera activa el guardado de variables en la flash y la propia interfaz web. Figura~\ref{fig:comunicacion}
+La visibilidad entre bloques del sistema debe permitir que los parámetros introducidos por el usuario en la interfaz lleguen a los algoritmos de los distintos modos de funcionamiento, por lo que es necesario establecer una comunicación eficiente. Para ello, la web debe permitir el envío de parámetros al servidor, responsable de lanzar los distintos modos, siendo estos los responsables, a su vez, de ejecutar los algoritmos y controlar los motores. También se encarga de gestionar de manera activa el guardado de variables en la flash y la propia interfaz web. La Figura~\ref{fig:comunicacion} muestra la visibilidad entre bloques con un diagrama de comunicación.
 
 Con el objetivo de materializar este mecanismo de control, se ha definido una máquina de estados finitos que gobierna el comportamiento global del sistema y regula las transiciones entre los distintos modos de funcionamiento. Esta máquina de estados finitos tiene la responsabilidad de coercionar el acceso del usuario, a través de las condiciones de cambio de estado, a distintas funcionalidades que causarían un funcionamiento indeseado o inesperado en el programa. Asimismo, es el encargado de gestionar la resincronización del GPS, el modo automático y la manera en la que el microcontrolador entra en suspensión y sale de esta.
 Este enfoque resulta especialmente adecuado para sistemas embebidos reactivos, donde el comportamiento depende del estado global y de eventos externos asincrónicos.
@@ -159,6 +156,44 @@ Por último, se describen en detalle los distintos modos de funcionamiento imple
 La descripción de cada modo es acompañada de los diagramas de flujo de datos y los diagramas secuenciales correspondientes, con el fin de ilustrar de manera clara el comportamiento del sistema, el intercambio de información entre bloques y la secuencia de ejecución asociada. Este enfoque permite comprender no solo qué hace el sistema en cada modo, sino también cómo y en qué orden se llevan a cabo las distintas operaciones, manteniendo la coherencia con la máquina de estados definida previamente.
 
 \FloatBarrier
+
+\section{Interpolación bilineal}\label{sec:interpol}
+Para obtener las posiciones del panel en los ejes $x$ y $z$, se interpola sobre dos matrices de $85 \times 85$ cuyos valores dependen de los ángulos de incidencia transversal y longitudinal. La obtención de estas matrices se ha definido en la sección~\ref{sec:matriz} del estado del arte.
+
+Este procedimiento permite aproximar el valor de una función escalar en un punto arbitrario del plano a partir de los valores conocidos en los cuatro nodos más próximos que delimitan la celda en la que se encuentra dicho punto.
+
+Sea una función $f(x,y)$ definida sobre una malla regular en los ejes $x$ e $y$. Dado un punto de consulta $(x,y)$ comprendido en el rectángulo delimitado por los nodos:
+\[
+(x_i, y_j), \quad (x_{i+1}, y_j), \quad (x_i, y_{j+1}), \quad (x_{i+1}, y_{j+1}),
+\]
+con valores conocidos:
+\[
+f_{00} = f(x_i, y_j), \quad
+f_{10} = f(x_{i+1}, y_j), \quad
+f_{01} = f(x_i, y_{j+1}), \quad
+f_{11} = f(x_{i+1}, y_{j+1}),
+\]
+se definen los parámetros adimensionales de interpolación como:
+\begin{equation}
+	t_x = \frac{x - x_i}{x_{i+1} - x_i}, \qquad
+	t_y = \frac{y - y_j}{y_{j+1} - y_j},
+\end{equation}
+con $0 \leq t_x, t_y \leq 1$.
+
+El procedimiento se realiza en dos etapas. En primer lugar, se interpola linealmente en la dirección $y$ para los dos valores correspondientes a $x_i$ y $x_{i+1}$:
+\begin{equation}
+	f_0 = f_{00} + t_y (f_{01} - f_{00}),
+\end{equation}
+\begin{equation}
+	f_1 = f_{10} + t_y (f_{11} - f_{10}).
+\end{equation}
+
+Posteriormente, se interpola linealmente en la dirección $x$ entre los valores obtenidos:
+\begin{equation}
+	f(x,y) = f_0 + t_x (f_1 - f_0).
+\end{equation}
+
+Este método garantiza continuidad en el valor interpolado dentro de cada celda de la malla y constituye una aproximación eficiente y suficientemente precisa cuando la función presenta variaciones suaves entre nodos adyacentes.
 
 \subsubsection{Modo automático}
 

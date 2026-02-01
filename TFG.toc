@@ -1,137 +1,138 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {chapter}{Agradecimientos}{\es@scroman {ix}}{chapter*.1}%
-\contentsline {chapter}{Resumen}{\es@scroman {xi}}{chapter*.2}%
-\contentsline {paragraph}{Palabras clave:}{\es@scroman {xi}}{section*.3}%
-\contentsline {chapter}{Abstract}{\es@scroman {xiii}}{chapter*.4}%
-\contentsline {paragraph}{Keywords:}{\es@scroman {xiii}}{section*.5}%
-\contentsline {chapter}{Nomenclatura}{\es@scroman {xv}}{chapter*.6}%
-\contentsline {chapter}{Índice}{\es@scroman {xix}}{chapter*.7}%
+\contentsline {chapter}{Agradecimientos}{\es@scroman {v}}{chapter*.1}%
+\contentsline {chapter}{Resumen}{\es@scroman {vii}}{chapter*.2}%
+\contentsline {paragraph}{Palabras clave:}{\es@scroman {vii}}{section*.3}%
+\contentsline {chapter}{Abstract}{\es@scroman {ix}}{chapter*.4}%
+\contentsline {paragraph}{Keywords:}{\es@scroman {ix}}{section*.5}%
+\contentsline {chapter}{Lista de símbolos}{\es@scroman {xi}}{chapter*.6}%
+\contentsline {chapter}{Acrónimos}{\es@scroman {xiii}}{chapter*.7}%
+\contentsline {chapter}{Índice}{\es@scroman {xvii}}{chapter*.8}%
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Motivación del proyecto}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Objetivos}{2}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Objetivo general}{2}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Objetivos específicos}{2}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Alcance del proyecto}{2}{subsection.1.2.3}%
-\contentsline {section}{\numberline {1.3}Materiales utilizados}{3}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Hardware}{3}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Software}{3}{subsection.1.3.2}%
-\contentsline {section}{\numberline {1.4}Estructura del documento}{3}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Marco Teórico}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Radiación Solar}{7}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Naturaleza de la radiación solar}{7}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Influencia de la atmósfera terrestre en la radiación solar}{8}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Dirección de la radiación solar directa}{9}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Efemérides Solares}{10}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Hora solar y hora oficial}{10}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Fracción del año}{11}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Declinación solar}{11}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Ecuación del tiempo}{11}{subsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.2.5}Tiempo solar verdadero}{12}{subsection.2.2.5}%
-\contentsline {subsection}{\numberline {2.2.6}Ángulo horario}{12}{subsection.2.2.6}%
-\contentsline {subsection}{\numberline {2.2.7}Ángulo cenital, elevación y azimut solar}{12}{subsection.2.2.7}%
-\contentsline {section}{\numberline {2.3}Cálculo de ángulos de incidencia en la superficie de la ventana}{13}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Transformación de efemérides solares a ángulos de incidencia}{13}{subsection.2.3.1}%
-\contentsline {subsubsection}{Conversión a coordenadas cartesianas}{14}{section*.16}%
-\contentsline {subsubsection}{Rotación por pan}{14}{section*.17}%
-\contentsline {subsubsection}{Rotación por tilt}{14}{section*.18}%
-\contentsline {subsubsection}{Corrección de orientación del módulo}{14}{section*.19}%
-\contentsline {subsubsection}{Obtención de efemérides relativas al módulo}{15}{section*.20}%
-\contentsline {subsubsection}{Cálculo de los ángulos de incidencia}{15}{section*.21}%
-\contentsline {section}{\numberline {2.4}Interpolación bilineal}{15}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Fundamentos de la energía Solar Fotovoltaica}{16}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Células solares}{16}{subsection.2.5.1}%
-\contentsline {subsubsection}{Estructura de una célula fotovoltaica}{17}{section*.23}%
-\contentsline {subsubsection}{Principio de funcionamiento de las células solares}{18}{section*.25}%
-\contentsline {subsection}{\numberline {2.5.2}Teoría de semiconductores}{18}{subsection.2.5.2}%
-\contentsline {subsubsection}{Semiconductor tipo n}{18}{section*.27}%
-\contentsline {subsubsection}{Semiconductor tipo p}{18}{section*.28}%
-\contentsline {subsection}{\numberline {2.5.3}Unión \textit {p-n} }{19}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Conversión fotovoltaica}{20}{subsection.2.5.4}%
-\contentsline {subsubsection}{La unión p-n iluminada}{21}{section*.31}%
-\contentsline {subsection}{\numberline {2.5.5}Caracterización eléctrica de una célula fotovoltaica: curva I--V}{21}{subsection.2.5.5}%
-\contentsline {subsection}{\numberline {2.5.6}Pérdidas: circuito equivalente}{26}{subsection.2.5.6}%
-\contentsline {section}{\numberline {2.6}Módulos fotovoltaicos}{26}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Estructura y componentes de un módulo fotovoltaico}{26}{subsection.2.6.1}%
-\contentsline {subsubsection}{Vidrio frontal}{27}{section*.35}%
-\contentsline {subsubsection}{Encapsulante frontal y trasero}{27}{section*.36}%
-\contentsline {subsubsection}{Células solares}{27}{section*.37}%
-\contentsline {subsubsection}{Recubrimiento trasero}{28}{section*.38}%
-\contentsline {subsubsection}{Marco}{28}{section*.39}%
-\contentsline {subsubsection}{Caja de conexiones}{28}{section*.40}%
-\contentsline {subsection}{\numberline {2.6.2}Tipos de arrays fotovoltaicos}{28}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}BIPV}{30}{subsection.2.6.3}%
-\contentsline {subsubsection}{Ventanas BIPV}{30}{section*.42}%
-\contentsline {section}{\numberline {2.7}Óptica geométrica}{30}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Principio de Fermat}{31}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}Refracción de la luz y ley de Snell}{31}{subsection.2.7.2}%
-\contentsline {subsection}{\numberline {2.7.3}Lentes delgadas}{31}{subsection.2.7.3}%
-\contentsline {subsubsection}{Ecuación de la lente delgada}{32}{section*.44}%
-\contentsline {subsubsection}{Ecuación del fabricante de lentes}{32}{section*.45}%
-\contentsline {subsubsection}{Desplazamiento del foco y dependencia angular}{32}{section*.46}%
-\contentsline {subsection}{\numberline {2.7.4}Concentración de la radiación solar}{33}{subsection.2.7.4}%
-\contentsline {subsection}{\numberline {2.7.5}Lente de Fresnel}{33}{subsection.2.7.5}%
-\contentsline {chapter}{\numberline {3}Estado del arte}{35}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Presentación del prototipo}{41}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Punto de partida}{41}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Movimiento vertical}{41}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Movimiento horizontal}{42}{subsection.4.1.2}%
-\contentsline {chapter}{\numberline {5}Planteamiento de requisitos y selección tecnológica}{45}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Requisitos del sistema}{45}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Requisitos funcionales}{45}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Requisitos no funcionales}{46}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Criterios de selección tecnológica}{46}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Alternativas para la plataforma hardware}{48}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}PLC (Controladores lógicos programables)}{48}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}FPGA (Field Programmable Gate Array)}{48}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}STM32}{49}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}ESP32}{50}{subsection.5.3.4}%
-\contentsline {subsection}{\numberline {5.3.5}Otros microcontroladores de 32 bits}{51}{subsection.5.3.5}%
-\contentsline {subsection}{\numberline {5.3.6}Descartes hardware}{52}{subsection.5.3.6}%
-\contentsline {section}{\numberline {5.4}Selección de Software}{53}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Software asociado a ESP32}{53}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Software asociado a STM32}{54}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Software asociado a microcontroladores SAMD/SAME}{54}{subsection.5.4.3}%
-\contentsline {section}{\numberline {5.5}Discusión de las decisiones adoptadas}{55}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Justificación de la plataforma ESP32-S3-DevKitC-1}{56}{subsection.5.5.1}%
-\contentsline {chapter}{\numberline {6}Diseño del sistema de control}{59}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Enfoque general del diseño}{59}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Diseño electrónico}{59}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Arquitectura hardware}{59}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Subsistema de alimentación}{62}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Subsistema de control}{62}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Subsistema de accionamiento}{62}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Subsistema de la planta}{63}{subsection.6.2.5}%
-\contentsline {subsection}{\numberline {6.2.6}Discusión de la arquitectura hardware}{63}{subsection.6.2.6}%
-\contentsline {section}{\numberline {6.3}Arquitectura funcional del sistema de control}{63}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Diseño software}{64}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Arquitectura software}{65}{subsection.6.4.1}%
-\contentsline {subsubsection}{Modo automático}{70}{section*.61}%
-\contentsline {subsubsection}{Modo efemérides}{72}{section*.64}%
-\contentsline {subsubsection}{Modo manual}{72}{section*.65}%
-\contentsline {section}{\numberline {6.5}Diseño de la interfaz}{74}{section.6.5}%
-\contentsline {chapter}{\numberline {7}Implementación del control de movimiento}{77}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Implementación inicial del movimiento}{77}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Detección de problemas mecánicos}{77}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Problema de backlash e histéresis en el eje Z}{78}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Implementación del homing y establecimiento de referencias}{79}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Compensación del backlash}{79}{section.7.5}%
-\contentsline {section}{\numberline {7.6}Resultado de la evolución del control de movimiento}{79}{section.7.6}%
-\contentsline {section}{\numberline {7.7}Detección de problemas software}{80}{section.7.7}%
-\contentsline {chapter}{\numberline {8}Resultados}{81}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Demostración del movimiento del sistema}{81}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Validación de la precisión de posicionamiento}{82}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Resultados en el modo automático}{82}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Validación del modo efemérides}{83}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Consumo energético}{84}{section.8.5}%
-\contentsline {chapter}{\numberline {9}Conclusiones}{89}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Evaluación global de los resultados}{89}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Discusión de aspectos clave}{90}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Rendimiento de la selección tecnológica}{90}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Fiabilidad del diseño}{91}{section.9.4}%
-\contentsline {section}{\numberline {9.5}Limitaciones del sistema}{91}{section.9.5}%
-\contentsline {section}{\numberline {9.6}Aportación del proyecto}{91}{section.9.6}%
-\contentsline {section}{\numberline {9.7}Líneas de trabajo futuro}{91}{section.9.7}%
-\contentsline {section}{\numberline {9.8}Impacto ambiental}{92}{section.9.8}%
-\contentsline {chapter}{\numberline {A}Anexo}{93}{appendix.Alph1}%
-\contentsline {section}{\numberline {A.1}ESP32-S3-Devkit-C1}{93}{section.Alph1.1}%
-\contentsline {chapter}{Bibliografia}{95}{figure.caption.75}%
+\contentsline {section}{\numberline {1.2}Ventana fotovoltaica}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Objetivos}{2}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Objetivo general}{2}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Objetivos específicos}{2}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Estructura del documento}{2}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Marco teórico}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Radiación solar}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Componentes de la radiación solar}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Posición del sol y ángulo de incidencia respecto de una superficie}{5}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Efemérides Solares}{7}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Hora solar y hora oficial}{7}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Fracción del año}{7}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Declinación solar}{7}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Ecuación del tiempo}{8}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Tiempo solar verdadero}{8}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Ángulo horario}{8}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.7}Ángulo cenital, elevación y azimut solar}{8}{subsection.2.2.7}%
+\contentsline {section}{\numberline {2.3}Cálculo de ángulos de incidencia en la superficie de la ventana}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Transformación de efemérides solares a ángulos de incidencia}{9}{subsection.2.3.1}%
+\contentsline {subsubsection}{Conversión a coordenadas cartesianas}{9}{section*.15}%
+\contentsline {subsubsection}{Rotación por pan}{9}{section*.16}%
+\contentsline {subsubsection}{Rotación por tilt}{10}{section*.17}%
+\contentsline {subsubsection}{Corrección de orientación del módulo}{10}{section*.18}%
+\contentsline {subsubsection}{Obtención de efemérides relativas al módulo}{11}{section*.19}%
+\contentsline {subsubsection}{Cálculo de los ángulos de incidencia}{11}{section*.20}%
+\contentsline {section}{\numberline {2.4}Fundamentos de la energía solar fotovoltaica}{11}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Células solares}{12}{subsection.2.4.1}%
+\contentsline {subsubsection}{Estructura de una célula fotovoltaica}{12}{section*.23}%
+\contentsline {subsection}{\numberline {2.4.2}Conversión fotovoltaica}{13}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Caracterización eléctrica de una célula fotovoltaica: curva I--V}{13}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Pérdidas: circuito equivalente}{16}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}Módulos fotovoltaicos}{16}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Estructura y componentes de un módulo fotovoltaico}{16}{subsection.2.5.1}%
+\contentsline {subsubsection}{Vidrio frontal}{17}{section*.28}%
+\contentsline {subsubsection}{Encapsulante frontal y trasero}{17}{section*.29}%
+\contentsline {subsubsection}{Células solares}{17}{section*.30}%
+\contentsline {subsubsection}{Recubrimiento trasero}{17}{section*.31}%
+\contentsline {subsubsection}{Marco}{18}{section*.32}%
+\contentsline {subsubsection}{Caja de conexiones}{18}{section*.33}%
+\contentsline {section}{\numberline {2.6}BIPV}{18}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Componentes y tipologías de sistemas BIPV}{18}{subsection.2.6.1}%
+\contentsline {subsubsection}{BIPV en cubiertas}{19}{section*.36}%
+\contentsline {subsubsection}{BIPV en fachadas}{19}{section*.37}%
+\contentsline {subsubsection}{BIPV en ventanas y sistemas acristalados}{19}{section*.38}%
+\contentsline {subsubsection}{BIPV en muros cortina}{20}{section*.40}%
+\contentsline {subsubsection}{BIPV en elementos de sombreado y estructuras auxiliares}{20}{section*.41}%
+\contentsline {section}{\numberline {2.7}Concentración fotovoltaica}{21}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Células multi-unión}{21}{subsection.2.7.1}%
+\contentsline {section}{\numberline {2.8}Óptica geométrica}{22}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Principio de Fermat}{22}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Refracción de la luz y ley de Snell}{22}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}Ecuación de la lente delgada}{23}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}Ecuación del fabricante de lentes}{23}{subsection.2.8.4}%
+\contentsline {subsubsection}{Desplazamiento del foco y dependencia angular}{23}{section*.44}%
+\contentsline {subsection}{\numberline {2.8.5}Lente de Fresnel}{23}{subsection.2.8.5}%
+\contentsline {chapter}{\numberline {3}Estado del arte}{27}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Descripción del prototipo de ventana BIPV}{35}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Punto de partida}{35}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Sistema móvil}{36}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Movimiento vertical}{36}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Movimiento horizontal}{37}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Firmware de los motores}{37}{subsection.4.2.3}%
+\contentsline {chapter}{\numberline {5}Diseño del proyecto}{43}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Consideraciones iniciales}{43}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Planteamiento de requisitos y selección tecnológica}{43}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Requisitos funcionales}{43}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Requisitos no funcionales}{44}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Criterios de selección tecnológica}{44}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Alternativas para la plataforma hardware}{45}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}PLC (Controladores lógicos programables)}{45}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}FPGA (Field Programmable Gate Array)}{46}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}STM32}{47}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}ESP32}{47}{subsection.5.4.4}%
+\contentsline {subsection}{\numberline {5.4.5}Otros microcontroladores de 32 bits}{48}{subsection.5.4.5}%
+\contentsline {subsection}{\numberline {5.4.6}Descartes hardware}{49}{subsection.5.4.6}%
+\contentsline {section}{\numberline {5.5}Selección de Software}{49}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Software asociado a ESP32}{49}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Software asociado a STM32}{50}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Software asociado a microcontroladores SAMD/SAME}{50}{subsection.5.5.3}%
+\contentsline {section}{\numberline {5.6}Discusión de las decisiones adoptadas}{51}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Justificación de la plataforma ESP32-S3-DevKitC-1}{52}{subsection.5.6.1}%
+\contentsline {section}{\numberline {5.7}Herramientas utilizadas}{52}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Hardware}{52}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Software}{53}{subsection.5.7.2}%
+\contentsline {section}{\numberline {5.8}Diseño del sistema de control}{53}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Enfoque general del diseño}{53}{subsection.5.8.1}%
+\contentsline {section}{\numberline {5.9}Arquitectura hardware}{53}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}Subsistema de alimentación}{57}{subsection.5.9.1}%
+\contentsline {subsection}{\numberline {5.9.2}Subsistema de control}{57}{subsection.5.9.2}%
+\contentsline {subsection}{\numberline {5.9.3}Subsistema de accionamiento}{57}{subsection.5.9.3}%
+\contentsline {subsection}{\numberline {5.9.4}Subsistema de la planta}{57}{subsection.5.9.4}%
+\contentsline {subsection}{\numberline {5.9.5}Discusión de la arquitectura hardware}{57}{subsection.5.9.5}%
+\contentsline {section}{\numberline {5.10}Arquitectura funcional del sistema de control}{58}{section.5.10}%
+\contentsline {section}{\numberline {5.11}Diseño software}{59}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Arquitectura software}{60}{subsection.5.11.1}%
+\contentsline {section}{\numberline {5.12}Interpolación bilineal}{64}{section.5.12}%
+\contentsline {subsubsection}{Modo automático}{64}{section*.64}%
+\contentsline {subsubsection}{Modo efemérides}{66}{section*.67}%
+\contentsline {subsubsection}{Modo manual}{66}{section*.68}%
+\contentsline {section}{\numberline {5.13}Diseño de la interfaz}{67}{section.5.13}%
+\contentsline {chapter}{\numberline {6}Resultados}{69}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Implementación del control de movimiento}{69}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Implementación inicial del movimiento}{69}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Detección de problemas mecánicos}{69}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Problema de backlash e histéresis en el eje Z}{70}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Implementación del homing y establecimiento de referencias}{70}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}Compensación del backlash}{70}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.1.6}Resultado de la evolución del control de movimiento}{71}{subsection.6.1.6}%
+\contentsline {subsection}{\numberline {6.1.7}Detección de problemas software}{71}{subsection.6.1.7}%
+\contentsline {section}{\numberline {6.2}Validación del prototipo}{71}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Demostración del movimiento del sistema}{71}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Validación de la precisión de posicionamiento}{72}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Resultados en el modo automático}{72}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Validación del modo efemérides}{73}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Consumo energético}{73}{section.6.7}%
+\contentsline {chapter}{\numberline {7}Conclusiones}{87}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Evaluación global de los resultados}{87}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Discusión de aspectos clave}{87}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Rendimiento de la selección tecnológica}{88}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Fiabilidad del diseño}{88}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Limitaciones del sistema}{88}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Aportación del proyecto}{88}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Líneas de trabajo futuro}{89}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Impacto ambiental}{89}{section.7.8}%
+\contentsline {chapter}{\numberline {A}Anexo}{91}{appendix.Alph1}%
+\contentsline {section}{\numberline {A.1}ESP32-S3-Devkit-C1}{91}{section.Alph1.1}%
+\contentsline {chapter}{Bibliografia}{93}{figure.caption.87}%

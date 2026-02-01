@@ -1,22 +1,27 @@
-\chapter{Planteamiento de requisitos y selección tecnológica}
+\chapter{Diseño del proyecto}
 
+\section{Consideraciones iniciales}
 
-\section{Requisitos del sistema}
+El prototipo desarrollado por la Universidad de Salerno cuenta con seis motores paso a paso, dos NEMA-15 enfrentados para el movimiento horizontal, y cuatro NEMA-17 enfrentados dos a dos para el vertical. Estos están integrados en una placa de expansión, CNC-Shield, que permiten el acoplamiento de drivers, en este caso A4988. Esta metodología es muy utilizada para fresadoras CNC, impresoras 3D, grabadoras láser, u otros usos que requieran de desplazamiento en ejes cartesianos. También se entregaron seis finales de carrera que no estaban integrados en la maqueta y que deberán de ajustarse a las necesidades de este proyecto. El control se realizó en una ESP32-Wroover, con un programa que permitía elegir la posición absoluta a la que se movía el plano de la ventana móvil a la posición introducida en una interfaz HTML cliente-servidor en el microcontrolador. Los motores vienen alimentados con una fuente de 12 V y 6 A conectada a la instalación eléctrica. Estas características imponen una serie de condicionantes técnicos que deben ser tenidos en cuenta en el diseño del sistema de control y en la selección de la plataforma hardware. 
+Cabe destacar que el control, microcontrolador y entorno de programación desarrollado y empleado para la integración del sistema por la Universidad de Salerno no tiene ningún peso sobre la elección de de la plataforma seleccionada, pues se basa en un análisis riguroso de distintos dispositivos, centrándose en el cumplimiento de los requisitos funcionales y no funcionales atendiendo a una serie de criterios de selección tecnológica.
+
+\section{Planteamiento de requisitos y selección tecnológica}
+
 Es de vital importancia fijar claramente los requisitos que debe tener el programa antes de abordarlo para poder realizar una planificación adecuada que
-cubra las necesidades de caracterización, permitiendo al usuario tener un total control del movimiento del panel móvil de la ventana. Se diferencia a continuación entre requisitos funcionales, aquellos que describen qué debe hacer el sistema, y no funcionales, que definen cómo debe hacerse.
+cubra las necesidades de caracterización, permitiendo al usuario tener un completo control del movimiento del panel móvil de la ventana. Se diferencia a continuación entre requisitos funcionales, aquellos que describen qué debe hacer el sistema, y no funcionales, que definen cómo debe hacerse.
 
 \subsection{Requisitos funcionales} 
 \begin{itemize}
 	\item El sistema debe disponer de una referencia temporal precisa para seguir el desplazamiento del Sol.
 	\item El sistema debe tener tres modos de funcionamiento, como se mencionó en la Introducción \ref{sec:obj_esp}, que permitan al usuario escoger la manera específica con la que se controla el movimiento de la ventana.
-	\item  Interfaz de usuario que permita establecer la configuración de la ventana, restablecer sus valores predeterminados, cambiar entre los distintos modos y visualizar el estado de la parte móvil, es decir, en qué estado se encuentra, en qué posición está y su configuración, así como la fecha y hora.
+	\item El sistema debe disponer de una interfaz de usuario que permita establecer la configuración de la ventana, restablecer sus valores predeterminados, cambiar entre los distintos modos y visualizar el estado de la parte móvil, es decir, en qué estado se encuentra, en qué posición está y su configuración, así como la fecha y hora.
 	\begin{enumerate}
 		\item \textbf{Modo automático}: es el responsable de realizar el seguimiento de la radiación directa concentrada por las lentes durante el día solar. Para ello se emplean tres algoritmos distintos que permiten calcular la posición correspondiente a la que debe dirigirse el marco móvil.
 			\begin{enumerate}
 				\item Cálculo de ángulo azimutal y elevación: a partir de los parámetros de configuración, fecha y hora, zona horaria, pan, tilt, longitud y latitud, devuelve la elevación y el ángulo azimutal.
 				\item Cálculo de $AOI_l$ y $AOI_t$: recibe la elevación y el ángulo azimutal calculados en el paso anterior y devuelve los ángulos de incidencia sobre el plano con las lentes de fresnel.
 				\item Interpolación lineal: %Aquí escribir alguna referencia al estado del arte donde se explique el colimador y los ensayos de lab de los que se obtiene la matriz a interpolar. 
-				partiendo de la matriz obtenida mediante \ref{sec:refsec}, donde la precisión es de un grado, se realiza una interpolación bilineal entre dicha matriz y los ángulos de incidencia obtenidos.
+				partiendo de la matriz obtenida mediante \ref{sec:matriz}, donde la precisión es de un grado, se realiza una interpolación bilineal entre dicha matriz y los ángulos de incidencia obtenidos.
 			\end{enumerate} 
 		\item \textbf{Modo efemérides}: permite desplazar el panel a la posición simulando los ángulos de azimut y elevación que tiene el Sol respecto del plano. Solo necesita disponer del cálculo de los ángulos de incidencia y de la interpolación lineal.   
 		\item \textbf{Modo manual}: el usuario decide la posición a la que se desplaza el panel o lo mueve progresivamente.  
@@ -42,7 +47,9 @@ Existen una serie de requisitos no funcionales que condicionan el diseño y la i
 
 \section{Criterios de selección tecnológica}
 
-La selección tecnológica se ha confeccionado atendiendo a una serie de pautas derivados de los requisitos funcionales y no funcionales definidos anteriormente. Siguiendo el carácter proyectual de la elaboración de un prototipo orientado a la investigación, se han priorizado los criterios de flexibilidad, pues puede requerirse exportar el proyecto a un entorno distinto, hacer adecuaciones para una nueva maqueta, cambiar funcionalidades o algoritmos de operación; facilidad de integración, pues se requiere de un sistema unificado que aglutine todos las funcionalidades requeridas de una manera coherente; y rapidez de desarrollo frente a la exploración de soluciones altamente optimizadas a nivel industrial.
+La selección hardware del sistema mecatrónico ha sido realizada por la Universidad de Salerno, tal como se indica en la sección~\ref{sec:herramientas}. Por lo tanto, ha de tenerse en cuenta la compatibilidad de los posibles dispositivos hardware y plataformas software con los elementos existentes como criterio de obligado cumplimiento.
+
+La selección tecnológica se ha confeccionado atendiendo a una serie de pautas derivadas de los requisitos funcionales y no funcionales definidos anteriormente. Asimismo, debe de ser compatible con los componentes Siguiendo el carácter proyectual de la elaboración de un prototipo orientado a la investigación, se han priorizado los criterios de flexibilidad, pues puede requerirse exportar el proyecto a un entorno distinto, hacer adecuaciones para una nueva maqueta, cambiar funcionalidades o algoritmos de operación; facilidad de integración, pues se requiere de un sistema unificado que aglutine todos las funcionalidades requeridas de una manera coherente; y rapidez de desarrollo frente a la exploración de soluciones altamente optimizadas a nivel industrial.
 
 Los principales criterios considerados son los siguientes:
 
@@ -89,7 +96,7 @@ Respecto a la capacidad de comunicación, permiten la implementación flexible d
 
 En cuanto a la facilidad de desarrollo y depuración, el uso de FPGAs para satisfacer todas las funcionalidades presenta una curva de aprendizaje significativamente más elevada. Los entornos de desarrollo se basan en lenguajes de descripción hardware como VHDL o Verilog, que no están orientados al desarrollo algorítmico secuencial. Aunque es posible implementar algoritmos matemáticos complejos, como el cálculo de efemérides solares o la interpolación bilineal, estos deben adaptarse a un paradigma de diseño hardware, lo que incrementa en gran medida el tiempo de desarrollo y la complejidad del sistema. La depuración se realiza mediante simulaciones y herramientas específicas, menos inmediatas que en plataformas de programación de alto nivel.
 
-Desde el punto de vista de la portabilidad, el diseño desarrollado en FPGA presenta una fuerte dependencia del dispositivo y del fabricante. Si bien los lenguajes de descripción hardware son estándar, la reutilización del sistema en otros entornos resulta limitada sin un esfuerzo de adaptación significativo.
+Desde el punto de vista de la portabilidad, el diseño desarrollado en FPGA presenta una fuerte dependencia del dispositivo y del fabricante. Por este motivo, la reutilización del sistema en otros entornos resulta limitada sin un esfuerzo de adaptación significativo.
 
 En términos de escalabilidad, las FPGAs permiten ampliar funcionalidades mediante la incorporación de nuevos bloques lógicos en paralelo. Sin embargo, se encuentra condicionada por los recursos disponibles del dispositivo y por el incremento de la complejidad del diseño, especialmente si se ha de combinar control, comunicaciones e interfaz de usuario.
 
@@ -113,9 +120,9 @@ La familia STM32 cuenta con una comunidad amplia y activa, así como con una doc
 
 Desde el punto de vista económico, los microcontroladores STM32 presentan un coste moderado y una amplia disponibilidad en el mercado. Los entornos de desarrollo y bibliotecas asociadas son gratuitos, haciéndolos adecuados para proyectos académicos y prototipos de investigación.
 
-Los microcontroladores STM32 presentan un consumo energético reducido, típicamente del orden de decenas a centenas de miliwatios durante la operación activa, resultando considerablemente adecuados.
 
-Finalmente, desde el punto de vista del consumo energético, presentan un consumo reducido, con corrientes del orden de decenas de miliamperios en funcionamiento normal, y la disponibilidad de modos de bajo consumo. Esto los hace adecuados para sistemas alimentados a partir de generación propia, 
+Finalmente, desde el punto de vista del consumo energético, presentan un consumo reducido, con corrientes del orden de decenas de miliamperios en funcionamiento normal, y la disponibilidad de modos de bajo consumo. Esto los hace adecuados para sistemas alimentados a partir de generación propia.
+ 
 \subsection{ESP32}
 
 La familia de microcontroladores ESP32 constituye una plataforma orientada al desarrollo de sistemas embebidos con capacidades avanzadas de comunicación. Esta característica, junto con una capacidad de cálculo elevada para su rango de coste, la convierte en una opción especialmente atractiva para prototipos de investigación que requieren interacción remota y flexibilidad en la interfaz de usuario. 
@@ -126,7 +133,7 @@ Uno de los aspectos más relevantes del ESP32 es su capacidad para implementar d
 
 Respecto a la capacidad de comunicación, el ESP32 dispone de múltiples interfaces serie, incluyendo UART, SPI e I$^2$C, además de conectividad inalámbrica integrada. Esto permite la comunicación simultánea con el módulo GPS y otros dispositivos externos, manteniendo una arquitectura compacta y reduciendo la complejidad del sistema.
 
-En cuanto a la facilidad de desarrollo y depuración, puede programarse utilizando entornos de alto nivel como Arduino IDE o ESP-IDF, que ofrecen una amplia disponibilidad de bibliotecas y ejemplos, facilitando la implementación rápida de funcionalidades complejas, como la interfaz web o la gestión de comunicaciones, reduciendo significativamente el tiempo de desarrollo y validación del sistema. Además, la mayoría de estos dispositivos tienen un procesador dual que rentabiliza el empleo de procesos ligeros, tasks de FreeRTOS, pues permite ligarlos a uno de los dos procesadores sin interrumpir la ejecución de otros procesos recurrentes, como podría ser el acceso Wi-Fi y el movimiento de los motores del sistema.
+En cuanto a la facilidad de desarrollo y depuración, puede programarse utilizando entornos de alto nivel como Arduino IDE o ESP-IDF, que ofrecen una amplia disponibilidad de bibliotecas y ejemplos, facilitando la implementación rápida de funcionalidades complejas, como la interfaz web o la gestión de comunicaciones, reduciendo significativamente el tiempo de desarrollo y validación del sistema. Además, la mayoría de estos dispositivos tienen un procesador dual que favorece el empleo de procesos ligeros, tasks de FreeRTOS, pues permite ligarlos a uno de los dos procesadores sin interrumpir la ejecución de otros procesos recurrentes, como podría ser el acceso Wi-Fi y el movimiento de los motores del sistema.
 
 Desde el punto de vista de la portabilidad, el uso de APIs de alto nivel y bibliotecas ampliamente extendidas permite una adaptación relativamente sencilla del código a otras plataformas compatibles con entornos Arduino o microcontroladores de 32 bits con capacidades similares. Si bien el sistema puede operar próximo a los límites de memoria disponibles, una arquitectura software modular permite su escalabilidad funcional dentro de las restricciones propias del dispositivo.
 
@@ -177,7 +184,7 @@ En cuanto a los entornos de desarrollo disponibles, el ESP32 puede programarse m
 
 Desde el punto de vista de la capacidad del lenguaje y la portabilidad de la arquitectura software, el uso de C/C++ favorece una clara separación entre la lógica de alto nivel del sistema y la capa de acceso al hardware, pero permitiendo que se integren eficazmente. Los algoritmos de cálculo pueden implementarse de forma independiente del microcontrolador, facilitando su reutilización en otras plataformas que puedan compilar C/C++. 
 
-Uno de los aspectos más relevantes del ecosistema software de Arduino es la disponibilidad de bibliotecas para la implementación de conectividad Wi-Fi, servicios web e integración del GPS sin tener que traducir sentencias NMEA. El microcontrolador puede configurarse para operar como punto de acceso inalámbrico independiente, permitiendo la comunicación directa con dispositivos externos sin necesidad de infraestructura de red adicional. Mediante bibliotecas como \textit{AsyncWebServer}, es posible implementar una interfaz web accesible desde un navegador, que permita al usuario configurar los parámetros del sistema, seleccionar los distintos modos de funcionamiento, supervisar el estado del panel móvil y enviar órdenes de control en tiempo real. Esta interfaz desacoplada del hardware resulta especialmente adecuada para la fase experimental del proyecto, al simplificar el acceso y la interacción con el sistema.
+Uno de los aspectos más relevantes del ecosistema software de Arduino es la disponibilidad de bibliotecas para la implementación de conectividad Wi-Fi, servicios web e integración del GPS sin implementar manualmente el parseo de sentencias NMEA. El microcontrolador puede configurarse para operar como punto de acceso inalámbrico independiente, permitiendo la comunicación directa con dispositivos externos sin necesidad de infraestructura de red adicional. Mediante bibliotecas como \textit{AsyncWebServer}, es posible implementar una interfaz web accesible desde un navegador, que permita al usuario configurar los parámetros del sistema, seleccionar los distintos modos de funcionamiento, supervisar el estado del panel móvil y enviar órdenes de control en tiempo real. Esta interfaz desacoplada del hardware resulta especialmente adecuada para la fase experimental del proyecto, al simplificar el acceso y la interacción con el sistema.
 
 En lo relativo al almacenamiento de configuración y parámetros persistentes, el ESP32 dispone de memoria flash interna que puede utilizarse para guardar información de forma no volátil. A través de bibliotecas como \textit{Preferences}, es posible almacenar y recuperar parámetros de configuración, estado, modo de funcionamiento u otros datos relevantes, garantizando su conservación tras reinicios o pérdidas de alimentación. Esta capacidad contribuye a mejorar tanto la usabilidad como la robustez del sistema durante ensayos prolongados y campañas experimentales.
 
@@ -225,7 +232,7 @@ El microcontrolador dispone de hasta tres pares de interfaces UART completamente
 
 La placa integra 16 MB de memoria flash, capacidad suficiente para alojar sin restricciones las bibliotecas empleadas en el sistema, en particular \textit{TinyGPSPlus} y \textit{ESPAsyncWebServer}, que constituyen las dependencias de mayor tamaño del proyecto. Asimismo, esta memoria permite almacenar dos matrices de interpolación de tamaño $86\times 86$, junto con el código del programa y los parámetros de configuración, manteniendo un margen amplio para futuras ampliaciones o modificaciones del software.
 
-Desde el punto de vista del consumo energético, el ESP32-S3 presenta un consumo del orden de décimas de vatio durante el reposo, hasta un rango de $1-2 \, \mathrm{W}$, compatible con su integración en un sistema generador de -electricidad. Además, la posibilidad de gestionar la actividad de las comunicaciones y emplear modos de bajo consumo contribuye a minimizar el impacto energético del sistema de control.
+Desde el punto de vista del consumo energético, el ESP32-S3 presenta un consumo del orden de décimas de vatio durante el reposo, hasta un rango de $1-2 \, \mathrm{W}$, compatible con su integración en un sistema generador de electricidad. Además, la posibilidad de gestionar la actividad de las comunicaciones y emplear modos de bajo consumo contribuye a minimizar el impacto energético del sistema de control.
 
 El entorno de desarrollo seleccionado para este microcontrolador es Arduino-IDE. La elección de este entorno se fundamenta en su adecuación al carácter experimental y funcional del proyecto. Este entorno permite un desarrollo rápido e iterativo, facilitando la integración de las bibliotecas que se han reconocido como obligatorias para la implementación de comunicación inalámbrica, servicios web y procesamiento de datos GPS. Todo ello sin necesidad de una configuración compleja en tiempo real ni de una gestión manual de tareas. Dado que el sistema de control no presenta requisitos estrictos de temporización dura ni una elevada concurrencia de procesos, las capacidades adicionales ofrecidas por ESP-IDF no resultan determinantes en este caso.
 
@@ -235,3 +242,45 @@ Por último, el empleo de Arduino-IDE no limita la portabilidad futura del softw
 
 La idoneidad del ESP32-S3 para aplicaciones similares queda respaldada por su uso habitual en proyectos de seguimiento solar, sistemas de monitorización energética y control embebido con interfaz web, ampliamente documentados en repositorios técnicos y plataformas especializadas de desarrollo de sistemas embebidos, lo que refuerza su elección para el presente proyecto.
 
+
+\section{Herramientas utilizadas}\label{sec:herramientas}
+Una vez definida la plataforma de desarrollo y el entorno de programación, se realiza una lista de todos los elementos que son necesarios para el correcto funcionamiento del programa de control y que deben de ser integrados en el sistema.
+ 
+\subsection{Hardware}
+\begin{itemize}
+	\item \textbf{ESP32-S3-DevkitC1}, microcontrolador con sistema operativo \textit{FreeRTOS}, punto de acceso WIFI y conexión Bluetooth.
+	\item Módulo \textbf {GPS NEO-6M}, es un módulo integrable en \textit{Arduino} utilizado para proporcionar la fecha y la hora al microcontrolador.
+	\item Motores paso a paso \textbf{NEMA-15} y \textbf{NEMA-17}, empleados para producir el movimiento del panel móvil.
+	\item Finales de carrera, para detectar los límites físicos de la maqueta que restringen el movimiento del panel móvil.
+	\item Reductor buck LM2596S-Like de $12-24\, \mathrm{V}$ a $5\, \mathrm{V}$.
+\end{itemize}
+
+\begin{figure}[t]
+	\centering
+	\subfloat[ESP32-S3-DevkitC1]{
+		\includesvg[width=0.45\linewidth]{figuras/esp_micro}	
+	}	
+	\subfloat[GPS NEO-6M.]{
+		\includesvg[width=0.45\linewidth]{figuras/gpsneo}	
+	}	
+	
+	\subfloat[Nema-15.]{
+		\includesvg[width=0.45\linewidth]{figuras/nema15}		
+	}
+	\subfloat[Nema-17.]{
+		\includesvg[width=0.45\linewidth]{figuras/nema17}		
+	}
+	
+	\subfloat[CNC-Shield-V3 con drivers A4998.]{
+		\includesvg[width=0.45\linewidth]{figuras/CNC_ali}			
+	}
+	\subfloat[Convertidor DC-DC Buck.]{
+		\includesvg[width=0.45\linewidth]{figuras/buck}			
+	}
+	\caption{Elementos hardware. Fuente: web AliExpress.}
+\end{figure}
+
+\subsection{Software}
+
+El desarrollo del código para el control de la ventana se realiza en el entorno de \textit{Arduino} \footnote{\url{https://www.arduino.cc/}}, \textit{Arduino-IDE}, motivado por la gran compatibilidad de bibliotecas que ofrece para implementar el punto de acceso wifi e integrar el GPS.
+\input{capitulos/disenio}

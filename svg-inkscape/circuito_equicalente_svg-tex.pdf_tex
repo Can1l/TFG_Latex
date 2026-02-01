@@ -54,5 +54,7 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{circuito_equicalente_svg-tex.pdf}}%
+    \put(0.19636495,0.12017191){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Célula ideal\end{tabular}}}}%
+    \put(0.42655053,0.03323593){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Célula real\end{tabular}}}}%
   \end{picture}%
 \endgroup%

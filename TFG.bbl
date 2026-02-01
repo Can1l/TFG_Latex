@@ -1,20 +1,16 @@
 \begin{thebibliography}{10}
 
-\bibitem{asi5040067}
-Athil~S. Al-Ezzi and Mohamed Nainar~M. Ansari.
-\newblock Photovoltaic solar cells: A review.
-\newblock {\em Applied System Innovation}, 5(4), 2022.
-
-\bibitem{pareja2010}
-Miguel~Pareja Aparicio.
-\newblock {\em Radiación solar y su aprovechamiento energético}.
-\newblock Marcombo, 2010.
-
 \bibitem{ASF_ETH2024}
 {Architecture and Building Systems, ETH Zurich}.
 \newblock Asf – adaptive solar facade, 2024.
 \newblock Proyecto de fachada fotovoltaica dinámica con módulos PV
   orientables para seguimiento solar y gestión energética integrada.
+
+\bibitem{Baljit2016}
+S.S.S. Baljit, Hoy-Yen Chan, and Kamaruzzaman Sopian.
+\newblock Review of building integrated applications of photovoltaic and solar
+  thermal systems.
+\newblock {\em Journal of Cleaner Production}, 137:677--689, 2016.
 
 \bibitem{BORN2024100372}
 Larissa Born, Edith~Anahi {González San Martín}, Matthias Ridder, Axel~Hannes
@@ -23,27 +19,16 @@ Larissa Born, Edith~Anahi {González San Martín}, Matthias Ridder, Axel~Hannes
   shading module with bending motion in two directions for solar tracking.
 \newblock {\em Developments in the Built Environment}, 18:100372, 2024.
 
-\bibitem{chander2015}
-Subhash Chander, Indu Purohit, and S~Nehra.
-\newblock A comprehensive review of pv panel performance under partial shading.
-\newblock {\em Renewable and Sustainable Energy Reviews}, 52:713--724, 2015.
-
-\bibitem{dominguez2009characterization}
-C~Dominguez, S~Askins, I~Ant{\'o}n, and G~Sala.
-\newblock Characterization of five cpv module technologies with the helios 3198
-  solar simulator.
-\newblock In {\em 2009 34th IEEE Photovoltaic Specialists Conference (PVSC)},
-  pages 001004--001008. IEEE, 2009.
+\bibitem{cesar2012}
+César Domínguez~Domínguez.
+\newblock {\em CARACTERIZACIÓN ÓPTICA Y ELÉCTRICA DE SISTEMAS FOTOVOLTAICOS
+  DE ALTA CONCENTRACIÓN}.
+\newblock PhD thesis, ETSIT / UPM, 2012.
 
 \bibitem{duffie2020}
 John~A. Duffie and William~A. Beckman.
 \newblock {\em Solar Engineering of Thermal Processes}.
 \newblock Wiley, 2020.
-
-\bibitem{gupta2019}
-Vikas Gupta and Manoj Sharma.
-\newblock Bifacial photovoltaic modules: A review.
-\newblock {\em Energy Conversion and Management}, 196:885--895, 2019.
 
 \bibitem{Optics}
 Eugene Hecht.
@@ -70,23 +55,10 @@ Ricardo~A. Marques~Lameirinhas, João Paulo~N. Torres, and João~P.
   applications.
 \newblock {\em Energies}, 15(5), 2022.
 
-\bibitem{mason2021}
-Jonathan Mason, Clifford Hansen, and Joshua Stein.
-\newblock Vertical bifacial solar farms: gains, limitations, and land-use
-  performance.
-\newblock {\em Progress in Photovoltaics}, 29(4):389--404, 2021.
-
 \bibitem{meeus1998}
 Jean Meeus.
 \newblock {\em Astronomical Algorithms}.
 \newblock Willmann-Bell, Richmond, Virginia, 2 edition, 1998.
-
-\bibitem{mousazadeh2009}
-Hossein Mousazadeh and Alireza Keyhani.
-\newblock A review of principle and sun-tracking methods for maximizing solar
-  systems output.
-\newblock {\em Renewable and Sustainable Energy Reviews}, 13(8):1800--1818,
-  2009.
 
 \bibitem{pedrotti2017}
 Leno~S. Pedrotti~Frank, Leno~M.
